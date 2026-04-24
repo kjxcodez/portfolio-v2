@@ -1,0 +1,202 @@
+import type { Project, Skill, Contribution } from '@/types/portfolio'
+
+
+export const PERSONAL = {
+  name: 'Kapil Kumar Jangid',
+  title: 'Full Stack Developer & Open Source Contributor',
+  location: 'Rajasthan, India',
+  email: 'kapil@kapiljangid.pro',
+  github: 'https://github.com/kjxcodez',
+  twitter: 'https://x.com/kjxcodez',
+  bio: 'I build things for the web. Specializing in UI design and creating engaging user experiences. I love open source and building developer tools.',
+  available: true,
+} as const
+
+export const PROJECTS: Project[] = [
+  {
+    id: 'rune-lang',
+    title: 'Rune Lang',
+    description: 'A minimal interpreted programming language built from scratch',
+    longDescription:
+      'Rune Lang is a custom-built, interpreted programming language designed for learning and experimentation. It features a natural, readable syntax built entirely from scratch in Python — including its own lexer, parser, AST system, and tree-walk interpreter. A companion VS Code extension adds syntax highlighting and developer ergonomics.',
+    tags: ['Python', 'Lexer', 'Parser', 'AST', 'Interpreter', 'Language Design'],
+    url: 'https://rune.kapiljangid.live',
+    featured: true,
+    year: 2024,
+  },
+  {
+    id: 'percept-ui',
+    title: 'Percept UI',
+    description: 'A comprehensive React component library',
+    longDescription:
+      'A modern, accessible, and customizable component library for React. Includes high-quality UI components, templates, and a CLI for scaffolding projects. Published on npm.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Nextra', 'Next.js', 'npm', 'Vite'],
+    url: 'https://perceptui.codebrise.tech',
+    github: 'https://github.com/perceptui/ui',
+    featured: true,
+    year: 2024,
+  },
+  {
+    id: 'rune-lang-vscode',
+    title: 'Rune Lang VS Code Extension',
+    description: 'Official VS Code support for Rune Lang',
+    longDescription:
+      'Provides first-class VS Code support for Rune Lang — syntax highlighting via TextMate grammars, code snippets, and in-editor execution. Published to the VS Code Marketplace.',
+    tags: ['VS Code Extension API', 'TypeScript', 'VSCE', 'TextMate Grammars', 'Marketplace'],
+    url: 'https://marketplace.visualstudio.com/items?itemName=kjxcodez.rune',
+    featured: true,
+    year: 2024,
+  },
+  {
+    id: 'ai-auto-commit',
+    title: 'AI Auto Commit',
+    description: 'AI-powered Git commit message generator for VS Code',
+    longDescription:
+      'A VS Code extension that auto-generates meaningful commit messages using the Gemini API. Scans staged diffs with simple-git, feeds them to the model, and writes the message directly into the Source Control input box.',
+    tags: ['VS Code Extension API', 'TypeScript', 'VSCE', 'Gemini API', 'simple-git'],
+    url: 'https://marketplace.visualstudio.com/items?itemName=kjxcodez.ai-commitbot',
+    github: 'https://github.com/kjxcodez/ai-commitbot',
+    featured: true,
+    year: 2024,
+  },
+  {
+    id: 'brainly',
+    title: 'Brainly',
+    description: 'A second brain for your links and docs',
+    longDescription:
+      'Store, organise, and surface important content with ease. Full-stack app with React + Vite frontend and an Express/MongoDB API. Supports tagging, search, and sharing.',
+    tags: ['Vite', 'React', 'Tailwind CSS', 'shadcn/ui', 'MongoDB', 'Express', 'Zod'],
+    url: 'https://brainlyv1.vercel.app',
+    github: 'https://github.com/kjxcodez/brainly',
+    featured: false,
+    year: 2024,
+  },
+  {
+    id: 'url-shortener',
+    title: 'URL Shortener',
+    description: 'Clean, no-frills URL shortener',
+    longDescription:
+      'Shorten long URLs and share them instantly. Built with Next.js and Postgres via Prisma. Supports custom slugs and click tracking.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Postgres', 'Prisma'],
+    url: 'https://shorturlmaker.vercel.app',
+    github: 'https://github.com/kjxcodez/url-shortner',
+    featured: false,
+    year: 2024,
+  },
+]
+
+export const SKILLS: Skill[] = [
+  // Frontend
+  { name: 'HTML5',        icon: 'html5',      category: 'frontend', level: 3 },
+  { name: 'CSS3',         icon: 'css3',       category: 'frontend', level: 3 },
+  { name: 'JavaScript',   icon: 'javascript', category: 'frontend', level: 3 },
+  { name: 'TypeScript',   icon: 'typescript', category: 'frontend', level: 3 },
+  { name: 'React',        icon: 'react',      category: 'frontend', level: 3 },
+  { name: 'Next.js',      icon: 'ri_nextjs',     category: 'frontend', level: 3 },
+  { name: 'Tailwind CSS', icon: 'tailwind',   category: 'frontend', level: 3 },
+  // Backend
+  { name: 'Node.js',      icon: 'ri_nodejs',     category: 'backend',  level: 2 },
+  { name: 'Python',       icon: 'python',     category: 'backend',  level: 2 },
+  { name: 'Express',      icon: 'ri_express',    category: 'backend',  level: 2 },
+  // Database
+  { name: 'MongoDB',      icon: 'ri_mongodb',    category: 'database', level: 2 },
+  { name: 'Postgres',     icon: 'ri_postgresql',   category: 'database', level: 2 },
+  { name: 'Prisma',       icon: 'ri_prisma',     category: 'database', level: 2 },
+  { name: 'Supabase',     icon: 'ri_supabase',   category: 'database', level: 2 },
+  // Tools
+  { name: 'Git',          icon: 'git',        category: 'tools',    level: 3 },
+  { name: 'VS Code',      icon: 'vscode',     category: 'tools',    level: 3 },
+  { name: 'React Native', icon: 'ri_react_native', category: 'tools',    level: 1 },
+]
+
+// Seeded from GitHub API — live data fetched via lib/github.ts at runtime (ISR)
+export const CONTRIBUTIONS: Contribution[] = [
+  {
+    id: 2720115333,
+    repo: 'mehul-m-prajapati/github_tracker',
+    repoUrl: 'https://github.com/mehul-m-prajapati/github_tracker',
+    title: 'Feat/UI — full UI revamp',
+    url: 'https://github.com/mehul-m-prajapati/github_tracker/pull/59',
+    type: 'PR',
+    status: 'Open',
+    date: '2024-12-05',
+    description: 'Complete UI overhaul for a GitHub activity tracker dashboard.',
+  },
+  {
+    id: 2727922916,
+    repo: 'diffusionstudio/examples',
+    repoUrl: 'https://github.com/diffusionstudio/examples',
+    title: 'BUG: small UI issue with select component',
+    url: 'https://github.com/diffusionstudio/examples/issues/2',
+    type: 'Issue',
+    status: 'Open',
+    date: '2024-12-09',
+    description: 'Reported a UI inconsistency in the select component.',
+  },
+  {
+    id: 2679838656,
+    repo: 'perceptui/ui',
+    repoUrl: 'https://github.com/perceptui/ui',
+    title: 'feat(cli): add initial CLI setup with project creation commands',
+    url: 'https://github.com/perceptui/ui/pull/10',
+    type: 'PR',
+    status: 'Merged',
+    date: '2024-11-21',
+    description: 'Bootstrapped the Percept UI CLI tool for project scaffolding.',
+  },
+  {
+    id: 2724637280,
+    repo: 'perceptui/ui',
+    repoUrl: 'https://github.com/perceptui/ui',
+    title: 'Improved the CLI — better DX and error handling',
+    url: 'https://github.com/perceptui/ui/pull/15',
+    type: 'PR',
+    status: 'Merged',
+    date: '2024-12-07',
+    description: 'Enhanced CLI UX with better prompts and descriptive error messages.',
+  },
+  {
+    id: 2724558107,
+    repo: 'perceptui/ui',
+    repoUrl: 'https://github.com/perceptui/ui',
+    title: 'feat(templates): add improvement issue template',
+    url: 'https://github.com/perceptui/ui/pull/13',
+    type: 'PR',
+    status: 'Merged',
+    date: '2024-12-07',
+    description: 'Added structured improvement issue template to streamline feedback.',
+  },
+  {
+    id: 2720928780,
+    repo: 'perceptui/vite-react-ts-tailwind-template',
+    repoUrl: 'https://github.com/perceptui/vite-react-ts-tailwind-template',
+    title: 'Initialize Vite + React + TypeScript + Tailwind template',
+    url: 'https://github.com/perceptui/vite-react-ts-tailwind-template/pull/1',
+    type: 'PR',
+    status: 'Merged',
+    date: '2024-12-05',
+    description: 'Bootstrapped the official Percept UI starter template.',
+  },
+  {
+    id: 2997333460,
+    repo: 'kjxcodez/astra-chatbot',
+    repoUrl: 'https://github.com/kjxcodez/astra-chatbot',
+    title: 'Adds chatbot implementation with logging and history',
+    url: 'https://github.com/kjxcodez/astra-chatbot/pull/1',
+    type: 'PR',
+    status: 'Merged',
+    date: '2025-04-15',
+    description: 'Full chatbot implementation with conversation history and request logging.',
+  },
+  {
+    id: 2739985995,
+    repo: 'kjxcodez/LinkVerse',
+    repoUrl: 'https://github.com/kjxcodez/LinkVerse',
+    title: 'Initialize Next.js project with TypeScript, Tailwind CSS, and ESLint',
+    url: 'https://github.com/kjxcodez/LinkVerse/pull/1',
+    type: 'PR',
+    status: 'Merged',
+    date: '2024-12-14',
+    description: 'Set up project scaffolding with full TypeScript and Tailwind configuration.',
+  },
+]
