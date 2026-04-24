@@ -15,7 +15,7 @@ import { SiteHeader } from "@/components/shared/SiteHeader";
 import { PERSONAL } from "@/lib/data";
 import Link from "next/link";
 
-export default function MinimalModePage() {
+export function MinimalPortfolio() {
   return (
     <>
       {/* Easter eggs & UI chrome */}

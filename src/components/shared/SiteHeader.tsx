@@ -4,15 +4,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import IMG from '@/assets/logo.png';
 import { GithubIcon, XIcon } from '@/components/shared/icons';
-import { ThemeToggle } from '@/components/shared/ThemeToggle';
+import { HeaderModeSelector } from '@/components/shared/HeaderModeSelector';
 import { PERSONAL } from '@/lib/data';
 
 interface SiteHeaderProps {
   /** Show the Cmd+K hint in the nav. Default true. */
   showSearch?: boolean;
+  /** Show the mode selector in the nav. Default true. */
+  showModeSelector?: boolean;
 }
 
-export function SiteHeader({ showSearch = true }: SiteHeaderProps) {
+export function SiteHeader({ showSearch = true, showModeSelector = true }: SiteHeaderProps) {
   return (
     <header className="fixed top-3 z-50 w-full md:max-w-[700px] left-1/2 -translate-x-1/2 px-2">
       <nav className="flex items-center justify-between p-2 rounded-xl px-4 shadow-inner shadow-zinc-500/30 border backdrop-blur-xl dark:bg-black/80 bg-white/80">
@@ -29,6 +31,9 @@ export function SiteHeader({ showSearch = true }: SiteHeaderProps) {
         <div className="flex items-center gap-3">
           {showSearch && (
             <QuickNavTrigger />
+          )}
+          {showModeSelector && (
+            <HeaderModeSelector />
           )}
           <a
             href={PERSONAL.github}
@@ -48,7 +53,6 @@ export function SiteHeader({ showSearch = true }: SiteHeaderProps) {
           >
             <XIcon size={16} />
           </a>
-          <ThemeToggle />
         </div>
       </nav>
     </header>

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getAllPosts } from '@/lib/mdx'
 import { Clock, ArrowLeft } from 'lucide-react'
-import { SiteHeader } from '@/components/shared/SiteHeader'
+import { ModeAwarePageWrapper } from '@/components/shared/ModeAwarePageWrapper'
 
 export const metadata = { title: 'Blog — Kapil Kumar Jangid' }
 
@@ -10,12 +10,10 @@ export default function BlogPage() {
   const posts = getAllPosts()
 
   return (
-    <>
-      <SiteHeader />
-      <main className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
+    <ModeAwarePageWrapper className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
       <div className="mb-10">
-        <Link href="/modes/minimal" className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-6">
-          <ArrowLeft size={12} /> Back
+        <Link href="/" className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-6">
+          <ArrowLeft size={12} /> Back to portfolio
         </Link>
         <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-1">Writing</p>
         <h1 className="text-2xl font-bold">Blog</h1>
@@ -59,7 +57,6 @@ export default function BlogPage() {
           </Link>
         ))}
       </div>
-    </main>
-    </>
+    </ModeAwarePageWrapper>
   )
 }

@@ -6,14 +6,10 @@ import type { Project } from '@/types/portfolio';
 
 interface ProjectCardProps {
   project: Project;
-  variant?: 'default' | 'glass';
 }
 
-export function ProjectCard({ project, variant = 'default' }: ProjectCardProps) {
-  const base =
-    variant === 'glass'
-      ? 'rounded-xl border border-white/10 bg-white/5 backdrop-blur-md p-6 flex flex-col gap-4 hover:border-white/20 transition-colors'
-      : 'rounded-xl border border-zinc-800 bg-zinc-900 p-6 flex flex-col gap-4 hover:border-zinc-700 transition-colors';
+export function ProjectCard({ project }: ProjectCardProps) {
+  const base = 'rounded-xl border border-zinc-800 bg-zinc-900 p-6 flex flex-col gap-4 hover:border-zinc-700 transition-colors';
 
   return (
     <div className={base}>

@@ -36,14 +36,10 @@ const LEVEL_COLOR: Record<1 | 2 | 3, string> = {
 
 interface SkillBadgeProps {
   skill: Skill;
-  variant?: 'default' | 'glass';
 }
 
-export function SkillBadge({ skill, variant = 'default' }: SkillBadgeProps) {
-  const base =
-    variant === 'glass'
-      ? 'flex flex-col items-center gap-2 p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover:border-white/20 transition-colors'
-      : 'flex flex-col items-center gap-2 p-4 rounded-xl border border-zinc-800 bg-zinc-900 hover:border-zinc-700 transition-colors';
+export function SkillBadge({ skill }: SkillBadgeProps) {
+  const base = 'flex flex-col items-center gap-2 p-4 rounded-xl border border-zinc-800 bg-zinc-900 hover:border-zinc-700 transition-colors';
 
   return (
     <div className={base}>

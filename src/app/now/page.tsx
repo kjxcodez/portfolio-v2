@@ -1,16 +1,14 @@
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import { SiteHeader } from '@/components/shared/SiteHeader'
+import { ModeAwarePageWrapper } from '@/components/shared/ModeAwarePageWrapper'
 
 export const metadata = { title: 'Now — Kapil Kumar Jangid' }
 
 export default function NowPage() {
   return (
-    <>
-      <SiteHeader />
-      <main className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
-      <Link href="/modes/minimal" className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-8">
-        <ArrowLeft size={12} /> Back
+    <ModeAwarePageWrapper className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
+      <Link href="/" className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-8">
+        <ArrowLeft size={12} /> Back to portfolio
       </Link>
 
       <div className="mb-10">
@@ -49,7 +47,6 @@ export default function NowPage() {
         </ul>
 
       </div>
-    </main>
-    </>
+    </ModeAwarePageWrapper>
   )
 }

@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-export type PortfolioMode = 1 | 2 | 3 | 4 | 5
+export type PortfolioMode = 1 | 2 | 3 | 4
 
 interface ModeStore {
   mode: PortfolioMode
@@ -21,16 +21,14 @@ export const useModeStore = create<ModeStore>()(
 // Mode labels
 export const MODE_LABELS: Record<PortfolioMode, string> = {
   1: 'Minimal',
-  2: 'Glassmorphism',
-  3: 'macOS Desktop',
-  4: 'RPG World',
-  5: 'Terminal OS',
+  2: 'macOS Desktop',
+  3: 'RPG World',
+  4: 'Terminal OS',
 }
 
 export const MODE_DESCRIPTIONS: Record<PortfolioMode, string> = {
   1: 'Clean, fast, professional',
-  2: 'Three.js background, glass cards',
-  3: 'Full desktop OS experience',
-  4: 'Top-down game world',
-  5: 'Real terminal, fake OS',
+  2: 'Full desktop OS experience',
+  3: 'Top-down game world',
+  4: 'Real terminal, fake OS',
 }

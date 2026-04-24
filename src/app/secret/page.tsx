@@ -59,7 +59,7 @@ export default function SecretPage() {
             📧 {PERSONAL.email}
           </a>
           <Link
-            href="/modes/minimal"
+            href="/"
             className="text-xs text-zinc-600 hover:text-zinc-400 transition-colors"
           >
             ← Back to portfolio

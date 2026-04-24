@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { GithubIcon } from '@/components/shared/icons'
 import { PROJECTS } from '@/lib/data'
-import { SiteHeader } from '@/components/shared/SiteHeader'
+import { ModeAwarePageWrapper } from '@/components/shared/ModeAwarePageWrapper'
 
 // Screenshots mapped per project id
 const SCREENSHOTS: Record<string, { src: string; alt: string }[]> = {
@@ -50,11 +50,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   const others = PROJECTS.filter(p => p.id !== project.id).slice(0, 3)
 
   return (
-    <>
-      <SiteHeader />
-      <main className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
-      <Link href="/modes/minimal#projects" className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-8">
-        <ArrowLeft size={12} /> All projects
+    <ModeAwarePageWrapper className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
+      <Link href="/#projects" className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-8">
+        <ArrowLeft size={12} /> Back to portfolio
       </Link>
 
       {/* Header */}
@@ -132,7 +130,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           </div>
         </div>
       )}
-    </main>
-    </>
+    </ModeAwarePageWrapper>
   )
 }

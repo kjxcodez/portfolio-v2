@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
-import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { QuickNav } from "@/components/shared/QuickNav";
+import { ModeProvider } from "@/components/shared/ModeProvider";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -50,7 +50,7 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
       className={cn(
-        "h-full antialiased",
+        "h-full antialiased dark",
         geistSans.variable,
         geistMono.variable,
         inter.variable,
@@ -58,10 +58,10 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+        <ModeProvider>
           <QuickNav />
           {children}
-        </ThemeProvider>
+        </ModeProvider>
       </body>
     </html>
   );

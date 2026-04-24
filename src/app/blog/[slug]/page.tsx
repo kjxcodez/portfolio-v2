@@ -6,7 +6,7 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import { getAllPostSlugs, getPost, getAllPosts } from '@/lib/mdx'
 import { ArrowLeft, Clock } from 'lucide-react'
 import { ScrollProgress } from '@/components/mode1-minimal/ScrollUI'
-import { SiteHeader } from '@/components/shared/SiteHeader'
+import { ModeAwarePageWrapper } from '@/components/shared/ModeAwarePageWrapper'
 
 export async function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }))
@@ -42,9 +42,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
-      <SiteHeader />
       <ScrollProgress />
-      <main className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
+      <ModeAwarePageWrapper className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
         {/* Back */}
         <Link href="/blog" className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-8">
           <ArrowLeft size={12} /> All posts
@@ -95,7 +94,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </Link>
           )}
         </div>
-      </main>
+      </ModeAwarePageWrapper>
     </>
   )
 }
