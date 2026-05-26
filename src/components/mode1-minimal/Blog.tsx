@@ -41,12 +41,12 @@ export function Blog({ posts }: BlogProps) {
   return (
     <div className="flex flex-col items-start w-full my-6 gap-4">
       <div className="flex items-center justify-between w-full">
-        <h2 className="uppercase [font-family:var(--font-mono)] [font-size:var(--text-xs)] tracking-[0.1em] text-[var(--text-tertiary)]">
+        <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-muted-foreground">
           Blog
         </h2>
         <a
           href="/blog"
-          className="flex items-center gap-1 transition-colors [font-family:var(--font-mono)] [font-size:var(--text-xs)] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]"
+          className="flex items-center gap-1 transition-colors font-mono [font-size:var(--text-xs)] text-muted-foreground hover:text-[var(--text-secondary)]"
         >
           All posts <ArrowRight size={11} />
         </a>
@@ -62,16 +62,16 @@ export function Blog({ posts }: BlogProps) {
             whileHover={{ y: -2 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ delay: idx * 0.08, duration: 0.35 }}
-            className="group flex items-start justify-between gap-4 p-4 rounded-xl transition-colors duration-150 bg-[var(--bg-surface)] border border-[var(--border-default)] hover:border-[var(--border-strong)]"
+            className="group flex items-start justify-between gap-4 p-4 rounded-xl transition-colors duration-150 bg-(--bg-surface) border border hover:border-[var(--border-strong)]"
           >
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium leading-snug [font-family:var(--font-ui)] text-[var(--text-primary)]">
+              <p className="text-sm font-medium leading-snug font-ui text-(--text-primary)">
                 {post.title}
               </p>
-              <p className="text-xs mt-1 line-clamp-1 [font-family:var(--font-ui)] text-[var(--text-secondary)]">
+              <p className="text-xs mt-1 line-clamp-1 font-ui text-[var(--text-secondary)]">
                 {post.description}
               </p>
-              <div className="flex items-center gap-2 mt-2 [font-family:var(--font-mono)] text-[11px] text-[var(--text-tertiary)]">
+              <div className="flex items-center gap-2 mt-2 font-mono text-[11px] text-muted-foreground">
                 <span>{post.date}</span>
                 <span>·</span>
                 <span className="flex items-center gap-0.5">
@@ -82,7 +82,7 @@ export function Blog({ posts }: BlogProps) {
             </div>
             <ArrowRight
               size={13}
-              className="shrink-0 mt-1 transition-transform group-hover:translate-x-0.5 text-[var(--text-tertiary)]"
+              className="shrink-0 mt-1 transition-transform group-hover:translate-x-0.5 text-muted-foreground"
             />
           </motion.a>
         ))}

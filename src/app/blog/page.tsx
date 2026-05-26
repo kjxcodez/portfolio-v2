@@ -13,13 +13,13 @@ export default function BlogPage() {
       <div className="mb-10">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-xs transition-colors mb-6 text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]"
+          className="inline-flex items-center gap-1.5 text-xs transition-colors mb-6 text-muted-foreground hover:text-[var(--text-secondary)]"
           style={{ fontFamily: 'var(--font-ui)' }}
         >
           <ArrowLeft size={12} /> Back to portfolio
         </Link>
         <p
-          className="uppercase mb-1 text-[var(--text-tertiary)]"
+          className="uppercase mb-1 text-muted-foreground"
           style={{
             fontFamily: 'var(--font-mono)',
             fontSize: 'var(--text-xs)',
@@ -29,13 +29,13 @@ export default function BlogPage() {
           Writing
         </p>
         <h1
-          className="text-2xl font-bold text-[var(--text-primary)]"
+          className="text-2xl font-bold text-(--text-primary)"
           style={{ fontFamily: 'var(--font-ui)' }}
         >
           Blog
         </h1>
         <p
-          className="text-sm mt-1 text-[var(--text-tertiary)]"
+          className="text-sm mt-1 text-muted-foreground"
           style={{ fontFamily: 'var(--font-ui)' }}
         >
           {posts.length} posts about building things
@@ -47,10 +47,10 @@ export default function BlogPage() {
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="group flex gap-4 p-4 rounded-xl transition-all duration-200 border border-[var(--border-default)] bg-[var(--bg-surface)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-elevated)]"
+            className="group flex gap-4 p-4 rounded-xl transition-all duration-200 border border bg-(--bg-surface) hover:border-[var(--border-strong)] hover:bg-(--bg-elevated)]"
           >
             {post.cover && (
-              <div className="shrink-0 w-24 h-16 rounded-lg overflow-hidden border border-[var(--border-default)]">
+              <div className="shrink-0 w-24 h-16 rounded-lg overflow-hidden border border">
                 <Image
                   src={post.cover}
                   alt={post.title}
@@ -62,7 +62,7 @@ export default function BlogPage() {
             )}
             <div className="flex-1 min-w-0">
               <h2
-                className="text-sm font-semibold group-hover:underline leading-snug text-[var(--text-primary)]"
+                className="text-sm font-semibold group-hover:underline leading-snug text-(--text-primary)"
                 style={{ fontFamily: 'var(--font-ui)' }}
               >
                 {post.title}
@@ -74,7 +74,7 @@ export default function BlogPage() {
                 {post.description}
               </p>
               <div
-                className="flex items-center gap-2 mt-2 text-[11px] text-[var(--text-tertiary)]"
+                className="flex items-center gap-2 mt-2 text-[11px] text-muted-foreground"
                 style={{ fontFamily: 'var(--font-mono)' }}
               >
                 <span>{post.date}</span>

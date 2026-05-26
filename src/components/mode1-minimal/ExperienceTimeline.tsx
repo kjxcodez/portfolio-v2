@@ -7,7 +7,7 @@ import { EXPERIENCE } from '@/lib/data';
 export function ExperienceTimeline() {
   return (
     <div className="flex flex-col items-start w-full my-6 gap-4">
-      <h2 className="uppercase [font-family:var(--font-mono)] [font-size:var(--text-xs)] tracking-[0.1em] text-[var(--text-tertiary)]">
+      <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-muted-foreground">
         Experience
       </h2>
 
@@ -24,7 +24,7 @@ export function ExperienceTimeline() {
             {/* Company header */}
             <div className="flex items-start gap-4 mb-4">
               <div className="flex flex-col items-center pt-1">
-                <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-[var(--bg-elevated)] border border-[var(--border-default)]">
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 bg-(--bg-elevated)] border border">
                   <Building2 size={16} className="text-[var(--text-secondary)]" />
                 </div>
                 {exp.projects.length > 1 && (
@@ -39,13 +39,13 @@ export function ExperienceTimeline() {
               </div>
 
               <div className="flex-1">
-                <h3 className="text-base font-medium [font-family:var(--font-ui)] text-[var(--text-primary)]">
+                <h3 className="text-base font-medium font-ui text-(--text-primary)">
                   {exp.company}
                 </h3>
                 <p className="text-sm mt-0.5 font-ui text-[var(--text-secondary)]">
                   {exp.role}
                 </p>
-                <div className="flex items-center gap-3 mt-1 [font-family:var(--font-mono)] [font-size:var(--text-xs)] text-[var(--text-tertiary)] tracking-[0.04em]">
+                <div className="flex items-center gap-3 mt-1 font-mono [font-size:var(--text-xs)] text-muted-foreground tracking-[0.04em]">
                   <span className="flex items-center gap-1">
                     <Calendar size={11} />
                     {exp.period}
@@ -67,10 +67,10 @@ export function ExperienceTimeline() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ delay: expIdx * 0.1 + projIdx * 0.08, duration: 0.4 }}
-                  className="rounded-lg p-4 transition-colors duration-150 bg-[var(--bg-surface)] border border-[var(--border-default)] hover:bg-[var(--bg-elevated)] hover:border-[var(--border-strong)]"
+                  className="rounded-lg p-4 transition-colors duration-150 bg-(--bg-surface) border border hover:bg-(--bg-elevated)] hover:border-[var(--border-strong)]"
                 >
                   <div className="flex items-center gap-2 mb-3">
-                    <Briefcase size={13} className="text-[var(--text-tertiary)]" />
+                    <Briefcase size={13} className="text-muted-foreground" />
                     <h4 className="text-sm font-medium font-ui text-[var(--text-secondary)]">
                       {project.name}
                     </h4>
@@ -82,7 +82,7 @@ export function ExperienceTimeline() {
                         key={achIdx}
                         className="flex items-start gap-2 text-xs leading-relaxed font-ui text-(--text-secondary)"
                       >
-                        <ChevronRight size={11} className="text-(--text-tertiary) shrink-0 mt-0.5" />
+                        <ChevronRight size={11} className="text-muted-foreground shrink-0 mt-0.5" />
                         <span>{achievement}</span>
                       </li>
                     ))}

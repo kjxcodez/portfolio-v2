@@ -62,7 +62,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* Back */}
         <Link
           href="/blog"
-          className="inline-flex items-center gap-1.5 text-xs transition-colors mb-8 text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]"
+          className="inline-flex items-center gap-1.5 text-xs transition-colors mb-8 text-muted-foreground hover:text-[var(--text-secondary)]"
           style={{ fontFamily: 'var(--font-ui)' }}
         >
           <ArrowLeft size={12} /> All posts
@@ -87,7 +87,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             ))}
           </div>
           <h1
-            className="text-2xl font-bold leading-snug mb-3 text-[var(--text-primary)]"
+            className="text-2xl font-bold leading-snug mb-3 text-(--text-primary)"
             style={{ fontFamily: 'var(--font-ui)' }}
           >
             {post.title}
@@ -99,7 +99,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {post.description}
           </p>
           <div
-            className="flex items-center gap-2 text-xs text-[var(--text-tertiary)]"
+            className="flex items-center gap-2 text-xs text-muted-foreground"
             style={{ fontFamily: 'var(--font-mono)' }}
           >
             <span>{post.date}</span>
@@ -113,7 +113,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {/* Cover image */}
         {post.cover && (
-          <div className="w-full aspect-video rounded-xl overflow-hidden mb-10 border border-[var(--border-default)]">
+          <div className="w-full aspect-video rounded-xl overflow-hidden mb-10 border border">
             <Image
               src={post.cover}
               alt={post.title}
@@ -130,17 +130,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </article>
 
         {/* Prev / Next */}
-        <div className="flex justify-between gap-4 mt-16 pt-8 border-t border-[var(--border-default)]">
+        <div className="flex justify-between gap-4 mt-16 pt-8 border-t border">
           {prev ? (
             <Link href={`/blog/${prev.slug}`} className="group flex flex-col gap-1 max-w-[45%]">
               <span
-                className="text-[11px] text-[var(--text-tertiary)]"
+                className="text-[11px] text-muted-foreground"
                 style={{ fontFamily: 'var(--font-mono)' }}
               >
                 ← Previous
               </span>
               <span
-                className="text-sm font-medium group-hover:underline line-clamp-2 text-[var(--text-primary)]"
+                className="text-sm font-medium group-hover:underline line-clamp-2 text-(--text-primary)"
                 style={{ fontFamily: 'var(--font-ui)' }}
               >
                 {prev.title}
@@ -153,13 +153,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               className="group flex flex-col gap-1 items-end text-right max-w-[45%]"
             >
               <span
-                className="text-[11px] text-[var(--text-tertiary)]"
+                className="text-[11px] text-muted-foreground"
                 style={{ fontFamily: 'var(--font-mono)' }}
               >
                 Next →
               </span>
               <span
-                className="text-sm font-medium group-hover:underline line-clamp-2 text-[var(--text-primary)]"
+                className="text-sm font-medium group-hover:underline line-clamp-2 text-(--text-primary)"
                 style={{ fontFamily: 'var(--font-ui)' }}
               >
                 {next.title}

@@ -30,7 +30,7 @@ export function BackToTop() {
       initial={false}
       animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 12, pointerEvents: visible ? 'auto' : 'none' }}
       transition={{ duration: 0.2 }}
-      className="fixed bottom-6 right-6 z-50 w-9 h-9 flex items-center justify-center rounded-xl shadow-md text-xs font-bold hover:scale-110 transition-transform bg-[var(--bg-surface)] border border-[var(--border-default)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"
+      className="fixed bottom-6 right-6 z-50 w-9 h-9 flex items-center justify-center rounded-xl shadow-md text-xs font-bold hover:scale-110 transition-transform bg-(--bg-surface) border border text-muted-foreground hover:text-(--text-primary)"
       aria-label="Back to top"
     >
       ↑

@@ -74,11 +74,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
     : 'Live Demo'
 
   return (
-    <div className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen bg-[var(--bg-base)]">
+    <div className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen ">
       {/* Back */}
       <Link
         href="/#projects"
-        className="inline-flex items-center gap-1.5 text-xs transition-colors mb-10 text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]"
+        className="inline-flex items-center gap-1.5 text-xs transition-colors mb-10 text-muted-foreground hover:text-[var(--text-secondary)]"
         style={{ fontFamily: 'var(--font-ui)' }}
       >
         <ArrowLeft size={12} /> Back to portfolio
@@ -89,7 +89,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         {/* Meta row: type badge, year, status */}
         <div className="flex flex-wrap items-center gap-2 mb-3">
           <span
-            className="inline-flex items-center gap-1 rounded border border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-tertiary)]"
+            className="inline-flex items-center gap-1 rounded border border bg-(--bg-elevated)] text-muted-foreground"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: '0.625rem',
@@ -102,7 +102,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           </span>
 
           <span
-            className="text-[var(--text-tertiary)]"
+            className="text-muted-foreground"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: 'var(--text-xs)',
@@ -129,7 +129,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
 
         {/* Title */}
         <h1
-          className="text-2xl font-bold mb-4 leading-tight text-[var(--text-primary)]"
+          className="text-2xl font-bold mb-4 leading-tight text-(--text-primary)"
           style={{ fontFamily: 'var(--font-ui)' }}
         >
           {project.title}
@@ -155,7 +155,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors border border-[var(--border-default)] hover:border-[var(--border-strong)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]"
+              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors border border hover:border-[var(--border-strong)] text-[var(--text-secondary)] hover:text-(--text-primary) hover:bg-(--bg-elevated)]"
               style={{ fontFamily: 'var(--font-ui)' }}
             >
               <GithubIcon size={12} />
@@ -167,7 +167,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             <a
               href={project.apkUrl}
               download
-              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors border border-[var(--border-default)] hover:border-[var(--border-strong)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]"
+              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors border border hover:border-[var(--border-strong)] text-[var(--text-secondary)] hover:text-(--text-primary) hover:bg-(--bg-elevated)]"
               style={{ fontFamily: 'var(--font-ui)' }}
             >
               <Download size={12} />
@@ -243,10 +243,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             {project.technicalDecisions.map((decision, i) => (
               <div
                 key={i}
-                className="rounded-lg p-4 border border-[var(--border-default)] bg-[var(--bg-surface)]"
+                className="rounded-lg p-4 border border bg-(--bg-surface)"
               >
                 <p
-                  className="text-xs font-medium mb-2 text-[var(--text-primary)]"
+                  className="text-xs font-medium mb-2 text-(--text-primary)"
                   style={{ fontFamily: 'var(--font-mono)', letterSpacing: '0.04em' }}
                 >
                   {decision.title}
@@ -265,9 +265,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
 
       {/* ── Related Projects ───────────────────────────────────────── */}
       {related.length > 0 && (
-        <div className="mt-12 pt-8 border-t border-[var(--border-default)]">
+        <div className="mt-12 pt-8 border-t">
           <p
-            className="uppercase mb-4 text-[var(--text-tertiary)]"
+            className="uppercase mb-4 text-muted-foreground"
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: 'var(--text-xs)',
@@ -281,17 +281,17 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
               <Link
                 key={p.id}
                 href={`/projects/${p.id}`}
-                className="group flex items-center justify-between p-3 rounded-xl transition-colors border border-[var(--border-default)] hover:bg-[var(--bg-surface)] hover:border-[var(--border-strong)]"
+                className="group flex items-center justify-between p-3 rounded-xl transition-colors border border hover:bg-(--bg-surface) hover:border-[var(--border-strong)]"
               >
                 <div>
                   <p
-                    className="text-sm font-medium text-[var(--text-primary)]"
+                    className="text-sm font-medium text-(--text-primary)"
                     style={{ fontFamily: 'var(--font-ui)' }}
                   >
                     {p.title}
                   </p>
                   <p
-                    className="text-xs mt-0.5 text-[var(--text-tertiary)]"
+                    className="text-xs mt-0.5 text-muted-foreground"
                     style={{ fontFamily: 'var(--font-ui)' }}
                   >
                     {p.description}
@@ -299,7 +299,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
                 </div>
                 <ArrowRight
                   size={13}
-                  className="shrink-0 transition-transform group-hover:translate-x-0.5 text-[var(--text-tertiary)]"
+                  className="shrink-0 transition-transform group-hover:translate-x-0.5 text-muted-foreground"
                 />
               </Link>
             ))}
@@ -314,7 +314,7 @@ function Section({ label, children }: { label: string; children: React.ReactNode
   return (
     <div className="mb-8">
       <p
-        className="uppercase mb-3 text-[var(--text-tertiary)]"
+        className="uppercase mb-3 text-muted-foreground"
         style={{
           fontFamily: 'var(--font-mono)',
           fontSize: 'var(--text-xs)',

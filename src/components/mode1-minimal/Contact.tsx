@@ -7,7 +7,7 @@ import { GithubIcon } from '@/components/shared/icons';
 import { PERSONAL, SOCIALS } from '@/lib/data';
 
 const btnClass =
-  'inline-flex items-center gap-2 px-4 py-2 rounded-xl transition-all [font-family:var(--font-ui)] [font-size:var(--text-sm)] text-[var(--text-secondary)] border border-[var(--border-default)] hover:border-[var(--border-strong)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]';
+  'inline-flex items-center gap-2 px-4 py-2 rounded-xl transition-all font-ui [font-size:var(--text-sm)] text-[var(--text-secondary)] border border hover:border-[var(--border-strong)] hover:text-(--text-primary) hover:bg-(--bg-elevated)]';
 
 export function Contact() {
   const [copied, setCopied] = useState(false);
@@ -20,7 +20,7 @@ export function Contact() {
 
   return (
     <div id="contact" className="flex flex-col items-start w-full my-6 gap-4">
-      <h2 className="uppercase [font-family:var(--font-mono)] [font-size:var(--text-xs)] tracking-[0.1em] text-[var(--text-tertiary)]">
+      <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-muted-foreground">
         Contact
       </h2>
 
@@ -31,7 +31,7 @@ export function Contact() {
         transition={{ duration: 0.4 }}
         className="flex flex-col gap-4 w-full"
       >
-        <p className="text-sm leading-relaxed [font-family:var(--font-ui)] text-[var(--text-secondary)]">
+        <p className="text-sm leading-relaxed font-ui text-[var(--text-secondary)]">
           Open to interesting projects, collaborations, or just a good conversation about tech.
         </p>
 
@@ -45,11 +45,11 @@ export function Contact() {
             {copied ? (
               <>
                 <Check size={14} className="text-emerald-500" />
-                <span className="text-emerald-400 text-sm [font-family:var(--font-ui)]">Copied!</span>
+                <span className="text-emerald-400 text-sm font-ui">Copied!</span>
               </>
             ) : (
               <>
-                <Mail size={14} className="text-[var(--text-tertiary)]" />
+                <Mail size={14} className="text-muted-foreground" />
                 <span>{PERSONAL.email}</span>
               </>
             )}

@@ -50,10 +50,10 @@ export function Hero() {
           <h1 className="text-3xl md:text-4xl tracking-tight leading-tight font-display text-(--text-primary)">
             {PERSONAL.name}
           </h1>
-          <p className="text-sm font-mono text-(--text-tertiary) tracking-[0.04em]">
+          <p className="text-sm font-mono text-muted-foreground tracking-[0.04em]">
             {PERSONAL.title}
           </p>
-          <div className="flex items-center gap-1 text-xs select-none font-mono text-(--text-tertiary)">
+          <div className="flex items-center gap-1 text-xs select-none font-mono text-muted-foreground">
             <MapPin size={12} />
             <span>{PERSONAL.location}</span>
           </div>
@@ -70,13 +70,13 @@ export function Hero() {
             onClick={handleAvatarClick}
             className="rounded-lg cursor-pointer select-none bg-(--bg-surface) border border-(--border-default) min-w-45 py-5 px-6"
           >
-            <p className="mb-3 font-mono text-xs text-(--text-tertiary) tracking-[0.06em] uppercase">
+            <p className="mb-3 font-mono text-xs text-muted-foreground tracking-[0.06em] uppercase">
               Now
             </p>
             <ul className="space-y-1.5">
               {['Building products', 'Writing', 'Open source'].map((item) => (
                 <li key={item} className="flex items-start gap-2 text-sm font-ui text-(--text-secondary)">
-                  <span className="text-(--text-tertiary)">·</span>
+                  <span className="text-muted-foreground">·</span>
                   {item}
                 </li>
               ))}

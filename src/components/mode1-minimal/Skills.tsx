@@ -67,7 +67,7 @@ export function Skills() {
   return (
     <div ref={ref} className="flex flex-col items-start w-full gap-5 my-6">
       <div className="flex items-center justify-between w-full">
-        <h2 className="uppercase [font-family:var(--font-mono)] [font-size:var(--text-xs)] tracking-[0.1em] text-[var(--text-tertiary)]">
+        <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-muted-foreground">
           Skills <span className="font-normal">({SKILLS.length})</span>
         </h2>
       </div>
@@ -80,7 +80,7 @@ export function Skills() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: groupIdx * 0.08, duration: 0.4 }}
           >
-            <h3 className="mb-2.5 uppercase [font-family:var(--font-mono)] [font-size:var(--text-xs)] tracking-[0.08em] text-[var(--text-tertiary)] font-normal">
+            <h3 className="mb-2.5 uppercase font-mono [font-size:var(--text-xs)] tracking-[0.08em] text-muted-foreground font-normal">
               {group.label}
             </h3>
             <div className="flex items-center gap-2 flex-wrap">
@@ -94,14 +94,14 @@ export function Skills() {
                     animate={inView ? { opacity: 1, scale: 1 } : {}}
                     whileHover={{ y: -1 }}
                     transition={{ delay: groupIdx * 0.08 + idx * 0.03, duration: 0.25 }}
-                    className="group flex items-center gap-2 px-3 py-2 rounded-lg transition-colors cursor-default bg-[var(--bg-surface)] border border-[var(--border-default)] hover:bg-[var(--bg-elevated)] hover:border-[var(--border-strong)]"
+                    className="group flex items-center gap-2 px-3 py-2 rounded-lg transition-colors cursor-default bg-(--bg-surface) border border hover:bg-(--bg-elevated)] hover:border-[var(--border-strong)]"
                     title={`${skill.name} — Level ${skill.level}/3`}
                     onMouseEnter={() => handleSkillHover(skill.name)}
                   >
                     <span className="text-[var(--text-secondary)]">
                       {isReactElement ? icon : icon ? <HugeiconsIcon icon={icon} size={16} /> : null}
                     </span>
-                    <span className="text-xs font-medium [font-family:var(--font-ui)] text-[var(--text-secondary)]">
+                    <span className="text-xs font-medium font-ui text-[var(--text-secondary)]">
                       {skill.name}
                     </span>
                   </motion.div>
@@ -120,7 +120,7 @@ export function Skills() {
             exit={{ opacity: 0, y: 20 }}
             className="fixed bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 rounded-lg z-50 bg-[var(--bg-overlay)] border border-[var(--border-strong)] shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
           >
-            <p className="text-sm [font-family:var(--font-ui)] text-[var(--text-secondary)]">
+            <p className="text-sm font-ui text-[var(--text-secondary)]">
               {skillMsg}
             </p>
           </motion.div>
