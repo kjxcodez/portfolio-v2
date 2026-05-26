@@ -1,12 +1,30 @@
 'use client';
 
-import { motion } from 'motion/react';
-import { MapPin, FileText, Mail, ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { useRef, useState } from 'react';
+import { MapPin, FileText, Mail } from 'lucide-react';
 import { GithubIcon } from '@/components/shared/icons';
 import { PERSONAL, RESUME_URL } from '@/lib/data';
 import { trackEvent } from '@/lib/analytics';
+import { dispatchAchievement } from '@/lib/easter-eggs';
 
 export function Hero() {
+  const clickCount = useRef(0)
+  const clickTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [showResume, setShowResume] = useState(false)
+
+  function handleAvatarClick() {
+    clickCount.current += 1
+    if (clickTimer.current) clearTimeout(clickTimer.current)
+    clickTimer.current = setTimeout(() => { clickCount.current = 0 }, 5000)
+    if (clickCount.current >= 7) {
+      clickCount.current = 0
+      dispatchAchievement('avatar-click', 'Persistent Human')
+      setShowResume(true)
+      setTimeout(() => setShowResume(false), 5000)
+    }
+  }
+
   return (
     <section className="flex flex-col w-full pt-8 pb-2">
       {/* Availability badge */}
@@ -40,9 +58,29 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Abstract design element / logo container */}
-        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-2xl relative select-none shrink-0">
-          <span className="text-3xl font-extrabold text-white">K</span>
+        {/* Avatar — easter egg: 7 clicks in 5s */}
+        <div className="relative shrink-0 self-start md:self-auto">
+          <div
+            onClick={handleAvatarClick}
+            className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-2xl select-none cursor-pointer"
+          >
+            <span className="text-3xl font-extrabold text-white">K</span>
+          </div>
+          <AnimatePresence>
+            {showResume && (
+              <motion.a
+                href={RESUME_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-sky-400 border border-sky-500/30 px-2 py-0.5 rounded-full whitespace-nowrap hover:bg-sky-500/10 transition-colors"
+              >
+                📄 Resume.pdf
+              </motion.a>
+            )}
+          </AnimatePresence>
         </div>
       </motion.div>
 

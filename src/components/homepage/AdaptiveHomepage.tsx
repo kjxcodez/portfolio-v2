@@ -2,6 +2,7 @@
 
 import { useModeContext } from "@/components/shared/ModeProvider";
 import { GlobalBackground } from "@/components/shared/GlobalBackground";
+import { EasterEggProvider } from "@/components/easter-eggs/EasterEggProvider";
 import { MinimalPortfolio } from "./MinimalPortfolio";
 import { MacOSPortfolio } from "./MacOSPortfolio";
 import { RPGPortfolio } from "./RPGPortfolio";
@@ -33,6 +34,7 @@ export function AdaptiveHomepage({ posts }: AdaptiveHomepageProps) {
 
   return (
     <>
+      <EasterEggProvider />
       <GlobalBackground mode={mode} />
       <AnimatePresence mode="wait">
         <motion.div

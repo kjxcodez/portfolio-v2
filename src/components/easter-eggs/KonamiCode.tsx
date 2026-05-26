@@ -1,32 +1,34 @@
-'use client';
+'use client'
 
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
+import { dispatchAchievement } from '@/lib/easter-eggs'
 
 const KONAMI = [
-  'ArrowUp','ArrowUp','ArrowDown','ArrowDown',
-  'ArrowLeft','ArrowRight','ArrowLeft','ArrowRight',
-  'b','a',
-];
+  'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+  'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
+  'b', 'a',
+]
 
 export function KonamiCode() {
-  const [seq, setSeq] = useState<string[]>([]);
-  const [triggered, setTriggered] = useState(false);
+  const [seq, setSeq] = useState<string[]>([])
+  const [triggered, setTriggered] = useState(false)
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       setSeq((prev) => {
-        const next = [...prev, e.key].slice(-KONAMI.length);
+        const next = [...prev, e.key].slice(-KONAMI.length)
         if (next.join(',') === KONAMI.join(',')) {
-          setTriggered(true);
-          setTimeout(() => setTriggered(false), 3000);
+          setTriggered(true)
+          dispatchAchievement('konami', 'Keyboard Wizard')
+          setTimeout(() => setTriggered(false), 3000)
         }
-        return next;
-      });
+        return next
+      })
     }
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   return (
     <AnimatePresence>
@@ -59,9 +61,12 @@ export function KonamiCode() {
             >
               kapil@kapiljangid.pro
             </motion.div>
+            <p className="text-zinc-600 text-[11px] mt-2">
+              Hint unlocked: Developers usually press F12
+            </p>
           </motion.div>
         </motion.div>
       )}
     </AnimatePresence>
-  );
+  )
 }

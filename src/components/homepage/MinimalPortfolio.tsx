@@ -7,22 +7,13 @@ import { Blog } from "@/components/mode1-minimal/Blog";
 import { Contact } from "@/components/mode1-minimal/Contact";
 import { CurrentlyBuilding } from "@/components/mode1-minimal/CurrentlyBuilding";
 import { ScrollProgress, BackToTop } from "@/components/mode1-minimal/ScrollUI";
-import { KonamiCode } from "@/components/mode1-minimal/KonamiCode";
-import { ConsoleMessage } from "@/components/mode1-minimal/ConsoleMessage";
-import { TabTitleTrick } from "@/components/mode1-minimal/TabTitleTrick";
-import { RageClick } from "@/components/mode1-minimal/RageClick";
+import { SecretProgress } from "@/components/easter-eggs/SecretProgress";
 import Link from "next/link";
-import { SecretTrigger } from "../mode1-minimal/SecretTrigger";
 
 export function MinimalPortfolio() {
   return (
     <>
-      {/* Easter eggs & UI chrome */}
-      <ConsoleMessage />
-      <KonamiCode />
-      <TabTitleTrick />
-      <SecretTrigger/>
-      <RageClick />
+      {/* UI chrome */}
       <ScrollProgress />
       <BackToTop />
 
@@ -43,6 +34,8 @@ export function MinimalPortfolio() {
           <Link href="/now" className="hover:text-zinc-400 transition-colors">Now</Link>
           <span>·</span>
           <Link href="/uses" className="hover:text-zinc-400 transition-colors">Uses</Link>
+          <span>·</span>
+          <SecretProgress />
         </footer>
       </main>
     </>

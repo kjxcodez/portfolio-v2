@@ -1,36 +1,37 @@
-'use client';
+'use client'
 
-import { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
+import { dispatchAchievement } from '@/lib/easter-eggs'
 
 export function RageClick() {
-  const clickCount = useRef(0);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [shaking, setShaking] = useState(false);
-  const [toast, setToast] = useState(false);
+  const clickCount = useRef(0)
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [shaking, setShaking] = useState(false)
+  const [toast, setToast] = useState(false)
 
   useEffect(() => {
     function onClick() {
-      clickCount.current += 1;
-      if (timer.current) clearTimeout(timer.current);
-      timer.current = setTimeout(() => { clickCount.current = 0; }, 1000);
+      clickCount.current += 1
+      if (timer.current) clearTimeout(timer.current)
+      timer.current = setTimeout(() => { clickCount.current = 0 }, 1000)
 
       if (clickCount.current >= 5) {
-        clickCount.current = 0;
-        setShaking(true);
-        setToast(true);
-        setTimeout(() => setShaking(false), 500);
-        setTimeout(() => setToast(false), 2500);
+        clickCount.current = 0
+        setShaking(true)
+        setToast(true)
+        dispatchAchievement('rage-click', 'Persistent Human')
+        setTimeout(() => setShaking(false), 500)
+        setTimeout(() => setToast(false), 2500)
       }
     }
 
-    window.addEventListener('click', onClick);
-    return () => window.removeEventListener('click', onClick);
-  }, []);
+    window.addEventListener('click', onClick)
+    return () => window.removeEventListener('click', onClick)
+  }, [])
 
   return (
     <>
-      {/* Inject shake class on body */}
       {shaking && (
         <style>{`
           body { animation: rage-shake 0.4s ease; }
@@ -56,5 +57,5 @@ export function RageClick() {
         )}
       </AnimatePresence>
     </>
-  );
+  )
 }

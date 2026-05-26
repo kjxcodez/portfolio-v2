@@ -1,6 +1,7 @@
-'use client';
+'use client'
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react'
+import { dispatchAchievement } from '@/lib/easter-eggs'
 
 const ART = `
 %c
@@ -18,20 +19,21 @@ const ART = `
   📧 kapil@kapiljangid.pro
   🐙 github.com/kjxcodez
 
-  P.S. Type "kapil" on the page for another surprise.
-`;
+  P.S. Type "kapil" on the page for a surprise. Keyboards unlock things too.
+`
 
 export function ConsoleMessage() {
-  const fired = useRef(false);
+  const fired = useRef(false)
 
   useEffect(() => {
-    if (fired.current) return;
-    fired.current = true;
+    if (fired.current) return
+    fired.current = true
     console.log(
       ART,
       'color: #38bdf8; font-family: monospace; font-size: 11px; line-height: 1.4;',
-    );
-  }, []);
+    )
+    dispatchAchievement('devtools', 'Curious Human')
+  }, [])
 
-  return null;
+  return null
 }

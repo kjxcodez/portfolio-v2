@@ -6,6 +6,7 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import { getAllPostSlugs, getPost, getAllPosts } from '@/lib/mdx'
 import { ArrowLeft, Clock } from 'lucide-react'
 import { ScrollProgress } from '@/components/mode1-minimal/ScrollUI'
+import { BlogReader } from '@/components/easter-eggs/BlogReader'
 
 export async function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }))
@@ -66,6 +67,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   return (
     <>
       <ScrollProgress />
+      <BlogReader />
       <div className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
         {/* Back */}
         <Link href="/blog" className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-8">
