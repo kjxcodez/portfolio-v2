@@ -15,7 +15,7 @@ const OPEN_TARGETS: Record<string, string> = {
   
   github: "https://github.com/kjxcodez",
   twitter: "https://x.com/kjxcodez",
-  email: "mailto:kapil@kapiljangid.pro",
+  email: "mailto:hello@kapiljangid.pro",
   
   resume: "/resume.pdf",
   blog: "/blog"

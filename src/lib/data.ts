@@ -5,7 +5,7 @@ export const PERSONAL = {
   name: 'Kapil Kumar Jangid',
   title: 'Full Stack Developer & Open Source Contributor',
   location: 'Rajasthan, India',
-  email: 'kapil@kapiljangid.pro',
+  email: 'hello@kapiljangid.pro',
   github: 'https://github.com/kjxcodez',
   twitter: 'https://x.com/kjxcodez',
   bio: 'I build things for the web. Specializing in UI design and creating engaging user experiences. I love open source and building developer tools.',
@@ -16,7 +16,7 @@ export const PERSONAL = {
 export const SOCIALS: Socials = {
   github: 'https://github.com/kjxcodez',
   twitter: 'https://x.com/kjxcodez',
-  email: 'kapil@kapiljangid.pro',
+  email: 'hello@kapiljangid.pro',
 }
 
 // ─── Resume ──────────────────────────────────────────────────────

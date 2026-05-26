@@ -59,7 +59,7 @@ export function KonamiCode() {
               transition={{ duration: 1.5, repeat: Infinity }}
               className="text-sky-400 text-xs font-mono"
             >
-              kapil@kapiljangid.pro
+              hello@kapiljangid.pro
             </motion.div>
             <p className="text-zinc-600 text-[11px] mt-2">
               Hint unlocked: Developers usually press F12

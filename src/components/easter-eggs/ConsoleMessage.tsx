@@ -16,7 +16,7 @@ const ART = `
   Full Stack Developer & Open Source Contributor
   ──────────────────────────────────────────
   👀 You opened DevTools. I like you already.
-  📧 kapil@kapiljangid.pro
+  📧 hello@kapiljangid.pro
   🐙 github.com/kjxcodez
 
   P.S. Type "kapil" on the page for a surprise. Keyboards unlock things too.
