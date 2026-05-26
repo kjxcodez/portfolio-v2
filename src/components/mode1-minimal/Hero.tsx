@@ -133,12 +133,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: -4 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
-                className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] px-2 py-0.5 rounded whitespace-nowrap transition-colors"
-                style={{
-                  color: 'var(--accent)',
-                  border: '1px solid var(--accent-border)',
-                  fontFamily: 'var(--font-mono)',
-                }}
+                className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] px-2 py-0.5 rounded whitespace-nowrap transition-colors font-mono border border-accent"
               >
                 Resume.pdf
               </motion.a>
@@ -159,26 +154,7 @@ export function Hero() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => trackEvent('resume_click', { source: 'Professional Hero' })}
-          className="inline-flex items-center gap-2 transition-all active:scale-[0.98]"
-          style={{
-            fontFamily: 'var(--font-ui)',
-            fontSize: 'var(--text-sm)',
-            fontWeight: 500,
-            padding: '8px 16px',
-            borderRadius: '6px',
-            background: 'var(--accent)',
-            color: 'var(--text-inverse)',
-            border: '1px solid var(--accent)',
-            transition: 'background 120ms ease, border-color 120ms ease',
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.background = 'var(--accent-hover)';
-            (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-hover)';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.background = 'var(--accent)';
-            (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)';
-          }}
+          className="inline-flex items-center gap-2 transition-all active:scale-[0.98] font-ui text-sm font-medium font-semibold px-4 py-2 rounded-lg transition-colors border border-accent hover:bg-accent hover:text-white hover:bg-purple-600"
         >
           <FileText size={15} />
           Resume
@@ -188,28 +164,7 @@ export function Hero() {
           href={PERSONAL.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 transition-all active:scale-[0.98]"
-          style={{
-            fontFamily: 'var(--font-ui)',
-            fontSize: 'var(--text-sm)',
-            fontWeight: 500,
-            padding: '8px 16px',
-            borderRadius: '6px',
-            background: 'transparent',
-            color: 'var(--text-secondary)',
-            border: '1px solid var(--border-default)',
-            transition: 'border-color 120ms ease, color 120ms ease, background 120ms ease',
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-strong)';
-            (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
-            (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
-            (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
-            (e.currentTarget as HTMLElement).style.background = 'transparent';
-          }}
+          className="inline-flex items-center gap-2 transition-all active:scale-[0.98] font-ui text-sm font-medium px-4 py-2 rounded-lg transition-colors border border-[var(--border-default)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-elevated)]"
         >
           <GithubIcon size={15} />
           GitHub
@@ -218,28 +173,7 @@ export function Hero() {
         <a
           href={`mailto:${PERSONAL.email}`}
           onClick={() => trackEvent('contact_click', { source: 'Professional Hero' })}
-          className="inline-flex items-center gap-2 transition-all active:scale-[0.98]"
-          style={{
-            fontFamily: 'var(--font-ui)',
-            fontSize: 'var(--text-sm)',
-            fontWeight: 500,
-            padding: '8px 16px',
-            borderRadius: '6px',
-            background: 'transparent',
-            color: 'var(--text-secondary)',
-            border: '1px solid var(--border-default)',
-            transition: 'border-color 120ms ease, color 120ms ease, background 120ms ease',
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-strong)';
-            (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
-            (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
-            (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
-            (e.currentTarget as HTMLElement).style.background = 'transparent';
-          }}
+          className="inline-flex items-center gap-2 transition-all active:scale-[0.98] font-ui text-sm font-medium px-4 py-2 rounded-lg transition-colors border border-[var(--border-default)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-elevated)]"
         >
           <Mail size={15} />
           Contact
