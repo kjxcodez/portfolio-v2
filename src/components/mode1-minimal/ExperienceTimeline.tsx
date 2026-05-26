@@ -42,7 +42,7 @@ export function ExperienceTimeline() {
                 <h3 className="text-base font-medium [font-family:var(--font-ui)] text-[var(--text-primary)]">
                   {exp.company}
                 </h3>
-                <p className="text-sm mt-0.5 [font-family:var(--font-ui)] text-[var(--text-secondary)]">
+                <p className="text-sm mt-0.5 font-ui text-[var(--text-secondary)]">
                   {exp.role}
                 </p>
                 <div className="flex items-center gap-3 mt-1 [font-family:var(--font-mono)] [font-size:var(--text-xs)] text-[var(--text-tertiary)] tracking-[0.04em]">
@@ -71,7 +71,7 @@ export function ExperienceTimeline() {
                 >
                   <div className="flex items-center gap-2 mb-3">
                     <Briefcase size={13} className="text-[var(--text-tertiary)]" />
-                    <h4 className="text-sm font-medium [font-family:var(--font-ui)] text-[var(--text-secondary)]">
+                    <h4 className="text-sm font-medium font-ui text-[var(--text-secondary)]">
                       {project.name}
                     </h4>
                   </div>
@@ -80,25 +80,25 @@ export function ExperienceTimeline() {
                     {project.achievements.map((achievement, achIdx) => (
                       <li
                         key={achIdx}
-                        className="flex items-start gap-2 text-xs leading-relaxed [font-family:var(--font-ui)] text-[var(--text-secondary)]"
+                        className="flex items-start gap-2 text-xs leading-relaxed font-ui text-(--text-secondary)"
                       >
-                        <ChevronRight size={11} className="text-[var(--text-tertiary)] shrink-0 mt-0.5" />
+                        <ChevronRight size={11} className="text-(--text-tertiary) shrink-0 mt-0.5" />
                         <span>{achievement}</span>
                       </li>
                     ))}
                   </ul>
 
                   {project.metrics && project.metrics.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mt-4 pt-3 border-t border-t-[var(--border-subtle)]">
+                    <div className="flex flex-wrap gap-2 mt-4 pt-3 border-t border-t-(--border-subtle)">
                       {project.metrics.map((metric) => (
                         <div
                           key={metric.label}
-                          className="flex flex-col items-center px-3 py-2 rounded-lg min-w-[72px] bg-[var(--bg-elevated)] border border-[var(--border-default)]"
+                          className="flex flex-col items-center px-3 py-2 rounded-lg min-w-[72px] bg-(--bg-elevated) border border"
                         >
-                          <span className="text-sm font-semibold leading-tight [font-family:var(--font-ui)] text-[var(--accent)]">
+                          <span className="text-sm font-semibold leading-tight font-ui">
                             {metric.value}
                           </span>
-                          <span className="text-[10px] mt-0.5 text-center leading-tight [font-family:var(--font-mono)] text-[var(--text-tertiary)]">
+                          <span className="text-[10px] mt-0.5 text-center leading-tight font-mono tracking-[0.02em]">
                             {metric.label}
                           </span>
                         </div>
