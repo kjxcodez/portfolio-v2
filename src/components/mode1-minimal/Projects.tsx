@@ -8,7 +8,7 @@ import { MobileProjectCard } from './MobileProjectCard';
 import { PROJECTS } from '@/lib/data';
 import type { Project, ProjectType } from '@/types/portfolio';
 
-// ─── Type badge helpers ──────────────────────────────────────────
+// ─── Type badge ──────────────────────────────────────────────────
 const TYPE_LABEL: Record<ProjectType, string> = {
   web: 'Web App',
   mobile: 'Mobile App',
@@ -27,18 +27,7 @@ const TYPE_ICON: Record<ProjectType, React.ReactNode> = {
 
 function TypeBadge({ type }: { type: ProjectType }) {
   return (
-    <span
-      className="inline-flex items-center gap-1 rounded"
-      style={{
-        fontFamily: 'var(--font-mono)',
-        fontSize: '0.625rem',
-        letterSpacing: '0.04em',
-        color: 'var(--text-tertiary)',
-        background: 'var(--bg-elevated)',
-        border: '1px solid var(--border-default)',
-        padding: '1px 6px',
-      }}
-    >
+    <span className="inline-flex items-center gap-1 rounded [font-family:var(--font-mono)] text-[10px] tracking-[0.04em] text-[var(--text-tertiary)] bg-[var(--bg-elevated)] border border-[var(--border-default)] px-1.5 py-0.5">
       {TYPE_ICON[type]}
       {TYPE_LABEL[type]}
     </span>
@@ -54,38 +43,18 @@ function WebProjectCard({ project, idx }: { project: Project; idx: number }) {
       whileHover={{ y: -2 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ delay: idx * 0.06, duration: 0.35 }}
-      className="flex flex-col rounded-lg transition-colors duration-150"
-      style={{
-        background: 'var(--bg-surface)',
-        border: '1px solid var(--border-default)',
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)';
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
-      }}
+      className="flex flex-col rounded-lg transition-colors duration-150 bg-[var(--bg-surface)] border border-[var(--border-default)] hover:border-[var(--accent-border)]"
     >
       <div className="p-4 flex flex-col gap-2">
         <div className="flex items-start justify-between gap-2">
           <Link
             href={`/projects/${project.id}`}
-            className="text-sm font-medium transition-colors"
-            style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-primary)' }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--accent)'; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
+            className="text-sm font-medium transition-colors [font-family:var(--font-ui)] text-[var(--text-primary)] hover:text-[var(--accent)]"
           >
             {project.title}
           </Link>
           <div className="flex items-center gap-2 shrink-0">
-            <span
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'var(--text-xs)',
-                color: 'var(--text-tertiary)',
-                letterSpacing: '0.04em',
-              }}
-            >
+            <span className="[font-family:var(--font-mono)] [font-size:var(--text-xs)] text-[var(--text-tertiary)] tracking-[0.04em]">
               {project.year}
             </span>
             {project.url && (
@@ -93,10 +62,7 @@ function WebProjectCard({ project, idx }: { project: Project; idx: number }) {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: 'var(--text-tertiary)' }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
-                className="transition-colors"
+                className="transition-colors text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]"
               >
                 <SquareArrowOutUpRight size={13} />
               </a>
@@ -106,10 +72,7 @@ function WebProjectCard({ project, idx }: { project: Project; idx: number }) {
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: 'var(--text-tertiary)' }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
-                className="transition-colors"
+                className="transition-colors text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]"
               >
                 <GithubIcon size={14} />
               </a>
@@ -119,10 +82,7 @@ function WebProjectCard({ project, idx }: { project: Project; idx: number }) {
 
         <TypeBadge type={project.type} />
 
-        <p
-          className="text-xs leading-relaxed"
-          style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-secondary)' }}
-        >
+        <p className="text-xs leading-relaxed [font-family:var(--font-ui)] text-[var(--text-secondary)]">
           {project.description}
         </p>
 
@@ -130,25 +90,13 @@ function WebProjectCard({ project, idx }: { project: Project; idx: number }) {
           {project.tags.slice(0, 4).map((tag) => (
             <span
               key={tag}
-              className="rounded"
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.625rem',
-                letterSpacing: '0.04em',
-                color: 'var(--tag-text)',
-                background: 'var(--tag-bg)',
-                border: '1px solid var(--tag-border)',
-                padding: '1px 6px',
-              }}
+              className="rounded [font-family:var(--font-mono)] text-[10px] tracking-[0.04em] text-[var(--tag-text)] bg-[var(--tag-bg)] border border-[var(--tag-border)] px-1.5 py-0.5"
             >
               {tag}
             </span>
           ))}
           {project.tags.length > 4 && (
-            <span
-              className="text-[10px]"
-              style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}
-            >
+            <span className="text-[10px] [font-family:var(--font-mono)] text-[var(--text-tertiary)]">
               +{project.tags.length - 4}
             </span>
           )}
@@ -164,15 +112,7 @@ export function FeaturedProjects() {
 
   return (
     <div className="flex flex-col items-start w-full my-6 gap-4">
-      <h2
-        className="uppercase"
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--text-xs)',
-          letterSpacing: '0.1em',
-          color: 'var(--text-tertiary)',
-        }}
-      >
+      <h2 className="uppercase [font-family:var(--font-mono)] [font-size:var(--text-xs)] tracking-[0.1em] text-[var(--text-tertiary)]">
         Featured Projects
       </h2>
 
@@ -185,17 +125,7 @@ export function FeaturedProjects() {
             whileHover={{ y: -2 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ delay: idx * 0.08, duration: 0.4 }}
-            className="group relative rounded-lg transition-colors duration-150"
-            style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-default)',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
-            }}
+            className="group relative rounded-lg transition-colors duration-150 bg-[var(--bg-surface)] border border-[var(--border-default)] hover:border-[var(--accent-border)]"
           >
             <div className="p-5">
               {/* Title row */}
@@ -203,22 +133,11 @@ export function FeaturedProjects() {
                 <div className="flex items-center gap-2 min-w-0">
                   <Link
                     href={`/projects/${project.id}`}
-                    className="text-sm font-medium transition-colors truncate"
-                    style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-primary)' }}
-                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--accent)'; }}
-                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
+                    className="text-sm font-medium transition-colors truncate [font-family:var(--font-ui)] text-[var(--text-primary)] hover:text-[var(--accent)]"
                   >
                     {project.title}
                   </Link>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: 'var(--text-xs)',
-                      color: 'var(--text-tertiary)',
-                      letterSpacing: '0.04em',
-                      flexShrink: 0,
-                    }}
-                  >
+                  <span className="[font-family:var(--font-mono)] [font-size:var(--text-xs)] text-[var(--text-tertiary)] tracking-[0.04em] shrink-0">
                     {project.year}
                   </span>
                 </div>
@@ -228,16 +147,7 @@ export function FeaturedProjects() {
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-6 h-6 rounded flex items-center justify-center transition-colors"
-                      style={{ color: 'var(--text-tertiary)' }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
-                        (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)';
-                        (e.currentTarget as HTMLElement).style.background = 'transparent';
-                      }}
+                      className="w-6 h-6 rounded flex items-center justify-center transition-colors text-[var(--text-tertiary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]"
                     >
                       <SquareArrowOutUpRight size={13} />
                     </a>
@@ -247,16 +157,7 @@ export function FeaturedProjects() {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-6 h-6 rounded flex items-center justify-center transition-colors"
-                      style={{ color: 'var(--text-tertiary)' }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
-                        (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)';
-                        (e.currentTarget as HTMLElement).style.background = 'transparent';
-                      }}
+                      className="w-6 h-6 rounded flex items-center justify-center transition-colors text-[var(--text-tertiary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-elevated)]"
                     >
                       <GithubIcon size={14} />
                     </a>
@@ -270,10 +171,7 @@ export function FeaturedProjects() {
               </div>
 
               {/* Short description */}
-              <p
-                className="text-sm leading-relaxed mb-3"
-                style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-secondary)' }}
-              >
+              <p className="text-sm leading-relaxed mb-3 [font-family:var(--font-ui)] text-[var(--text-secondary)]">
                 {project.description}
               </p>
 
@@ -282,29 +180,17 @@ export function FeaturedProjects() {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded"
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: 'var(--text-xs)',
-                      letterSpacing: '0.04em',
-                      color: 'var(--tag-text)',
-                      background: 'var(--tag-bg)',
-                      border: '1px solid var(--tag-border)',
-                      padding: '2px 8px',
-                    }}
+                    className="rounded [font-family:var(--font-mono)] [font-size:var(--text-xs)] tracking-[0.04em] text-[var(--tag-text)] bg-[var(--tag-bg)] border border-[var(--tag-border)] px-2 py-0.5"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              {/* View details link */}
+              {/* View details */}
               <Link
                 href={`/projects/${project.id}`}
-                className="inline-flex items-center gap-1 text-xs transition-colors"
-                style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--accent)'; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
+                className="inline-flex items-center gap-1 text-xs transition-colors [font-family:var(--font-mono)] text-[var(--text-tertiary)] hover:text-[var(--accent)]"
               >
                 View details <ArrowRight size={11} />
               </Link>
@@ -319,20 +205,11 @@ export function FeaturedProjects() {
 // ─── Other projects ──────────────────────────────────────────────────
 export function OtherProjects() {
   const other = PROJECTS.filter((p) => !p.featured);
-
   if (other.length === 0) return null;
 
   return (
     <div className="flex flex-col items-start w-full my-4 gap-4">
-      <h2
-        className="uppercase"
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--text-xs)',
-          letterSpacing: '0.1em',
-          color: 'var(--text-tertiary)',
-        }}
-      >
+      <h2 className="uppercase [font-family:var(--font-mono)] [font-size:var(--text-xs)] tracking-[0.1em] text-[var(--text-tertiary)]">
         Other Projects
       </h2>
 
@@ -351,10 +228,7 @@ export function OtherProjects() {
           href="https://github.com/kjxcodez?tab=repositories"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1.5 transition-colors"
-          style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-tertiary)' }}
-          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
+          className="flex items-center gap-1.5 transition-colors [font-family:var(--font-ui)] text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]"
         >
           More on GitHub <ArrowRight size={13} />
         </a>

@@ -32,23 +32,9 @@ export function Hero() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="inline-flex items-center gap-2 self-start px-2.5 py-1 rounded"
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--text-xs)',
-          letterSpacing: '0.04em',
-          color: 'var(--success)',
-          background: 'var(--success-subtle)',
-          border: '1px solid var(--success)',
-        }}
+        className="inline-flex items-center gap-2 self-start px-2.5 py-1 rounded [font-family:var(--font-mono)] [font-size:var(--text-xs)] tracking-[0.04em] text-[var(--success)] bg-[var(--success-subtle)] border border-[var(--success)]"
       >
-        <span
-          className="w-1.5 h-1.5 rounded-full"
-          style={{
-            background: 'var(--success)',
-            animation: 'pulse-opacity 2s ease-in-out infinite',
-          }}
-        />
+        <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-[var(--success)]" />
         Available for new opportunities
       </motion.div>
 
@@ -61,22 +47,13 @@ export function Hero() {
           transition={{ duration: 0.45, delay: 0.05 }}
           className="space-y-2"
         >
-          <h1
-            className="text-3xl md:text-4xl tracking-tight leading-tight"
-            style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}
-          >
+          <h1 className="text-3xl md:text-4xl tracking-tight leading-tight [font-family:var(--font-display)] text-[var(--text-primary)]">
             {PERSONAL.name}
           </h1>
-          <p
-            className="text-sm"
-            style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)', letterSpacing: '0.04em' }}
-          >
+          <p className="text-sm [font-family:var(--font-mono)] text-[var(--text-tertiary)] tracking-[0.04em]">
             {PERSONAL.title}
           </p>
-          <div
-            className="flex items-center gap-1 text-xs select-none"
-            style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}
-          >
+          <div className="flex items-center gap-1 text-xs select-none [font-family:var(--font-mono)] text-[var(--text-tertiary)]">
             <MapPin size={12} />
             <span>{PERSONAL.location}</span>
           </div>
@@ -91,34 +68,15 @@ export function Hero() {
         >
           <div
             onClick={handleAvatarClick}
-            className="rounded-lg cursor-pointer select-none"
-            style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-default)',
-              padding: 'var(--space-5) var(--space-6)',
-              minWidth: '180px',
-            }}
+            className="rounded-lg cursor-pointer select-none bg-[var(--bg-surface)] border border-[var(--border-default)] min-w-[180px] py-5 px-6"
           >
-            <p
-              className="mb-3"
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'var(--text-xs)',
-                color: 'var(--text-tertiary)',
-                letterSpacing: '0.06em',
-                textTransform: 'uppercase',
-              }}
-            >
+            <p className="mb-3 [font-family:var(--font-mono)] [font-size:var(--text-xs)] text-[var(--text-tertiary)] tracking-[0.06em] uppercase">
               Now
             </p>
             <ul className="space-y-1.5">
               {['Building products', 'Writing', 'Open source'].map((item) => (
-                <li
-                  key={item}
-                  className="flex items-start gap-2 text-sm"
-                  style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-secondary)' }}
-                >
-                  <span style={{ color: 'var(--text-tertiary)' }}>·</span>
+                <li key={item} className="flex items-start gap-2 text-sm [font-family:var(--font-ui)] text-[var(--text-secondary)]">
+                  <span className="text-[var(--text-tertiary)]">·</span>
                   {item}
                 </li>
               ))}
@@ -185,8 +143,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.35 }}
-        className="mt-6 text-sm leading-relaxed max-w-lg"
-        style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-secondary)' }}
+        className="mt-6 text-sm leading-relaxed max-w-lg [font-family:var(--font-ui)] text-[var(--text-secondary)]"
       >
         {PERSONAL.bio}
       </motion.p>
