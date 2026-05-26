@@ -27,7 +27,7 @@ export function Hero() {
 
   return (
     <section className="flex flex-col w-full pt-8 pb-2">
-      {/* Availability badge — DESIGN.md: mono, success color, no scale pulse */}
+      {/* Availability badge */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -52,15 +52,15 @@ export function Hero() {
         Available for new opportunities
       </motion.div>
 
-      {/* Hero header — identity left, Now status card right */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="mt-6 flex flex-col-reverse md:flex-row md:items-start justify-between gap-6"
-      >
+      {/* Hero header — identity left, Now status card right (staggered) */}
+      <div className="mt-6 flex flex-col-reverse md:flex-row md:items-start justify-between gap-6">
         {/* Left — identity */}
-        <div className="space-y-2">
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.05 }}
+          className="space-y-2"
+        >
           <h1
             className="text-3xl md:text-4xl tracking-tight leading-tight"
             style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}
@@ -80,10 +80,15 @@ export function Hero() {
             <MapPin size={12} />
             <span>{PERSONAL.location}</span>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Right — "Now" status card (easter egg: 7 clicks in 5s) */}
-        <div className="relative shrink-0 self-start">
+        {/* Right — "Now" status card (easter egg: 7 clicks in 5s) — delayed */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.25 }}
+          className="relative shrink-0 self-start"
+        >
           <div
             onClick={handleAvatarClick}
             className="rounded-lg cursor-pointer select-none"
@@ -139,14 +144,14 @@ export function Hero() {
               </motion.a>
             )}
           </AnimatePresence>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
 
       {/* CTAs */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        transition={{ duration: 0.5, delay: 0.18 }}
         className="flex flex-wrap items-center gap-3 mt-6"
       >
         <a

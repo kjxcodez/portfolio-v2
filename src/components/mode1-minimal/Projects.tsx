@@ -4,8 +4,112 @@ import Link from 'next/link';
 import { motion } from 'motion/react';
 import { SquareArrowOutUpRight, ArrowRight } from 'lucide-react';
 import { GithubIcon } from '@/components/shared/icons';
+import { MobileProjectCard } from './MobileProjectCard';
 import { PROJECTS } from '@/lib/data';
+import type { Project } from '@/types/portfolio';
 
+// ─── Web / Tool / Extension / Language compact card ─────────────────
+function WebProjectCard({ project, idx }: { project: Project; idx: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -2 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ delay: idx * 0.06, duration: 0.35 }}
+      className="flex flex-col rounded-lg transition-colors duration-150"
+      style={{
+        background: 'var(--bg-surface)',
+        border: '1px solid var(--border-default)',
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)';
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
+      }}
+    >
+      <div className="p-4 flex flex-col gap-2">
+        <div className="flex items-start justify-between gap-2">
+          <Link
+            href={`/projects/${project.id}`}
+            className="text-sm font-medium transition-colors"
+            style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-primary)' }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--accent)'; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
+          >
+            {project.title}
+          </Link>
+          <div className="flex items-center gap-2 shrink-0">
+            {project.url && (
+              <a
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'var(--text-tertiary)' }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
+                className="transition-colors"
+              >
+                <SquareArrowOutUpRight size={13} />
+              </a>
+            )}
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'var(--text-tertiary)' }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
+                className="transition-colors"
+              >
+                <GithubIcon size={14} />
+              </a>
+            )}
+          </div>
+        </div>
+
+        <p
+          className="text-xs leading-relaxed"
+          style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-secondary)' }}
+        >
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-1 mt-1">
+          {project.tags.slice(0, 4).map((tag) => (
+            <span
+              key={tag}
+              className="rounded"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.625rem',
+                letterSpacing: '0.04em',
+                color: 'var(--tag-text)',
+                background: 'var(--tag-bg)',
+                border: '1px solid var(--tag-border)',
+                padding: '1px 6px',
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+          {project.tags.length > 4 && (
+            <span
+              className="text-[10px]"
+              style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}
+            >
+              +{project.tags.length - 4}
+            </span>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// ─── Featured projects ───────────────────────────────────────────────
 export function FeaturedProjects() {
   const featured = PROJECTS.filter((p) => p.featured);
 
@@ -29,20 +133,19 @@ export function FeaturedProjects() {
             key={project.id}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            whileHover={{ y: -2 }}
+            viewport={{ once: true, margin: '-40px' }}
             transition={{ delay: idx * 0.08, duration: 0.4 }}
-            className="group relative rounded-lg transition-all duration-150"
+            className="group relative rounded-lg transition-colors duration-150"
             style={{
               background: 'var(--bg-surface)',
               border: '1px solid var(--border-default)',
             }}
             onMouseEnter={(e) => {
               (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)';
-              (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
             }}
             onMouseLeave={(e) => {
               (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
-              (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
             }}
           >
             <div className="p-5 sm:p-6">
@@ -147,6 +250,7 @@ export function FeaturedProjects() {
   );
 }
 
+// ─── Other projects ──────────────────────────────────────────────────
 export function OtherProjects() {
   const other = PROJECTS.filter((p) => !p.featured);
 
@@ -167,105 +271,13 @@ export function OtherProjects() {
       </h2>
 
       <div className="grid sm:grid-cols-2 grid-cols-1 w-full gap-3">
-        {other.map((project, idx) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.06, duration: 0.35 }}
-            className="flex flex-col rounded-lg transition-all duration-150"
-            style={{
-              background: 'var(--bg-surface)',
-              border: '1px solid var(--border-default)',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)';
-              (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
-              (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-            }}
-          >
-            <div className="p-4 flex flex-col gap-2">
-              <div className="flex items-start justify-between gap-2">
-                <Link
-                  href={`/projects/${project.id}`}
-                  className="text-sm font-medium transition-colors"
-                  style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-primary)' }}
-                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--accent)'; }}
-                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
-                >
-                  {project.title}
-                </Link>
-                <div className="flex items-center gap-2 shrink-0">
-                  {project.url && (
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ color: 'var(--text-tertiary)' }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
-                      className="transition-colors"
-                    >
-                      <SquareArrowOutUpRight size={13} />
-                    </a>
-                  )}
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ color: 'var(--text-tertiary)' }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
-                      className="transition-colors"
-                    >
-                      <GithubIcon size={14} />
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              <p
-                className="text-xs leading-relaxed"
-                style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-secondary)' }}
-              >
-                {project.description}
-              </p>
-
-              <div className="flex flex-wrap gap-1 mt-1">
-                {project.tags.slice(0, 4).map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded"
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.625rem',
-                      letterSpacing: '0.04em',
-                      color: 'var(--tag-text)',
-                      background: 'var(--tag-bg)',
-                      border: '1px solid var(--tag-border)',
-                      padding: '1px 6px',
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-                {project.tags.length > 4 && (
-                  <span
-                    className="text-[10px]"
-                    style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}
-                  >
-                    +{project.tags.length - 4}
-                  </span>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        ))}
+        {other.map((project, idx) =>
+          project.type === 'mobile' ? (
+            <MobileProjectCard key={project.id} project={project} idx={idx} />
+          ) : (
+            <WebProjectCard key={project.id} project={project} idx={idx} />
+          )
+        )}
       </div>
 
       <div className="flex w-full items-center justify-end text-sm">

@@ -42,8 +42,28 @@ export function Blog({ posts }: BlogProps) {
   return (
     <div className="flex flex-col items-start w-full my-6 gap-4">
       <div className="flex items-center justify-between w-full">
-        <h2 className="font-semibold text-sm uppercase tracking-wider text-zinc-400">Blog</h2>
-        <a href="/blog" className="text-xs text-zinc-500 hover:text-zinc-300 flex items-center gap-1 transition-colors">
+        <h2
+          className="uppercase"
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            letterSpacing: '0.1em',
+            color: 'var(--text-tertiary)',
+          }}
+        >
+          Blog
+        </h2>
+        <a
+          href="/blog"
+          className="flex items-center gap-1 transition-colors"
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            color: 'var(--text-tertiary)',
+          }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
+        >
           All posts <ArrowRight size={11} />
         </a>
       </div>
@@ -55,14 +75,42 @@ export function Blog({ posts }: BlogProps) {
             href={`/blog/${post.slug}`}
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            whileHover={{ y: -2 }}
+            viewport={{ once: true, margin: '-40px' }}
             transition={{ delay: idx * 0.08, duration: 0.35 }}
-            className="group flex items-start justify-between gap-4 p-4 border border-zinc-800 rounded-xl bg-zinc-900/20 hover:bg-zinc-900/40 hover:border-zinc-700 transition-all duration-200"
+            className="group flex items-start justify-between gap-4 p-4 rounded-xl transition-colors duration-150"
+            style={{
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border-default)',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-strong)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
+            }}
           >
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-zinc-200 group-hover:text-white transition-colors leading-snug">{post.title}</p>
-              <p className="text-xs text-zinc-500 mt-1 line-clamp-1">{post.description}</p>
-              <div className="flex items-center gap-2 text-[11px] text-zinc-600 mt-2">
+              <p
+                className="text-sm font-medium leading-snug transition-colors"
+                style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-primary)' }}
+              >
+                {post.title}
+              </p>
+              <p
+                className="text-xs mt-1 line-clamp-1"
+                style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-secondary)' }}
+              >
+                {post.description}
+              </p>
+              <div
+                className="flex items-center gap-2 mt-2"
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.6875rem',
+                  color: 'var(--text-tertiary)',
+                }}
+              >
                 <span>{post.date}</span>
                 <span>·</span>
                 <span className="flex items-center gap-0.5">
@@ -71,7 +119,11 @@ export function Blog({ posts }: BlogProps) {
                 </span>
               </div>
             </div>
-            <ArrowRight size={13} className="shrink-0 text-zinc-700 group-hover:text-zinc-400 group-hover:translate-x-0.5 transition-all mt-1" />
+            <ArrowRight
+              size={13}
+              className="shrink-0 mt-1 transition-transform group-hover:translate-x-0.5"
+              style={{ color: 'var(--text-tertiary)' }}
+            />
           </motion.a>
         ))}
       </div>

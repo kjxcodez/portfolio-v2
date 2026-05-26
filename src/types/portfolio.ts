@@ -1,3 +1,5 @@
+export type ProjectType = 'web' | 'mobile' | 'tool' | 'extension' | 'language'
+
 export interface Project {
   id: string
   title: string
@@ -9,6 +11,9 @@ export interface Project {
   image?: string
   featured: boolean
   year: number
+  type: ProjectType
+  screenshots?: string[]
+  apkUrl?: string
 }
 
 export interface Skill {
@@ -52,6 +57,7 @@ export interface Experience {
 export interface ExperienceProject {
   name: string
   achievements: string[]
+  metrics?: { value: string; label: string }[]
 }
 
 export interface CurrentProject {

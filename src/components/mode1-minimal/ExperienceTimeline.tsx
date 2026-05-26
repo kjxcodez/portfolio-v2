@@ -25,13 +25,13 @@ export function ExperienceTimeline() {
             key={exp.id}
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '-40px' }}
             transition={{ delay: expIdx * 0.1, duration: 0.5 }}
             className="relative"
           >
             {/* Company header */}
             <div className="flex items-start gap-4 mb-4">
-              {/* Icon + connector line */}
+              {/* Icon + animated connector line */}
               <div className="flex flex-col items-center pt-1">
                 <div
                   className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
@@ -43,9 +43,13 @@ export function ExperienceTimeline() {
                   <Building2 size={16} style={{ color: 'var(--text-secondary)' }} />
                 </div>
                 {exp.projects.length > 1 && (
-                  <div
+                  <motion.div
                     className="w-px flex-1 mt-2 min-h-[20px]"
-                    style={{ background: 'var(--border-subtle)' }}
+                    initial={{ scaleY: 0 }}
+                    whileInView={{ scaleY: 1 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ delay: expIdx * 0.1 + 0.3, duration: 0.5 }}
+                    style={{ background: 'var(--border-subtle)', transformOrigin: 'top' }}
                   />
                 )}
               </div>
@@ -92,9 +96,9 @@ export function ExperienceTimeline() {
                   key={project.name}
                   initial={{ opacity: 0, x: -8 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: '-40px' }}
                   transition={{ delay: expIdx * 0.1 + projIdx * 0.08, duration: 0.4 }}
-                  className="rounded-lg p-4 transition-all duration-150"
+                  className="rounded-lg p-4 transition-colors duration-150"
                   style={{
                     background: 'var(--bg-surface)',
                     border: '1px solid var(--border-default)',
@@ -130,6 +134,35 @@ export function ExperienceTimeline() {
                       </li>
                     ))}
                   </ul>
+
+                  {/* Metric stat cards */}
+                  {project.metrics && project.metrics.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-4 pt-3" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                      {project.metrics.map((metric) => (
+                        <div
+                          key={metric.label}
+                          className="flex flex-col items-center px-3 py-2 rounded-lg min-w-[72px]"
+                          style={{
+                            background: 'var(--bg-elevated)',
+                            border: '1px solid var(--border-default)',
+                          }}
+                        >
+                          <span
+                            className="text-sm font-semibold leading-tight"
+                            style={{ fontFamily: 'var(--font-ui)', color: 'var(--accent)' }}
+                          >
+                            {metric.value}
+                          </span>
+                          <span
+                            className="text-[10px] mt-0.5 text-center leading-tight"
+                            style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}
+                          >
+                            {metric.label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </div>

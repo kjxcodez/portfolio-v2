@@ -30,7 +30,14 @@ export function BackToTop() {
       initial={false}
       animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 12, pointerEvents: visible ? 'auto' : 'none' }}
       transition={{ duration: 0.2 }}
-      className="fixed bottom-6 right-6 z-50 w-9 h-9 flex items-center justify-center rounded-xl border dark:bg-black dark:border-zinc-700 bg-white border-zinc-200 shadow-md text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:scale-110 transition-transform text-xs font-bold"
+      className="fixed bottom-6 right-6 z-50 w-9 h-9 flex items-center justify-center rounded-xl shadow-md text-xs font-bold hover:scale-110 transition-transform"
+      style={{
+        background: 'var(--bg-surface)',
+        border: '1px solid var(--border-default)',
+        color: 'var(--text-tertiary)',
+      }}
+      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
+      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
       aria-label="Back to top"
     >
       ↑
