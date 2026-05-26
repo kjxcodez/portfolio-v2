@@ -7,28 +7,28 @@ import type { BlogPost } from '@/types/portfolio';
 // Seed posts as fallback — these match the real MDX files
 const SEED_POSTS: BlogPost[] = [
   {
-    slug: 'building-rune-lang',
-    title: 'Building Rune Lang: A Programming Language From Scratch',
-    description: 'Lexer, parser, AST, and tree-walk interpreter — all in Python.',
-    date: '2024-11-15',
-    readingTime: '12 min read',
-    tags: ['Python', 'Language Design', 'Compilers'],
+    slug: 'building-products-taught-me-more-than-tutorials-did',
+    title: 'Building Products Taught Me More Than Tutorials Did',
+    description: 'I learned a lot from courses and tutorials, but building real products exposed problems that never show up in controlled learning environments.',
+    date: '2026-05-26',
+    readingTime: '5 min read',
+    tags: ['Development', 'Learning', 'Products'],
   },
   {
-    slug: 'percept-ui-story',
-    title: 'Lessons From Creating an Open Source React Component Library',
-    description: 'API design, npm publishing, DX trade-offs, and growing a community.',
-    date: '2024-12-01',
-    readingTime: '8 min read',
-    tags: ['React', 'Open Source', 'TypeScript'],
-  },
-  {
-    slug: 'open-source-journey',
-    title: 'My First 10 Merged PRs and What I Learned',
-    description: 'What worked, what got rejected, and habits that made me a better collaborator.',
-    date: '2025-01-10',
+    slug: 'things-i-underestimated-while-building-a-headless-cms',
+    title: 'Things I Underestimated While Building a Headless CMS',
+    description: 'I thought building a headless CMS mostly meant creating CRUD screens and APIs. I underestimated everything around the actual content itself.',
+    date: '2026-05-26',
     readingTime: '6 min read',
-    tags: ['Open Source', 'Git', 'Career'],
+    tags: ['Next.js', 'Backend', 'Architecture'],
+  },
+  {
+    slug: 'why-i-built-a-programming-language-just-to-understand-programming-better',
+    title: 'Why I Built a Programming Language Just to Understand Programming Better',
+    description: 'Building Rune Lang was less about creating a new language and more about understanding what happens behind the code I write every day.',
+    date: '2026-05-26',
+    readingTime: '7 min read',
+    tags: ['Python', 'Language Design', 'Learning'],
   },
 ];
 
