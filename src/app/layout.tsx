@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import { Geist, Geist_Mono, Inter, Instrument_Serif, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { QuickNav } from "@/components/shared/QuickNav";
@@ -17,6 +17,18 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  weight: "400",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-instrument-serif",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
 });
 
 export const metadata: Metadata = {
@@ -68,6 +80,8 @@ export default function RootLayout({
         geistSans.variable,
         geistMono.variable,
         inter.variable,
+        instrumentSerif.variable,
+        dmSans.variable,
         "font-sans"
       )}
     >

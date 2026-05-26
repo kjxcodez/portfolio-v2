@@ -12,7 +12,7 @@ export function GlobalBackground({ mode }: GlobalBackgroundProps) {
   // Memoize background components to prevent unnecessary re-renders
   const backgroundContent = useMemo(() => {
     switch (mode) {
-      case 1: // Minimal Mode
+      case 1: // Minimal Mode — DESIGN.md: near-black base, single subtle top radial
         return (
           <motion.div
             key="minimal-bg"
@@ -22,9 +22,7 @@ export function GlobalBackground({ mode }: GlobalBackgroundProps) {
             transition={{ duration: 0.5 }}
             className="absolute inset-0"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50 dark:from-black dark:to-gray-900 transition-colors duration-500" />
-            {/* Subtle animated grain for texture */}
-            <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05] bg-gradient-to-br from-transparent via-gray-500 to-transparent" />
+            <div className="absolute inset-0 transition-colors duration-500" style={{ backgroundColor: 'var(--bg-base)' }} />
           </motion.div>
         );
 

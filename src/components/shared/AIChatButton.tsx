@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MessageCircle, X } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { ChatDrawer } from './ChatDrawer';
 
 export function AIChatButton() {
@@ -10,7 +10,7 @@ export function AIChatButton() {
 
   return (
     <>
-      {/* Floating button — bottom-right */}
+      {/* Floating button — bottom-right, DESIGN.md: compact, docked, no glow */}
       <AnimatePresence>
         {!isOpen && (
           <motion.button
@@ -19,10 +19,29 @@ export function AIChatButton() {
             exit={{ scale: 0, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 300, damping: 25 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-[55] flex items-center gap-2 px-4 py-3 rounded-2xl bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-sm font-medium shadow-2xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105 active:scale-95 transition-all group"
+            className="fixed bottom-6 right-6 z-[55] flex items-center gap-2"
+            style={{
+              padding: '10px 16px',
+              borderRadius: '8px',
+              background: 'var(--bg-elevated)',
+              border: '1px solid var(--border-strong)',
+              fontFamily: 'var(--font-ui)',
+              fontSize: 'var(--text-sm)',
+              color: 'var(--text-secondary)',
+              cursor: 'pointer',
+              transition: 'border-color 150ms ease, color 150ms ease',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)';
+              (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-strong)';
+              (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
+            }}
             aria-label="Ask Kapil AI"
           >
-            <MessageCircle size={18} className="group-hover:rotate-12 transition-transform" />
+            <MessageCircle size={16} />
             <span className="hidden sm:inline">Ask Kapil AI</span>
           </motion.button>
         )}

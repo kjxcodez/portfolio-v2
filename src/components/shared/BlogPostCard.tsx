@@ -9,14 +9,34 @@ interface BlogPostCardProps {
 }
 
 export function BlogPostCard({ post, variant = 'default' }: BlogPostCardProps) {
-  const base =
-    variant === 'glass'
-      ? 'group flex flex-col gap-3 p-5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover:border-white/20 transition-colors'
-      : 'group flex flex-col gap-3 p-5 rounded-xl border border-zinc-800 bg-zinc-900 hover:border-zinc-700 transition-colors';
+  void variant; // variant preserved for API compat — both now use design system surface
 
   return (
-    <a href={`/blog/${post.slug}`} className={base}>
-      <div className="flex items-center gap-2 text-xs text-zinc-500">
+    <a
+      href={`/blog/${post.slug}`}
+      className="group flex flex-col gap-3 p-5 rounded-lg transition-all duration-150"
+      style={{
+        background: 'var(--bg-surface)',
+        border: '1px solid var(--border-default)',
+      }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)';
+        (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
+        (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+      }}
+    >
+      <div
+        className="flex items-center gap-2"
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--text-xs)',
+          letterSpacing: '0.04em',
+          color: 'var(--text-tertiary)',
+        }}
+      >
         <span>{post.date}</span>
         <span>·</span>
         <span className="inline-flex items-center gap-1">
@@ -25,26 +45,44 @@ export function BlogPostCard({ post, variant = 'default' }: BlogPostCardProps) {
         </span>
       </div>
 
-      <h3 className="text-white font-semibold text-base leading-snug group-hover:text-zinc-200 transition-colors">
+      <h3
+        className="font-medium text-base leading-snug"
+        style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-primary)' }}
+      >
         {post.title}
       </h3>
 
-      <p className="text-zinc-400 text-sm leading-relaxed line-clamp-2">{post.description}</p>
+      <p
+        className="text-sm leading-relaxed line-clamp-2"
+        style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-secondary)' }}
+      >
+        {post.description}
+      </p>
 
       <div className="flex items-center justify-between mt-auto pt-1">
         <div className="flex flex-wrap gap-1.5">
           {post.tags.slice(0, 3).map((tag) => (
             <span
               key={tag}
-              className="text-xs px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-500 border border-zinc-700"
+              className="rounded"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                letterSpacing: '0.04em',
+                color: 'var(--tag-text)',
+                background: 'var(--tag-bg)',
+                border: '1px solid var(--tag-border)',
+                padding: '2px 8px',
+              }}
             >
               {tag}
             </span>
           ))}
         </div>
         <ArrowRight
-          size={14}
-          className="text-zinc-600 group-hover:text-zinc-400 group-hover:translate-x-0.5 transition-all"
+          size={13}
+          className="group-hover:translate-x-0.5 transition-transform"
+          style={{ color: 'var(--text-tertiary)' }}
         />
       </div>
     </a>

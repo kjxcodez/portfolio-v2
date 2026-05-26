@@ -1,0 +1,104 @@
+/* =============================================================
+   Design Tokens — Portfolio Design System
+   Source of truth: DESIGN.md
+   Dark = default (.dark applied to <html>)
+   Light = :root without .dark
+   ============================================================= */
+
+/* ── Light mode ─────────────────────────────────────────────── */
+:root {
+  --bg-base:      #FAFAFA;
+  --bg-surface:   #FFFFFF;
+  --bg-elevated:  #F4F4F5;
+  --bg-overlay:   #E4E4E7;
+
+  --border-subtle:  #E4E4E7;
+  --border-default: #D4D4D8;
+  --border-strong:  #A1A1AA;
+
+  --text-primary:   #09090B;
+  --text-secondary: #52525B;
+  --text-tertiary:  #A1A1AA;
+  --text-inverse:   #FAFAFA;
+
+  --accent:         #6E56CF;
+  --accent-hover:   #5D47B8;
+  --accent-active:  #5D47B8;
+  --accent-subtle:  #6E56CF0F;
+  --accent-border:  #6E56CF30;
+
+  --success:        #2A9D6E;
+  --success-subtle: #2A9D6E14;
+  --warning:        #C97B2A;
+  --warning-subtle: #C97B2A14;
+  --error:          #C44B4B;
+  --error-subtle:   #C44B4B14;
+
+  --tag-bg:         #F4F4F5;
+  --tag-border:     #D4D4D8;
+  --tag-text:       #71717A;
+
+  /* Typography */
+  --font-display: var(--font-instrument-serif, Georgia, serif);
+  --font-ui:      var(--font-dm-sans, system-ui, sans-serif);
+  --font-mono:    var(--font-geist-mono, 'JetBrains Mono', monospace);
+
+  /* Scale */
+  --text-xs:   0.6875rem;
+  --text-sm:   0.8125rem;
+  --text-base: 0.9375rem;
+  --text-lg:   1.0625rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  2rem;
+  --text-4xl:  2.75rem;
+  --text-5xl:  3.5rem;
+
+  /* Spacing */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+}
+
+/* ── Dark mode ──────────────────────────────────────────────── */
+.dark {
+  --bg-base:      #0C0C0E;
+  --bg-surface:   #111114;
+  --bg-elevated:  #19191D;
+  --bg-overlay:   #222228;
+
+  --border-subtle:  #1E1E23;
+  --border-default: #2A2A31;
+  --border-strong:  #3A3A44;
+
+  --text-primary:   #F2F2F4;
+  --text-secondary: #9898A6;
+  --text-tertiary:  #5C5C6E;
+  --text-inverse:   #0C0C0E;
+
+  --accent:         #6E56CF;
+  --accent-hover:   #7C68D9;
+  --accent-active:  #5D47B8;
+  --accent-subtle:  #6E56CF14;
+  --accent-border:  #6E56CF40;
+
+  --success:        #2A9D6E;
+  --success-subtle: #2A9D6E14;
+  --warning:        #C97B2A;
+  --warning-subtle: #C97B2A14;
+  --error:          #C44B4B;
+  --error-subtle:   #C44B4B14;
+
+  --tag-bg:         #19191D;
+  --tag-border:     #2A2A31;
+  --tag-text:       #9898A6;
+}

@@ -41,7 +41,8 @@ export function HeaderModeSelector() {
           {mode === m && (
             <motion.div
               layoutId="active-mode"
-              className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-md"
+              className="absolute inset-0 rounded-md"
+              style={{ background: 'var(--accent)' }}
               transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
             />
           )}

@@ -140,9 +140,10 @@ export function GlobalNav() {
                       <span
                         className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold ${
                           m === mode
-                            ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white'
+                            ? 'text-white'
                             : 'bg-white/5 text-zinc-500'
                         }`}
+                        style={m === mode ? { background: 'var(--accent)' } : {}}
                       >
                         {m}
                       </span>
@@ -251,9 +252,10 @@ export function GlobalNav() {
                       <span
                         className={`w-6 h-6 rounded-md flex items-center justify-center text-[11px] font-bold ${
                           m === mode
-                            ? 'bg-gradient-to-br from-indigo-500 to-purple-600 text-white'
+                            ? 'text-white'
                             : 'bg-white/5 text-zinc-500'
                         }`}
+                        style={m === mode ? { background: 'var(--accent)' } : {}}
                       >
                         {m}
                       </span>

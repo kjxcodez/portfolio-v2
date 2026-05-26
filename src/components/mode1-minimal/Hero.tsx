@@ -27,44 +27,97 @@ export function Hero() {
 
   return (
     <section className="flex flex-col w-full pt-8 pb-2">
-      {/* Availability badge */}
+      {/* Availability badge — DESIGN.md: mono, success color, no scale pulse */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="inline-flex items-center gap-1.5 self-start px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono select-none"
+        className="inline-flex items-center gap-2 self-start px-2.5 py-1 rounded"
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--text-xs)',
+          letterSpacing: '0.04em',
+          color: 'var(--success)',
+          background: 'var(--success-subtle)',
+          border: '1px solid var(--success)',
+        }}
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+        <span
+          className="w-1.5 h-1.5 rounded-full"
+          style={{
+            background: 'var(--success)',
+            animation: 'pulse-opacity 2s ease-in-out infinite',
+          }}
+        />
         Available for new opportunities
       </motion.div>
 
-      {/* Hero header */}
+      {/* Hero header — identity left, Now status card right */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="mt-6 flex flex-col-reverse md:flex-row md:items-center justify-between gap-6"
+        className="mt-6 flex flex-col-reverse md:flex-row md:items-start justify-between gap-6"
       >
+        {/* Left — identity */}
         <div className="space-y-2">
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white leading-tight font-sans">
-            Hi, I&apos;m {PERSONAL.name}
+          <h1
+            className="text-3xl md:text-4xl tracking-tight leading-tight"
+            style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}
+          >
+            {PERSONAL.name}
           </h1>
-          <p className="text-lg md:text-xl font-medium text-zinc-400 font-mono">
+          <p
+            className="text-sm"
+            style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)', letterSpacing: '0.04em' }}
+          >
             {PERSONAL.title}
           </p>
-          <div className="flex items-center gap-1 text-sm text-zinc-500 font-mono select-none">
-            <MapPin size={14} />
+          <div
+            className="flex items-center gap-1 text-xs select-none"
+            style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}
+          >
+            <MapPin size={12} />
             <span>{PERSONAL.location}</span>
           </div>
         </div>
 
-        {/* Avatar — easter egg: 7 clicks in 5s */}
-        <div className="relative shrink-0 self-start md:self-auto">
+        {/* Right — "Now" status card (easter egg: 7 clicks in 5s) */}
+        <div className="relative shrink-0 self-start">
           <div
             onClick={handleAvatarClick}
-            className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center shadow-2xl select-none cursor-pointer"
+            className="rounded-lg cursor-pointer select-none"
+            style={{
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border-default)',
+              padding: 'var(--space-5) var(--space-6)',
+              minWidth: '180px',
+            }}
           >
-            <span className="text-3xl font-extrabold text-white">K</span>
+            <p
+              className="mb-3"
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                color: 'var(--text-tertiary)',
+                letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+              }}
+            >
+              Now
+            </p>
+            <ul className="space-y-1.5">
+              {['Building products', 'Writing', 'Open source'].map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-2 text-sm"
+                  style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-secondary)' }}
+                >
+                  <span style={{ color: 'var(--text-tertiary)' }}>·</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
           <AnimatePresence>
             {showResume && (
@@ -75,9 +128,14 @@ export function Hero() {
                 initial={{ opacity: 0, y: -4 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
-                className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] text-sky-400 border border-sky-500/30 px-2 py-0.5 rounded-full whitespace-nowrap hover:bg-sky-500/10 transition-colors"
+                className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] px-2 py-0.5 rounded whitespace-nowrap transition-colors"
+                style={{
+                  color: 'var(--accent)',
+                  border: '1px solid var(--accent-border)',
+                  fontFamily: 'var(--font-mono)',
+                }}
               >
-                📄 Resume.pdf
+                Resume.pdf
               </motion.a>
             )}
           </AnimatePresence>
@@ -96,7 +154,26 @@ export function Hero() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => trackEvent('resume_click', { source: 'Professional Hero' })}
-          className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl bg-white text-black hover:bg-zinc-200 transition-all hover:scale-[1.02] active:scale-[0.98]"
+          className="inline-flex items-center gap-2 transition-all active:scale-[0.98]"
+          style={{
+            fontFamily: 'var(--font-ui)',
+            fontSize: 'var(--text-sm)',
+            fontWeight: 500,
+            padding: '8px 16px',
+            borderRadius: '6px',
+            background: 'var(--accent)',
+            color: 'var(--text-inverse)',
+            border: '1px solid var(--accent)',
+            transition: 'background 120ms ease, border-color 120ms ease',
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.background = 'var(--accent-hover)';
+            (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-hover)';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.background = 'var(--accent)';
+            (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)';
+          }}
         >
           <FileText size={15} />
           Resume
@@ -106,7 +183,28 @@ export function Hero() {
           href={PERSONAL.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl border border-zinc-700 hover:bg-zinc-800 hover:border-zinc-600 transition-all hover:scale-[1.02] active:scale-[0.98]"
+          className="inline-flex items-center gap-2 transition-all active:scale-[0.98]"
+          style={{
+            fontFamily: 'var(--font-ui)',
+            fontSize: 'var(--text-sm)',
+            fontWeight: 500,
+            padding: '8px 16px',
+            borderRadius: '6px',
+            background: 'transparent',
+            color: 'var(--text-secondary)',
+            border: '1px solid var(--border-default)',
+            transition: 'border-color 120ms ease, color 120ms ease, background 120ms ease',
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-strong)';
+            (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
+            (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
+            (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
+            (e.currentTarget as HTMLElement).style.background = 'transparent';
+          }}
         >
           <GithubIcon size={15} />
           GitHub
@@ -115,7 +213,28 @@ export function Hero() {
         <a
           href={`mailto:${PERSONAL.email}`}
           onClick={() => trackEvent('contact_click', { source: 'Professional Hero' })}
-          className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-xl border border-zinc-700 hover:bg-zinc-800 hover:border-zinc-600 transition-all hover:scale-[1.02] active:scale-[0.98]"
+          className="inline-flex items-center gap-2 transition-all active:scale-[0.98]"
+          style={{
+            fontFamily: 'var(--font-ui)',
+            fontSize: 'var(--text-sm)',
+            fontWeight: 500,
+            padding: '8px 16px',
+            borderRadius: '6px',
+            background: 'transparent',
+            color: 'var(--text-secondary)',
+            border: '1px solid var(--border-default)',
+            transition: 'border-color 120ms ease, color 120ms ease, background 120ms ease',
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-strong)';
+            (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
+            (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
+            (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
+            (e.currentTarget as HTMLElement).style.background = 'transparent';
+          }}
         >
           <Mail size={15} />
           Contact
@@ -127,7 +246,8 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.35 }}
-        className="mt-6 text-sm text-zinc-400 leading-relaxed max-w-lg"
+        className="mt-6 text-sm leading-relaxed max-w-lg"
+        style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-secondary)' }}
       >
         {PERSONAL.bio}
       </motion.p>

@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion } from 'motion/react';
-import { X, Send, Bot, User, Sparkles } from 'lucide-react';
+import { X, Send, Bot, User } from 'lucide-react';
 
 const MAX_REQUESTS_PER_SESSION = 5;
 const STORAGE_KEY = 'kapil-ai-chat-count';
@@ -65,7 +65,6 @@ export function ChatDrawer({ onClose }: ChatDrawerProps) {
     const newCount = incrementRequestCount();
     setRequestCount(newCount);
 
-    // Add empty assistant message for streaming
     const assistantMessage: ChatMessage = { role: 'assistant', content: '' };
     setMessages([...updatedMessages, assistantMessage]);
 
@@ -147,26 +146,55 @@ export function ChatDrawer({ onClose }: ChatDrawerProps) {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: 100, scale: 0.95 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className="fixed bottom-4 right-4 z-[60] w-[380px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[calc(100vh-2rem)] flex flex-col bg-black/90 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl shadow-black/40 overflow-hidden"
+      className="fixed bottom-4 right-4 z-[60] w-[380px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[calc(100vh-2rem)] flex flex-col overflow-hidden"
+      style={{
+        background: 'var(--bg-overlay)',
+        border: '1px solid var(--border-strong)',
+        borderRadius: '8px',
+        boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
+      }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
+      <div
+        className="flex items-center justify-between px-5 py-4"
+        style={{ borderBottom: '1px solid var(--border-subtle)' }}
+      >
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-            <Sparkles size={16} className="text-white" />
+          <div
+            className="w-7 h-7 rounded flex items-center justify-center"
+            style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}
+          >
+            <Bot size={15} style={{ color: 'var(--text-secondary)' }} />
           </div>
           <div>
-            <p className="text-sm font-semibold text-white">Ask Kapil AI</p>
-            <p className="text-[11px] text-zinc-500">
+            <p
+              className="text-sm font-medium"
+              style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-primary)' }}
+            >
+              Ask Kapil AI
+            </p>
+            <p
+              className="text-[11px]"
+              style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}
+            >
               {remaining > 0 ? `${remaining} question${remaining !== 1 ? 's' : ''} remaining` : 'Limit reached'}
             </p>
           </div>
         </div>
         <button
           onClick={onClose}
-          className="w-8 h-8 rounded-xl flex items-center justify-center text-zinc-500 hover:text-white hover:bg-white/10 transition-all"
+          className="w-7 h-7 rounded flex items-center justify-center transition-colors"
+          style={{ color: 'var(--text-tertiary)' }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
+            (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)';
+            (e.currentTarget as HTMLElement).style.background = 'transparent';
+          }}
         >
-          <X size={16} />
+          <X size={15} />
         </button>
       </div>
 
@@ -174,19 +202,45 @@ export function ChatDrawer({ onClose }: ChatDrawerProps) {
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full text-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-purple-600/20 border border-indigo-500/20 flex items-center justify-center">
-              <Bot size={24} className="text-indigo-400" />
+            <div
+              className="w-10 h-10 rounded flex items-center justify-center"
+              style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}
+            >
+              <Bot size={20} style={{ color: 'var(--text-secondary)' }} />
             </div>
             <div>
-              <p className="text-sm font-medium text-zinc-300">Hi! I know everything about Kapil.</p>
-              <p className="text-xs text-zinc-600 mt-1">Ask about skills, projects, experience, or anything else.</p>
+              <p
+                className="text-sm font-medium"
+                style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-primary)' }}
+              >
+                Hi! I know everything about Kapil.
+              </p>
+              <p
+                className="text-xs mt-1"
+                style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-tertiary)' }}
+              >
+                Ask about skills, projects, experience, or anything else.
+              </p>
             </div>
             <div className="flex flex-wrap gap-1.5 justify-center mt-2">
               {['What does Kapil do?', 'Tell me about his projects', 'What tech does he use?'].map((q) => (
                 <button
                   key={q}
                   onClick={() => { setInput(q); inputRef.current?.focus(); }}
-                  className="text-[11px] px-2.5 py-1 rounded-full border border-white/10 text-zinc-500 hover:text-zinc-300 hover:border-white/20 transition-all"
+                  className="text-[11px] px-2.5 py-1 rounded transition-colors"
+                  style={{
+                    fontFamily: 'var(--font-ui)',
+                    color: 'var(--text-tertiary)',
+                    border: '1px solid var(--border-default)',
+                  }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)';
+                    (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-strong)';
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)';
+                    (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
+                  }}
                 >
                   {q}
                 </button>
@@ -196,30 +250,46 @@ export function ChatDrawer({ onClose }: ChatDrawerProps) {
         )}
 
         {messages.map((msg, i) => (
-          <div key={i} className={`flex gap-2.5 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+          <div key={i} className={`flex gap-2 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
             {msg.role === 'assistant' && (
-              <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shrink-0 mt-0.5">
-                <Bot size={13} className="text-white" />
+              <div
+                className="w-6 h-6 rounded flex items-center justify-center shrink-0 mt-0.5"
+                style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}
+              >
+                <Bot size={12} style={{ color: 'var(--text-secondary)' }} />
               </div>
             )}
             <div
-              className={`max-w-[80%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
+              className="max-w-[80%] rounded px-3 py-2 text-sm leading-relaxed"
+              style={
                 msg.role === 'user'
-                  ? 'bg-indigo-600 text-white rounded-br-md'
-                  : 'bg-white/5 text-zinc-300 rounded-bl-md border border-white/5'
-              }`}
+                  ? {
+                      background: 'var(--accent)',
+                      color: 'var(--text-inverse)',
+                      fontFamily: 'var(--font-ui)',
+                    }
+                  : {
+                      background: 'var(--bg-surface)',
+                      border: '1px solid var(--border-subtle)',
+                      color: 'var(--text-secondary)',
+                      fontFamily: 'var(--font-ui)',
+                    }
+              }
             >
               {msg.content || (
                 <span className="inline-flex gap-1">
-                  <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ background: 'var(--text-tertiary)', animationDelay: '0ms' }} />
+                  <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ background: 'var(--text-tertiary)', animationDelay: '150ms' }} />
+                  <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ background: 'var(--text-tertiary)', animationDelay: '300ms' }} />
                 </span>
               )}
             </div>
             {msg.role === 'user' && (
-              <div className="w-6 h-6 rounded-lg bg-zinc-800 flex items-center justify-center shrink-0 mt-0.5">
-                <User size={13} className="text-zinc-400" />
+              <div
+                className="w-6 h-6 rounded flex items-center justify-center shrink-0 mt-0.5"
+                style={{ background: 'var(--bg-elevated)', border: '1px solid var(--border-default)' }}
+              >
+                <User size={12} style={{ color: 'var(--text-secondary)' }} />
               </div>
             )}
           </div>
@@ -228,14 +298,30 @@ export function ChatDrawer({ onClose }: ChatDrawerProps) {
       </div>
 
       {/* Input */}
-      <div className="px-4 pb-4 pt-2 border-t border-white/5">
+      <div className="px-4 pb-4 pt-2" style={{ borderTop: '1px solid var(--border-subtle)' }}>
         {remaining <= 0 ? (
           <div className="text-center py-3">
-            <p className="text-xs text-zinc-500">You&apos;ve used all 5 questions this session.</p>
-            <p className="text-[11px] text-zinc-600 mt-1">Refresh the page for a new session.</p>
+            <p className="text-xs" style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-tertiary)' }}>
+              You&apos;ve used all 5 questions this session.
+            </p>
+            <p className="text-[11px] mt-1" style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}>
+              Refresh the page for a new session.
+            </p>
           </div>
         ) : (
-          <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-2xl px-3 py-1.5 focus-within:border-indigo-500/50 transition-colors">
+          <div
+            className="flex items-center gap-2 rounded px-3 py-1.5 transition-colors"
+            style={{
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border-default)',
+            }}
+            onFocusCapture={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)';
+            }}
+            onBlurCapture={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
+            }}
+          >
             <input
               ref={inputRef}
               value={input}
@@ -243,14 +329,24 @@ export function ChatDrawer({ onClose }: ChatDrawerProps) {
               onKeyDown={handleKeyDown}
               placeholder="Ask about Kapil..."
               disabled={isStreaming}
-              className="flex-1 bg-transparent text-sm text-white placeholder-zinc-600 outline-none py-1.5"
+              className="flex-1 bg-transparent text-sm outline-none py-1.5"
+              style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-primary)' }}
             />
             <button
               onClick={sendMessage}
               disabled={!input.trim() || isStreaming}
-              className="w-8 h-8 rounded-xl flex items-center justify-center text-zinc-500 hover:text-white hover:bg-white/10 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-7 h-7 rounded flex items-center justify-center transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              style={{ color: 'var(--text-tertiary)' }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
+                (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)';
+                (e.currentTarget as HTMLElement).style.background = 'transparent';
+              }}
             >
-              <Send size={15} />
+              <Send size={14} />
             </button>
           </div>
         )}

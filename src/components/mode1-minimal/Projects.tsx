@@ -11,7 +11,15 @@ export function FeaturedProjects() {
 
   return (
     <div className="flex flex-col items-start w-full my-6 gap-4">
-      <h2 className="font-semibold text-sm uppercase tracking-wider text-zinc-400">
+      <h2
+        className="uppercase"
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--text-xs)',
+          letterSpacing: '0.1em',
+          color: 'var(--text-tertiary)',
+        }}
+      >
         Featured Projects
       </h2>
 
@@ -23,21 +31,41 @@ export function FeaturedProjects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.08, duration: 0.4 }}
-            className="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/30 hover:bg-zinc-900/60 hover:border-zinc-700 transition-all duration-300"
+            className="group relative rounded-lg transition-all duration-150"
+            style={{
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border-default)',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)';
+              (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
+              (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+            }}
           >
-            {/* Gradient accent top bar */}
-            <div className="h-0.5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-50 group-hover:opacity-100 transition-opacity" />
-
             <div className="p-5 sm:p-6">
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div>
                   <Link
                     href={`/projects/${project.id}`}
-                    className="text-lg font-semibold text-white hover:text-indigo-300 transition-colors"
+                    className="text-base font-medium transition-colors"
+                    style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--accent)'; }}
+                    onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
                   >
                     {project.title}
                   </Link>
-                  <span className="ml-2 text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                  <span
+                    className="ml-2"
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--text-xs)',
+                      color: 'var(--text-tertiary)',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
                     {project.year}
                   </span>
                 </div>
@@ -47,9 +75,18 @@ export function FeaturedProjects() {
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-zinc-500 hover:text-white hover:bg-white/5 transition-all"
+                      className="w-7 h-7 rounded flex items-center justify-center transition-colors"
+                      style={{ color: 'var(--text-tertiary)' }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
+                        (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)';
+                        (e.currentTarget as HTMLElement).style.background = 'transparent';
+                      }}
                     >
-                      <SquareArrowOutUpRight size={15} />
+                      <SquareArrowOutUpRight size={14} />
                     </a>
                   )}
                   {project.github && (
@@ -57,15 +94,27 @@ export function FeaturedProjects() {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-zinc-500 hover:text-white hover:bg-white/5 transition-all"
+                      className="w-7 h-7 rounded flex items-center justify-center transition-colors"
+                      style={{ color: 'var(--text-tertiary)' }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
+                        (e.currentTarget as HTMLElement).style.background = 'var(--bg-elevated)';
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)';
+                        (e.currentTarget as HTMLElement).style.background = 'transparent';
+                      }}
                     >
-                      <GithubIcon size={16} />
+                      <GithubIcon size={15} />
                     </a>
                   )}
                 </div>
               </div>
 
-              <p className="text-sm text-zinc-400 leading-relaxed mb-4">
+              <p
+                className="text-sm leading-relaxed mb-4"
+                style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-secondary)' }}
+              >
                 {project.longDescription.length > 200
                   ? project.longDescription.slice(0, 200) + '…'
                   : project.longDescription}
@@ -75,7 +124,16 @@ export function FeaturedProjects() {
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-[11px] px-2 py-0.5 rounded-full border border-zinc-700/50 text-zinc-500 bg-zinc-800/30"
+                    className="rounded"
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 'var(--text-xs)',
+                      letterSpacing: '0.04em',
+                      color: 'var(--tag-text)',
+                      background: 'var(--tag-bg)',
+                      border: '1px solid var(--tag-border)',
+                      padding: '2px 8px',
+                    }}
                   >
                     {tag}
                   </span>
@@ -96,7 +154,15 @@ export function OtherProjects() {
 
   return (
     <div className="flex flex-col items-start w-full my-4 gap-4">
-      <h2 className="font-semibold text-sm uppercase tracking-wider text-zinc-400">
+      <h2
+        className="uppercase"
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 'var(--text-xs)',
+          letterSpacing: '0.1em',
+          color: 'var(--text-tertiary)',
+        }}
+      >
         Other Projects
       </h2>
 
@@ -108,31 +174,65 @@ export function OtherProjects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.06, duration: 0.35 }}
-            className="flex flex-col overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/20 hover:bg-zinc-900/40 hover:border-zinc-700 transition-all duration-200"
+            className="flex flex-col rounded-lg transition-all duration-150"
+            style={{
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border-default)',
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent-border)';
+              (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
+              (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+            }}
           >
             <div className="p-4 flex flex-col gap-2">
               <div className="flex items-start justify-between gap-2">
                 <Link
                   href={`/projects/${project.id}`}
-                  className="font-medium text-sm text-zinc-200 hover:text-white transition-colors"
+                  className="text-sm font-medium transition-colors"
+                  style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-primary)' }}
+                  onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--accent)'; }}
+                  onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
                 >
                   {project.title}
                 </Link>
                 <div className="flex items-center gap-2 shrink-0">
                   {project.url && (
-                    <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-zinc-300 transition-colors">
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: 'var(--text-tertiary)' }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
+                      className="transition-colors"
+                    >
                       <SquareArrowOutUpRight size={13} />
                     </a>
                   )}
                   {project.github && (
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-zinc-300 transition-colors">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: 'var(--text-tertiary)' }}
+                      onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
+                      onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
+                      className="transition-colors"
+                    >
                       <GithubIcon size={14} />
                     </a>
                   )}
                 </div>
               </div>
 
-              <p className="text-xs text-zinc-500 leading-relaxed">
+              <p
+                className="text-xs leading-relaxed"
+                style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-secondary)' }}
+              >
                 {project.description}
               </p>
 
@@ -140,13 +240,27 @@ export function OtherProjects() {
                 {project.tags.slice(0, 4).map((tag) => (
                   <span
                     key={tag}
-                    className="text-[10px] px-1.5 py-0.5 rounded-full border border-zinc-800 text-zinc-600"
+                    className="rounded"
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.625rem',
+                      letterSpacing: '0.04em',
+                      color: 'var(--tag-text)',
+                      background: 'var(--tag-bg)',
+                      border: '1px solid var(--tag-border)',
+                      padding: '1px 6px',
+                    }}
                   >
                     {tag}
                   </span>
                 ))}
                 {project.tags.length > 4 && (
-                  <span className="text-[10px] text-zinc-700">+{project.tags.length - 4}</span>
+                  <span
+                    className="text-[10px]"
+                    style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}
+                  >
+                    +{project.tags.length - 4}
+                  </span>
                 )}
               </div>
             </div>
@@ -159,7 +273,10 @@ export function OtherProjects() {
           href="https://github.com/kjxcodez?tab=repositories"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-1.5 text-zinc-500 hover:text-zinc-300 transition-colors"
+          className="flex items-center gap-1.5 transition-colors"
+          style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-tertiary)' }}
+          onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)'; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
         >
           More on GitHub <ArrowRight size={13} />
         </a>
