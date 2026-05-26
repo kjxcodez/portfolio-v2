@@ -1,5 +1,10 @@
 export type ProjectType = 'web' | 'mobile' | 'tool' | 'extension' | 'language'
 
+export interface TechnicalDecision {
+  title: string
+  body: string
+}
+
 export interface Project {
   id: string
   title: string
@@ -12,8 +17,11 @@ export interface Project {
   featured: boolean
   year: number
   type: ProjectType
+  status?: string
   screenshots?: string[]
   apkUrl?: string
+  keyFeatures?: string[]
+  technicalDecisions?: TechnicalDecision[]
 }
 
 export interface Skill {

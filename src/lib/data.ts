@@ -71,6 +71,14 @@ export const PROJECTS: Project[] = [
     type: 'web',
     featured: true,
     year: 2025,
+    status: 'Live',
+    keyFeatures: [
+      'Drag-and-drop visual page builder',
+      'Real-time content preview',
+      'Role-based access control',
+      'API-first headless architecture',
+      'Content versioning and drafts',
+    ],
   },
   {
     id: 'rune-lang',
@@ -83,6 +91,21 @@ export const PROJECTS: Project[] = [
     type: 'language',
     featured: true,
     year: 2024,
+    status: 'Live',
+    screenshots: ['/rune-dark.png', '/rune-light.png'],
+    keyFeatures: [
+      'Custom lexer and tokenizer built from scratch',
+      'Recursive descent parser',
+      'AST-based tree-walk interpreter',
+      'Variables, control flow, and functions',
+      'Companion VS Code extension for syntax highlighting',
+    ],
+    technicalDecisions: [
+      {
+        title: 'Why Python',
+        body: 'Python allowed rapid prototyping of the interpreter without C-level memory management. The standard library covers tokenization utilities, and the language\'s dynamic typing made AST node representation straightforward.',
+      },
+    ],
   },
   {
     id: 'ai-auto-commit',
@@ -96,6 +119,15 @@ export const PROJECTS: Project[] = [
     type: 'extension',
     featured: true,
     year: 2024,
+    status: 'Live',
+    screenshots: ['/ai-commit.png'],
+    keyFeatures: [
+      'One-click commit message generation from staged diffs',
+      'Gemini API integration for AI-powered summaries',
+      'Writes directly into VS Code Source Control input box',
+      'simple-git for accurate diff extraction',
+      'Published on the VS Code Marketplace',
+    ],
   },
   {
     id: 'percept-ui',
@@ -109,6 +141,14 @@ export const PROJECTS: Project[] = [
     type: 'tool',
     featured: false,
     year: 2024,
+    status: 'Live',
+    screenshots: ['/perceptui.png'],
+    keyFeatures: [
+      'React component library with full TypeScript support',
+      'CLI for scaffolding projects with Percept components',
+      'Published on npm',
+      'Nextra-powered documentation site',
+    ],
   },
   {
     id: 'rune-lang-vscode',
@@ -121,6 +161,13 @@ export const PROJECTS: Project[] = [
     type: 'extension',
     featured: false,
     year: 2024,
+    status: 'Live',
+    screenshots: ['/rune-extension.png'],
+    keyFeatures: [
+      'Syntax highlighting via TextMate grammars',
+      'Code snippets for common Rune patterns',
+      'Published to the VS Code Marketplace',
+    ],
   },
   {
     id: 'brainly',
@@ -134,6 +181,14 @@ export const PROJECTS: Project[] = [
     type: 'web',
     featured: false,
     year: 2024,
+    status: 'Live',
+    screenshots: ['/brainly.png', '/brainly-light.png'],
+    keyFeatures: [
+      'Save and organise links, notes, and documents',
+      'Tag-based categorisation and full-text search',
+      'Share collections with a public link',
+      'Full-stack: React + Vite frontend, Express + MongoDB backend',
+    ],
   },
   {
     id: 'url-shortener',
@@ -147,6 +202,13 @@ export const PROJECTS: Project[] = [
     type: 'web',
     featured: false,
     year: 2024,
+    status: 'Live',
+    screenshots: ['/url-shortner.png'],
+    keyFeatures: [
+      'Instant URL shortening with custom slugs',
+      'Click tracking per link',
+      'Next.js + Postgres + Prisma stack',
+    ],
   },
   {
     id: 'aura-wallpaper-app',
@@ -158,6 +220,7 @@ export const PROJECTS: Project[] = [
     type: 'mobile',
     featured: false,
     year: 2025,
+    status: 'In Development',
     screenshots: [
       '/aura-1.jpeg',
       '/aura-2.jpeg',
@@ -166,6 +229,28 @@ export const PROJECTS: Project[] = [
       '/aura-5.jpeg',
     ],
     apkUrl: '',
+    keyFeatures: [
+      'Prompt-to-wallpaper generation via Pollinations.ai',
+      'Daily Drop — fresh AI wallpaper every morning',
+      'Style presets: neon, minimal, nature, cyberpunk',
+      'Masonry gallery with save to camera roll',
+      'Favorites collection',
+      'Daily push notifications',
+    ],
+    technicalDecisions: [
+      {
+        title: 'Why Pollinations.ai',
+        body: 'Pollinations.ai provides a free, no-auth image generation API with stable model access. This removed the need for API key management for end users and kept the app fully free to run.',
+      },
+      {
+        title: 'Why Expo',
+        body: 'Expo provides a managed React Native workflow with OTA updates, EAS Build for APK distribution, and a rich ecosystem of native modules — all without requiring Xcode or Android Studio for the initial build.',
+      },
+      {
+        title: 'Why React Native',
+        body: 'A single TypeScript codebase that targets Android natively. NativeWind brings familiar Tailwind utility classes to native components, keeping styling consistent with web projects.',
+      },
+    ],
   },
 ]
 

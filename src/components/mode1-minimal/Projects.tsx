@@ -2,11 +2,48 @@
 
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import { SquareArrowOutUpRight, ArrowRight } from 'lucide-react';
+import { SquareArrowOutUpRight, ArrowRight, Smartphone, Wrench, Code2, Globe, Puzzle } from 'lucide-react';
 import { GithubIcon } from '@/components/shared/icons';
 import { MobileProjectCard } from './MobileProjectCard';
 import { PROJECTS } from '@/lib/data';
-import type { Project } from '@/types/portfolio';
+import type { Project, ProjectType } from '@/types/portfolio';
+
+// ─── Type badge helpers ──────────────────────────────────────────
+const TYPE_LABEL: Record<ProjectType, string> = {
+  web: 'Web App',
+  mobile: 'Mobile App',
+  tool: 'Developer Tool',
+  extension: 'VS Code Extension',
+  language: 'Language',
+};
+
+const TYPE_ICON: Record<ProjectType, React.ReactNode> = {
+  web: <Globe size={9} />,
+  mobile: <Smartphone size={9} />,
+  tool: <Wrench size={9} />,
+  extension: <Puzzle size={9} />,
+  language: <Code2 size={9} />,
+};
+
+function TypeBadge({ type }: { type: ProjectType }) {
+  return (
+    <span
+      className="inline-flex items-center gap-1 rounded"
+      style={{
+        fontFamily: 'var(--font-mono)',
+        fontSize: '0.625rem',
+        letterSpacing: '0.04em',
+        color: 'var(--text-tertiary)',
+        background: 'var(--bg-elevated)',
+        border: '1px solid var(--border-default)',
+        padding: '1px 6px',
+      }}
+    >
+      {TYPE_ICON[type]}
+      {TYPE_LABEL[type]}
+    </span>
+  );
+}
 
 // ─── Web / Tool / Extension / Language compact card ─────────────────
 function WebProjectCard({ project, idx }: { project: Project; idx: number }) {
@@ -41,6 +78,16 @@ function WebProjectCard({ project, idx }: { project: Project; idx: number }) {
             {project.title}
           </Link>
           <div className="flex items-center gap-2 shrink-0">
+            <span
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 'var(--text-xs)',
+                color: 'var(--text-tertiary)',
+                letterSpacing: '0.04em',
+              }}
+            >
+              {project.year}
+            </span>
             {project.url && (
               <a
                 href={project.url}
@@ -69,6 +116,8 @@ function WebProjectCard({ project, idx }: { project: Project; idx: number }) {
             )}
           </div>
         </div>
+
+        <TypeBadge type={project.type} />
 
         <p
           className="text-xs leading-relaxed"
@@ -127,7 +176,7 @@ export function FeaturedProjects() {
         Featured Projects
       </h2>
 
-      <div className="flex flex-col w-full gap-4">
+      <div className="flex flex-col w-full gap-3">
         {featured.map((project, idx) => (
           <motion.div
             key={project.id}
@@ -148,12 +197,13 @@ export function FeaturedProjects() {
               (e.currentTarget as HTMLElement).style.borderColor = 'var(--border-default)';
             }}
           >
-            <div className="p-5 sm:p-6">
-              <div className="flex items-start justify-between gap-3 mb-3">
-                <div>
+            <div className="p-5">
+              {/* Title row */}
+              <div className="flex items-start justify-between gap-3 mb-2">
+                <div className="flex items-center gap-2 min-w-0">
                   <Link
                     href={`/projects/${project.id}`}
-                    className="text-base font-medium transition-colors"
+                    className="text-sm font-medium transition-colors truncate"
                     style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-primary)' }}
                     onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--accent)'; }}
                     onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)'; }}
@@ -161,24 +211,24 @@ export function FeaturedProjects() {
                     {project.title}
                   </Link>
                   <span
-                    className="ml-2"
                     style={{
                       fontFamily: 'var(--font-mono)',
                       fontSize: 'var(--text-xs)',
                       color: 'var(--text-tertiary)',
                       letterSpacing: '0.04em',
+                      flexShrink: 0,
                     }}
                   >
                     {project.year}
                   </span>
                 </div>
-                <div className="flex items-center gap-2 shrink-0">
+                <div className="flex items-center gap-1.5 shrink-0">
                   {project.url && (
                     <a
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-7 h-7 rounded flex items-center justify-center transition-colors"
+                      className="w-6 h-6 rounded flex items-center justify-center transition-colors"
                       style={{ color: 'var(--text-tertiary)' }}
                       onMouseEnter={(e) => {
                         (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
@@ -189,7 +239,7 @@ export function FeaturedProjects() {
                         (e.currentTarget as HTMLElement).style.background = 'transparent';
                       }}
                     >
-                      <SquareArrowOutUpRight size={14} />
+                      <SquareArrowOutUpRight size={13} />
                     </a>
                   )}
                   {project.github && (
@@ -197,7 +247,7 @@ export function FeaturedProjects() {
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-7 h-7 rounded flex items-center justify-center transition-colors"
+                      className="w-6 h-6 rounded flex items-center justify-center transition-colors"
                       style={{ color: 'var(--text-tertiary)' }}
                       onMouseEnter={(e) => {
                         (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)';
@@ -208,22 +258,27 @@ export function FeaturedProjects() {
                         (e.currentTarget as HTMLElement).style.background = 'transparent';
                       }}
                     >
-                      <GithubIcon size={15} />
+                      <GithubIcon size={14} />
                     </a>
                   )}
                 </div>
               </div>
 
+              {/* Type badge */}
+              <div className="mb-3">
+                <TypeBadge type={project.type} />
+              </div>
+
+              {/* Short description */}
               <p
-                className="text-sm leading-relaxed mb-4"
+                className="text-sm leading-relaxed mb-3"
                 style={{ fontFamily: 'var(--font-ui)', color: 'var(--text-secondary)' }}
               >
-                {project.longDescription.length > 200
-                  ? project.longDescription.slice(0, 200) + '…'
-                  : project.longDescription}
+                {project.description}
               </p>
 
-              <div className="flex flex-wrap gap-1.5">
+              {/* Tags */}
+              <div className="flex flex-wrap gap-1.5 mb-4">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
@@ -242,6 +297,17 @@ export function FeaturedProjects() {
                   </span>
                 ))}
               </div>
+
+              {/* View details link */}
+              <Link
+                href={`/projects/${project.id}`}
+                className="inline-flex items-center gap-1 text-xs transition-colors"
+                style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-tertiary)' }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--accent)'; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = 'var(--text-tertiary)'; }}
+              >
+                View details <ArrowRight size={11} />
+              </Link>
             </div>
           </motion.div>
         ))}
