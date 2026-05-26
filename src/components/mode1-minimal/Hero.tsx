@@ -32,9 +32,9 @@ export function Hero() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
-        className="inline-flex items-center gap-2 self-start px-2.5 py-1 rounded [font-family:var(--font-mono)] [font-size:var(--text-xs)] tracking-[0.04em] text-[var(--success)] bg-[var(--success-subtle)] border border-[var(--success)]"
+        className="inline-flex items-center gap-2 self-start px-2.5 py-1 rounded font-mono text-xs tracking-[0.04em] text-(--success) bg-(--success-subtle) border border-(--success)"
       >
-        <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-[var(--success)]" />
+        <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-(--success)" />
         Available for new opportunities
       </motion.div>
 
@@ -47,13 +47,13 @@ export function Hero() {
           transition={{ duration: 0.45, delay: 0.05 }}
           className="space-y-2"
         >
-          <h1 className="text-3xl md:text-4xl tracking-tight leading-tight [font-family:var(--font-display)] text-[var(--text-primary)]">
+          <h1 className="text-3xl md:text-4xl tracking-tight leading-tight font-display text-(--text-primary)">
             {PERSONAL.name}
           </h1>
-          <p className="text-sm [font-family:var(--font-mono)] text-[var(--text-tertiary)] tracking-[0.04em]">
+          <p className="text-sm font-mono text-(--text-tertiary) tracking-[0.04em]">
             {PERSONAL.title}
           </p>
-          <div className="flex items-center gap-1 text-xs select-none [font-family:var(--font-mono)] text-[var(--text-tertiary)]">
+          <div className="flex items-center gap-1 text-xs select-none font-mono text-(--text-tertiary)">
             <MapPin size={12} />
             <span>{PERSONAL.location}</span>
           </div>
@@ -68,15 +68,15 @@ export function Hero() {
         >
           <div
             onClick={handleAvatarClick}
-            className="rounded-lg cursor-pointer select-none bg-[var(--bg-surface)] border border-[var(--border-default)] min-w-[180px] py-5 px-6"
+            className="rounded-lg cursor-pointer select-none bg-(--bg-surface) border border-(--border-default) min-w-45 py-5 px-6"
           >
-            <p className="mb-3 [font-family:var(--font-mono)] [font-size:var(--text-xs)] text-[var(--text-tertiary)] tracking-[0.06em] uppercase">
+            <p className="mb-3 font-mono text-xs text-(--text-tertiary) tracking-[0.06em] uppercase">
               Now
             </p>
             <ul className="space-y-1.5">
               {['Building products', 'Writing', 'Open source'].map((item) => (
-                <li key={item} className="flex items-start gap-2 text-sm [font-family:var(--font-ui)] text-[var(--text-secondary)]">
-                  <span className="text-[var(--text-tertiary)]">·</span>
+                <li key={item} className="flex items-start gap-2 text-sm font-ui text-(--text-secondary)">
+                  <span className="text-(--text-tertiary)">·</span>
                   {item}
                 </li>
               ))}
@@ -112,7 +112,7 @@ export function Hero() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => trackEvent('resume_click', { source: 'Professional Hero' })}
-          className="inline-flex items-center gap-2 transition-all active:scale-[0.98] font-ui text-sm font-medium font-semibold px-4 py-2 rounded-lg transition-colors border border-accent hover:bg-accent hover:text-white hover:bg-purple-600"
+          className="inline-flex items-center gap-2 active:scale-[0.98] font-ui text-sm font-medium px-4 py-2 rounded-lg transition-colors border border-accent hover:text-white hover:bg-purple-600"
         >
           <FileText size={15} />
           Resume
@@ -122,7 +122,7 @@ export function Hero() {
           href={PERSONAL.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 transition-all active:scale-[0.98] font-ui text-sm font-medium px-4 py-2 rounded-lg transition-colors border border-[var(--border-default)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-elevated)]"
+          className="inline-flex items-center gap-2 active:scale-[0.98] font-ui text-sm font-medium px-4 py-2 rounded-lg transition-colors border border-(--border-default) hover:border-(--border-strong) hover:bg-(--bg-elevated)"
         >
           <GithubIcon size={15} />
           GitHub
@@ -131,7 +131,7 @@ export function Hero() {
         <a
           href={`mailto:${PERSONAL.email}`}
           onClick={() => trackEvent('contact_click', { source: 'Professional Hero' })}
-          className="inline-flex items-center gap-2 transition-all active:scale-[0.98] font-ui text-sm font-medium px-4 py-2 rounded-lg transition-colors border border-[var(--border-default)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-elevated)]"
+          className="inline-flex items-center gap-2 active:scale-[0.98] font-ui text-sm font-medium px-4 py-2 rounded-lg transition-colors border border-(--border-default) hover:border-(--border-strong) hover:bg-(--bg-elevated)"
         >
           <Mail size={15} />
           Contact
@@ -143,7 +143,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.35 }}
-        className="mt-6 text-sm leading-relaxed max-w-lg [font-family:var(--font-ui)] text-[var(--text-secondary)]"
+        className="mt-6 text-sm leading-relaxed max-w-lg font-ui text-(--text-secondary)"
       >
         {PERSONAL.bio}
       </motion.p>
