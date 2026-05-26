@@ -6,7 +6,6 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import { getAllPostSlugs, getPost, getAllPosts } from '@/lib/mdx'
 import { ArrowLeft, Clock } from 'lucide-react'
 import { ScrollProgress } from '@/components/mode1-minimal/ScrollUI'
-import { ModeAwarePageWrapper } from '@/components/shared/ModeAwarePageWrapper'
 
 export async function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }))
@@ -16,7 +15,31 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const post = getPost(slug)
   if (!post) return {}
-  return { title: `${post.title} — Kapil Kumar Jangid`, description: post.description }
+  return { 
+    title: `${post.title} — Kapil Kumar Jangid`,
+    description: post.description,
+    openGraph: {
+      title: `${post.title} — Kapil Kumar Jangid`,
+      description: post.description,
+      url: `https://kapiljangid.pro/blog/${post.slug}`,
+      type: 'article',
+      publishedTime: post.date,
+      images: [
+        {
+          url: post.cover || `/og-image.png`,
+          width: 1200,
+          height: 630,
+          alt: post.title
+        }
+      ]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${post.title} — Kapil Kumar Jangid`,
+      description: post.description,
+      images: [post.cover || `/og-image.png`],
+    }
+  }
 }
 
 const mdxOptions = {
@@ -43,7 +66,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   return (
     <>
       <ScrollProgress />
-      <ModeAwarePageWrapper className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
+      <div className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
         {/* Back */}
         <Link href="/blog" className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-8">
           <ArrowLeft size={12} /> All posts
@@ -94,7 +117,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </Link>
           )}
         </div>
-      </ModeAwarePageWrapper>
+      </div>
     </>
   )
 }

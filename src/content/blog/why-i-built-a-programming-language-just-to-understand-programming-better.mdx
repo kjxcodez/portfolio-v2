@@ -1,0 +1,249 @@
+---
+title: "Why I Built a Programming Language Just to Understand Programming Better"
+description: "Building Rune Lang was less about creating a new language and more about understanding what happens behind the code I write every day."
+date: "2026-05-26"
+tags: ["Python", "Programming", "Language Design", "Learning"]
+cover: "/blog/rune-lang.png"
+---
+
+I did not build a programming language because I thought the world needed another programming language.
+
+I built one because I kept asking myself a simple question:
+
+> What actually happens after I write code and press run?
+
+For a long time I was comfortable using JavaScript, TypeScript, and Python without thinking much about what was happening underneath.
+
+I knew how to write code.
+
+I knew how to build things.
+
+But I treated languages as black boxes.
+
+I wanted to understand what existed inside that box.
+
+That curiosity eventually turned into Rune Lang.
+
+## At First I Thought It Would Be Simple
+
+I had a very simplified mental model.
+
+Something like:
+
+```txt
+Read code
+
+Understand code
+
+Run code
+```
+
+That was basically it.
+
+Then I started learning how interpreters actually work.
+
+Very quickly that mental model disappeared.
+
+Because a programming language is really a chain of systems working together.
+
+Something closer to this:
+
+```txt
+Source Code
+
+↓
+
+Lexer
+
+↓
+
+Parser
+
+↓
+
+Abstract Syntax Tree
+
+↓
+
+Interpreter
+
+↓
+
+Runtime Behavior
+```
+
+And every stage introduces its own problems.
+
+## The First Surprise Was Tokens
+
+I used to think languages read code exactly how humans read code.
+
+That turned out to be wrong.
+
+Before understanding code, the language first breaks everything into smaller pieces.
+
+Something like this:
+
+```javascript
+let total = 5 + 10
+```
+
+Becomes:
+
+```txt
+LET
+
+IDENTIFIER(total)
+
+EQUALS
+
+NUMBER(5)
+
+PLUS
+
+NUMBER(10)
+```
+
+This was surprisingly interesting to me.
+
+Because suddenly code stopped looking like text.
+
+It started looking like structured data.
+
+## Parsing Felt Like Solving A Puzzle
+
+After tokenization comes parsing.
+
+This was probably where things started becoming more challenging.
+
+The parser needs to understand relationships.
+
+Take this:
+
+```javascript
+2 + 3 * 4
+```
+
+Humans immediately understand that multiplication happens first.
+
+The language does not magically know that.
+
+You have to teach it.
+
+You define rules.
+
+You define precedence.
+
+You decide how expressions connect together.
+
+That was the point where I started appreciating how much work happens before code even executes.
+
+## Scope Became The Hardest Part
+
+The biggest challenge for me was not syntax.
+
+It was scope.
+
+Questions like:
+
+```txt
+Where does this variable exist?
+
+When should it disappear?
+
+Which function owns it?
+
+What should happen inside nested functions?
+```
+
+As a user of programming languages, I rarely think about these things.
+
+I just write:
+
+```javascript
+function greet() {
+    const message = "hello"
+}
+```
+
+and expect everything to work.
+
+Building a language forces you to think about why it works.
+
+You realize that variables do not magically appear and disappear.
+
+Someone has to manage all of that behavior.
+
+## It Changed How I Read Code
+
+This was probably the most valuable outcome.
+
+I expected to learn about interpreters.
+
+I did not expect my normal development habits to change.
+
+But they did.
+
+Now when I see code, I naturally think about:
+
+- execution order
+- scope boundaries
+- runtime behavior
+- parsing rules
+- evaluation flow
+
+Earlier I mostly thought:
+
+```txt
+What does this code do?
+```
+
+Now I sometimes think:
+
+```txt
+How would a language understand this?
+```
+
+That small shift changed the way I debug and reason about code.
+
+## Building Tools Feels Different
+
+Most projects I build solve external problems.
+
+A CMS helps manage content.
+
+A portfolio helps present work.
+
+An extension improves workflow.
+
+Rune felt different.
+
+Because the goal was not solving a user problem.
+
+The goal was understanding.
+
+It was one of the few projects where learning itself was the outcome.
+
+## Final Thought
+
+I started building Rune Lang because I wanted to understand programming better.
+
+I thought I would learn how interpreters work.
+
+I ended up learning something larger.
+
+Programming languages are not magic.
+
+They are systems built by people making decisions.
+
+Someone decided how variables behave.
+
+Someone decided operator precedence.
+
+Someone decided how functions should work.
+
+Building a language made me appreciate that.
+
+And strangely, it also made me a better user of languages.
+
+Because once you see inside the black box, you stop treating it like magic.

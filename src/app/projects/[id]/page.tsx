@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { GithubIcon } from '@/components/shared/icons'
 import { PROJECTS } from '@/lib/data'
-import { ModeAwarePageWrapper } from '@/components/shared/ModeAwarePageWrapper'
 
 // Screenshots mapped per project id
 const SCREENSHOTS: Record<string, { src: string; alt: string }[]> = {
@@ -38,7 +37,30 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params
   const project = PROJECTS.find(p => p.id === id)
   if (!project) return {}
-  return { title: `${project.title} — Kapil Kumar Jangid` }
+  return { 
+    title: `${project.title} — Kapil Kumar Jangid`,
+    description: project.description,
+    openGraph: {
+      title: `${project.title} — Kapil Kumar Jangid`,
+      description: project.description,
+      url: `https://kapiljangid.pro/projects/${project.id}`,
+      type: 'website',
+      images: [
+        {
+          url: `/og-image.png`,
+          width: 1200,
+          height: 630,
+          alt: project.title
+        }
+      ]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${project.title} — Kapil Kumar Jangid`,
+      description: project.description,
+      images: [`/og-image.png`],
+    }
+  }
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
@@ -50,7 +72,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
   const others = PROJECTS.filter(p => p.id !== project.id).slice(0, 3)
 
   return (
-    <ModeAwarePageWrapper className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
+    <div className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
       <Link href="/#projects" className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-8">
         <ArrowLeft size={12} /> Back to portfolio
       </Link>
@@ -130,6 +152,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           </div>
         </div>
       )}
-    </ModeAwarePageWrapper>
+    </div>
   )
 }

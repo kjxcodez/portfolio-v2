@@ -4,6 +4,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { QuickNav } from "@/components/shared/QuickNav";
 import { ModeProvider } from "@/components/shared/ModeProvider";
+import { GlobalNav } from "@/components/shared/GlobalNav";
+import { AIChatButton } from "@/components/shared/AIChatButton";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -22,6 +24,9 @@ export const metadata: Metadata = {
   description:
     "Portfolio of Kapil Kumar Jangid — Full Stack Developer & Open Source Contributor based in Rajasthan, India.",
   metadataBase: new URL("https://kapiljangid.pro"),
+  alternates: {
+    canonical: "https://kapiljangid.pro",
+  },
   openGraph: {
     title: "Kapil Kumar Jangid — Full Stack Developer",
     description:
@@ -30,6 +35,14 @@ export const metadata: Metadata = {
     siteName: "kapiljangid.pro",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Kapil Kumar Jangid — Full Stack Developer & Open Source Contributor"
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
@@ -37,6 +50,7 @@ export const metadata: Metadata = {
     description:
       "Full Stack Developer & Open Source Contributor based in Rajasthan, India.",
     creator: "@kjxcodez",
+    images: ["/og-image.png"],
   },
 };
 
@@ -59,7 +73,12 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <ModeProvider>
+          {/* Global persistent layer */}
+          <GlobalNav />
           <QuickNav />
+          <AIChatButton />
+
+          {/* Page content */}
           {children}
         </ModeProvider>
       </body>

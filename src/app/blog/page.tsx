@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getAllPosts } from '@/lib/mdx'
 import { Clock, ArrowLeft } from 'lucide-react'
-import { ModeAwarePageWrapper } from '@/components/shared/ModeAwarePageWrapper'
 
 export const metadata = { title: 'Blog — Kapil Kumar Jangid' }
 
@@ -10,7 +9,7 @@ export default function BlogPage() {
   const posts = getAllPosts()
 
   return (
-    <ModeAwarePageWrapper className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
+    <div className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
       <div className="mb-10">
         <Link href="/" className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-6">
           <ArrowLeft size={12} /> Back to portfolio
@@ -57,6 +56,6 @@ export default function BlogPage() {
           </Link>
         ))}
       </div>
-    </ModeAwarePageWrapper>
+    </div>
   )
 }

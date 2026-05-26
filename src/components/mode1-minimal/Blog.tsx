@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { Clock, ArrowRight } from 'lucide-react';
 import type { BlogPost } from '@/types/portfolio';
 
+// Seed posts as fallback — these match the real MDX files
 const SEED_POSTS: BlogPost[] = [
   {
     slug: 'building-rune-lang',
@@ -31,18 +32,24 @@ const SEED_POSTS: BlogPost[] = [
   },
 ];
 
-export function Blog() {
+interface BlogProps {
+  posts?: BlogPost[];
+}
+
+export function Blog({ posts }: BlogProps) {
+  const displayPosts = (posts && posts.length > 0) ? posts.slice(0, 3) : SEED_POSTS;
+
   return (
-    <div className="flex flex-col items-start w-full my-4 gap-3">
+    <div className="flex flex-col items-start w-full my-6 gap-4">
       <div className="flex items-center justify-between w-full">
-        <h2 className="font-semibold text-sm">BLOG</h2>
+        <h2 className="font-semibold text-sm uppercase tracking-wider text-zinc-400">Blog</h2>
         <a href="/blog" className="text-xs text-zinc-500 hover:text-zinc-300 flex items-center gap-1 transition-colors">
           All posts <ArrowRight size={11} />
         </a>
       </div>
 
-      <div className="flex flex-col w-full gap-2">
-        {SEED_POSTS.map((post, idx) => (
+      <div className="flex flex-col w-full gap-3">
+        {displayPosts.map((post, idx) => (
           <motion.a
             key={post.slug}
             href={`/blog/${post.slug}`}
@@ -50,12 +57,12 @@ export function Blog() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.08, duration: 0.35 }}
-            className="group flex items-start justify-between gap-4 p-3 border rounded-xl dark:bg-black/70 hover:dark:bg-zinc-950 hover:bg-slate-50 hover:scale-[1.01] transition-all duration-200"
+            className="group flex items-start justify-between gap-4 p-4 border border-zinc-800 rounded-xl bg-zinc-900/20 hover:bg-zinc-900/40 hover:border-zinc-700 transition-all duration-200"
           >
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium group-hover:underline leading-snug">{post.title}</p>
+              <p className="text-sm font-medium text-zinc-200 group-hover:text-white transition-colors leading-snug">{post.title}</p>
               <p className="text-xs text-zinc-500 mt-1 line-clamp-1">{post.description}</p>
-              <div className="flex items-center gap-2 text-[11px] text-zinc-600 mt-1.5">
+              <div className="flex items-center gap-2 text-[11px] text-zinc-600 mt-2">
                 <span>{post.date}</span>
                 <span>·</span>
                 <span className="flex items-center gap-0.5">
@@ -64,7 +71,7 @@ export function Blog() {
                 </span>
               </div>
             </div>
-            <ArrowRight size={13} className="shrink-0 text-zinc-600 group-hover:text-zinc-400 group-hover:translate-x-0.5 transition-all mt-1" />
+            <ArrowRight size={13} className="shrink-0 text-zinc-700 group-hover:text-zinc-400 group-hover:translate-x-0.5 transition-all mt-1" />
           </motion.a>
         ))}
       </div>

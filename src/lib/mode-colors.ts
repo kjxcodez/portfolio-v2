@@ -150,7 +150,7 @@ export function generateModeCSS(mode: PortfolioMode): string {
   const colors = getModeColors(mode);
 
   return `
-    :root {
+    .mode-renderer {
       --mode-bg-primary: ${colors.background.primary};
       --mode-bg-secondary: ${colors.background.secondary};
       --mode-bg-tertiary: ${colors.background.tertiary};

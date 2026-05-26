@@ -1,47 +1,50 @@
-import { SiteHeader } from "@/components/shared/SiteHeader";
+'use client';
 
-export function TerminalPortfolio() {
+import dynamic from 'next/dynamic';
+import type { PostMeta } from '@/lib/mdx';
+
+interface TerminalPortfolioProps {
+  posts?: PostMeta[];
+}
+
+// Dynamically load the client-only Terminal component to keep Mode 1 bundle size small
+const TerminalWindow = dynamic(
+  () => import('../mode4-terminal/TerminalWindow').then(mod => mod.TerminalWindow),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center font-mono text-sm text-emerald-500 bg-black animate-pulse">
+        Initializing KAPIL OS v1.0 CLI environment...
+      </div>
+    )
+  }
+);
+
+export function TerminalPortfolio({ posts }: TerminalPortfolioProps) {
   return (
-    <>
-      <SiteHeader />
-      <main className="min-h-screen flex flex-col items-center justify-center px-4">
-        <div className="text-center space-y-6">
-          <div className="w-20 h-20 mx-auto bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-2xl border border-green-400/30">
-            <span className="text-2xl font-bold text-white font-mono">5</span>
+    <main className="min-h-screen w-full flex items-center justify-center p-4 md:p-8 relative z-10 select-none">
+      <div 
+        className="w-full max-w-4xl h-[75vh] bg-black/90 rounded-xl border border-emerald-500/20 shadow-[0_0_40px_rgba(16,185,129,0.1)] backdrop-blur-xl relative overflow-hidden flex flex-col"
+        style={{
+          boxShadow: '0 0 50px -12px rgba(16, 185, 129, 0.25), inset 0 0 20px rgba(16, 185, 129, 0.05)'
+        }}
+      >
+        {/* Terminal frame window controls and title */}
+        <div className="h-10 bg-zinc-950/80 border-b border-emerald-500/10 flex items-center justify-between px-4 shrink-0">
+          <div className="flex items-center gap-1.5">
+            <div className="w-3 h-3 bg-red-500/40 border border-red-500/20 rounded-full" />
+            <div className="w-3 h-3 bg-yellow-500/40 border border-yellow-500/20 rounded-full" />
+            <div className="w-3 h-3 bg-emerald-500/40 border border-emerald-500/20 rounded-full" />
           </div>
-          <div>
-            <h1 className="text-3xl font-bold text-white mb-2 font-mono">Terminal OS</h1>
-            <p className="text-green-400 text-lg font-mono">Real terminal, fake operating system</p>
-          </div>
-          <div className="bg-black/60 backdrop-blur-lg border border-green-500/30 rounded-xl p-6 max-w-lg font-mono">
-            <div className="text-green-400 text-left text-sm mb-4">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <span className="ml-2 text-white/70">terminal</span>
-              </div>
-              <div className="border-t border-green-500/30 pt-3">
-                <div>kapil@portfolio:~$ ls</div>
-                <div className="text-white/80 ml-4">about.txt  projects/  skills/  contact.txt</div>
-                <div>kapil@portfolio:~$ cat about.txt</div>
-                <div className="text-white/80 ml-4">Loading portfolio data...</div>
-                <div className="text-green-400 animate-pulse">█</div>
-              </div>
-            </div>
-            <div className="text-white/90 text-sm">
-              <h3 className="font-semibold mb-3">Coming Soon Commands:</h3>
-              <ul className="text-left space-y-1 text-xs">
-                <li><span className="text-green-400">help</span> - Show available commands</li>
-                <li><span className="text-green-400">ls</span> - List files and directories</li>
-                <li><span className="text-green-400">cat</span> - Read portfolio content</li>
-                <li><span className="text-green-400">whoami</span> - Display developer info</li>
-                <li><span className="text-green-400">projects</span> - Browse project archive</li>
-              </ul>
-            </div>
-          </div>
+          <span className="text-xs font-mono text-emerald-500/50">visitor@kapil-os: ~ (bash)</span>
+          <div className="w-12" /> {/* spacing spacer */}
         </div>
-      </main>
-    </>
+
+        {/* Console canvas viewport */}
+        <div className="flex-1 min-h-0 relative">
+          <TerminalWindow posts={posts} />
+        </div>
+      </div>
+    </main>
   );
 }

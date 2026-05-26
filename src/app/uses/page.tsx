@@ -1,72 +1,166 @@
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import { ModeAwarePageWrapper } from '@/components/shared/ModeAwarePageWrapper'
 
-export const metadata = { title: 'Uses — Kapil Kumar Jangid' }
+export const metadata = {
+  title: 'Uses — Kapil Kumar Jangid',
+}
 
-const SETUP: { category: string; items: { name: string; desc: string }[] }[] = [
+const SETUP: {
+  category: string
+  items: {
+    name: string
+    desc: string
+  }[]
+}[] = [
   {
-    category: 'Editor & Terminal',
+    category: 'Editor & Development',
     items: [
-      { name: 'VS Code', desc: 'Primary editor. One Dark Pro theme. Geist Mono font at 14px.' },
-      { name: 'Neovim + LazyVim', desc: 'Learning to use it for quick edits. Getting there.' },
-      { name: 'Windows Terminal', desc: 'Git Bash as the default shell.' },
-      { name: 'Claude Code', desc: 'AI coding assistant. It lives in my terminal.' },
+      {
+        name: 'VS Code',
+        desc: 'Primary editor for most projects including frontend, backend, and extensions.',
+      },
+      {
+        name: 'Git',
+        desc: 'For version control and managing project history.',
+      },
+      {
+        name: 'AI coding tools',
+        desc: 'Used for brainstorming, iteration, debugging, and reducing repetitive work.',
+      },
     ],
   },
+
   {
     category: 'Languages & Frameworks',
     items: [
-      { name: 'TypeScript', desc: 'For everything frontend and most backend.' },
-      { name: 'Next.js', desc: 'App Router. The default choice for new projects.' },
-      { name: 'Python', desc: 'For scripts, tooling, and language experiments like Rune.' },
-      { name: 'Tailwind CSS', desc: 'v4 on new projects, v3 on old ones.' },
+      {
+        name: 'TypeScript',
+        desc: 'Used across most projects for both frontend and backend development.',
+      },
+      {
+        name: 'Next.js',
+        desc: 'Usually my first choice for building modern web applications.',
+      },
+      {
+        name: 'React',
+        desc: 'Primary frontend library for interfaces and component systems.',
+      },
+      {
+        name: 'Python',
+        desc: 'Mostly for scripting, experiments, and projects like Rune Lang.',
+      },
+      {
+        name: 'Tailwind CSS',
+        desc: 'For building interfaces quickly without leaving the component.',
+      },
     ],
   },
+
+  {
+    category: 'Backend & Infrastructure',
+    items: [
+      {
+        name: 'Node.js',
+        desc: 'Used for APIs, backend services, and application logic.',
+      },
+      {
+        name: 'Prisma',
+        desc: 'Primary ORM for database interactions.',
+      },
+      {
+        name: 'PostgreSQL',
+        desc: 'Database choice for most structured applications.',
+      },
+      {
+        name: 'MongoDB',
+        desc: 'Used where flexible document structures make sense.',
+      },
+      {
+        name: 'Redis',
+        desc: 'For caching and handling workflow-related problems.',
+      },
+    ],
+  },
+
   {
     category: 'Tools & Services',
     items: [
-      { name: 'Vercel', desc: 'All frontend deployments. Zero-config is the killer feature.' },
-      { name: 'GitHub', desc: 'Everything lives here.' },
-      { name: 'Supabase', desc: 'Postgres + auth for fullstack projects.' },
-      { name: 'Figma', desc: 'Design mockups. Not a power user but it gets the job done.' },
-      { name: 'Obsidian', desc: 'Notes, daily log, project planning.' },
+      {
+        name: 'GitHub',
+        desc: 'Where projects, experiments, and code live.',
+      },
+      {
+        name: 'Vercel',
+        desc: 'For frontend deployments and fast iteration.',
+      },
+      {
+        name: 'Figma',
+        desc: 'Used for rough layouts and interface ideas.',
+      },
+      {
+        name: 'Playwright',
+        desc: 'For automation and browser-based workflows.',
+      },
     ],
   },
+
   {
     category: 'Hardware',
     items: [
-      { name: 'Windows 11 laptop', desc: 'Main machine. Not a MacBook, and that\'s fine.' },
-      { name: 'External monitor', desc: '24". The best $150 productivity upgrade I\'ve made.' },
+      {
+        name: 'Windows laptop',
+        desc: 'Primary development machine.',
+      },
     ],
   },
 ]
 
 export default function UsesPage() {
   return (
-    <ModeAwarePageWrapper className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
-      <Link href="/" className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-8">
-        <ArrowLeft size={12} /> Back to portfolio
+    <div className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
+      <Link
+        href="/"
+        className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-8"
+      >
+        <ArrowLeft size={12} />
+        Back to portfolio
       </Link>
 
       <div className="mb-10">
-        <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-1">Setup</p>
-        <h1 className="text-2xl font-bold mb-2">Uses</h1>
-        <p className="text-sm text-zinc-500">The tools and gear I use day to day.</p>
+        <p className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-1">
+          Setup
+        </p>
+
+        <h1 className="text-2xl font-bold mb-2">
+          Uses
+        </h1>
+
+        <p className="text-sm text-zinc-500">
+          Tools and technologies I regularly use while building products and experiments.
+        </p>
       </div>
 
       <div className="space-y-10">
-        {SETUP.map(section => (
+        {SETUP.map((section) => (
           <div key={section.category}>
             <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">
               {section.category}
             </h2>
+
             <div className="flex flex-col gap-2">
-              {section.items.map(item => (
-                <div key={item.name} className="flex gap-3 p-3 border rounded-xl dark:bg-black/70">
+              {section.items.map((item) => (
+                <div
+                  key={item.name}
+                  className="flex gap-3 p-3 border rounded-xl dark:bg-black/70"
+                >
                   <div>
-                    <p className="text-sm font-medium">{item.name}</p>
-                    <p className="text-xs text-zinc-500 mt-0.5">{item.desc}</p>
+                    <p className="text-sm font-medium">
+                      {item.name}
+                    </p>
+
+                    <p className="text-xs text-zinc-500 mt-0.5">
+                      {item.desc}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -74,6 +168,6 @@ export default function UsesPage() {
           </div>
         ))}
       </div>
-    </ModeAwarePageWrapper>
+    </div>
   )
 }

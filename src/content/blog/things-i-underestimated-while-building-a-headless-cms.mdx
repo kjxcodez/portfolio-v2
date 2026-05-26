@@ -1,0 +1,250 @@
+---
+title: "Things I Underestimated While Building a Headless CMS"
+description: "I thought building a headless CMS mostly meant creating CRUD screens and APIs. I underestimated everything around the actual content itself."
+date: "2026-05-26"
+tags: ["Next.js", "Backend", "Architecture", "Lessons"]
+cover: "/blog/headless-cms-lessons.png"
+---
+
+I thought building a headless CMS would be relatively straightforward.
+
+Users create content.
+
+Store content in a database.
+
+Expose APIs.
+
+Build a dashboard.
+
+Done.
+
+That was the simplified version I had in my head before I started.
+
+Then I started building it.
+
+Very quickly I realized that content itself was probably the easiest part of the entire system.
+
+Everything around it became the difficult part.
+
+## Content Was Never The Real Problem
+
+Initially I was focused on the obvious pieces:
+
+- collections
+- fields
+- database models
+- API routes
+- dashboards
+
+Those felt like the main work.
+
+And yes, they take time.
+
+But after a while I noticed something interesting.
+
+The difficult questions were coming from everything around the content.
+
+Questions like:
+
+```txt
+Who can access this content?
+
+How do environments work?
+
+How should API keys behave?
+
+How should publishing work?
+
+What happens when billing changes?
+
+What if external services fail?
+```
+
+The system started becoming larger than I expected.
+
+## Authentication Gets Complicated Quickly
+
+Authentication initially looked simple.
+
+Users sign up.
+
+Users log in.
+
+Protect routes.
+
+That sounds easy until you start thinking beyond basic authentication.
+
+Questions started appearing:
+
+- What happens when users are invited?
+- Should invite links expire?
+- What if users already exist?
+- How do role permissions work?
+- What should users see after login?
+
+Small decisions started affecting the rest of the system.
+
+Changing authentication logic later also became much more painful than I expected.
+
+Because authentication slowly spreads into everything.
+
+## API Keys Are More Than Just Strings
+
+I originally thought API keys were basically this:
+
+```ts
+const apiKey = generateRandomString()
+```
+
+Store it.
+
+Validate it.
+
+Done.
+
+Reality was slightly different.
+
+Questions started appearing:
+
+```txt
+Should keys expire?
+
+Can users regenerate them?
+
+How should permissions work?
+
+How should requests be authenticated?
+
+How do you avoid unnecessary database lookups?
+```
+
+API keys eventually become part of performance, security, and user experience.
+
+Not just authentication.
+
+## Webhooks Sound Easy Until They Are Not
+
+Webhooks looked simple on paper.
+
+Receive event.
+
+Run logic.
+
+Return success.
+
+Then I started thinking about failure cases.
+
+```txt
+What happens if the same event arrives twice?
+
+What if processing fails halfway?
+
+What if external services retry?
+
+What if requests arrive out of order?
+```
+
+That was when I started understanding why idempotency matters.
+
+Systems start behaving differently once multiple services begin communicating with each other.
+
+## Billing Is Not A Single Event
+
+Earlier I thought billing worked like this:
+
+```txt
+User pays
+
+Subscription active
+```
+
+Simple.
+
+Then more situations started showing up.
+
+```txt
+Payment failed
+
+Subscription upgraded
+
+Subscription cancelled
+
+Webhook delayed
+
+Retry completed
+
+Payment refunded
+```
+
+Billing turned into a lifecycle rather than a button click.
+
+That changed how I looked at the problem.
+
+## You Start Thinking About Operations
+
+This was probably the biggest shift for me.
+
+Earlier I mostly thought about writing features.
+
+While building larger systems I started thinking about questions like:
+
+- How do I debug this later?
+- What happens when something fails?
+- How can I see system state quickly?
+- What information would help future me?
+
+I started realizing that dashboards are not just for users.
+
+Sometimes they are for developers too.
+
+## Complexity Hides Inside Small Decisions
+
+The interesting thing is that no single problem felt impossible.
+
+Every individual decision seemed manageable.
+
+But small decisions accumulate.
+
+Eventually you realize you are no longer building:
+
+```txt
+A content management app
+```
+
+You are building:
+
+```txt
+Authentication
+
+Permissions
+
+API access
+
+Publishing workflows
+
+Billing systems
+
+Background events
+
+Operational tooling
+```
+
+Content management became only one part of the system.
+
+## Final Thought
+
+I started this project thinking:
+
+> Building a CMS mostly means managing content.
+
+I finished with a different perspective.
+
+Content was only the center.
+
+The real work was building everything surrounding it.
+
+And I think that applies to a lot of products.
+
+The feature users see is usually not the hard part.
+
+The hard part is everything they never notice.

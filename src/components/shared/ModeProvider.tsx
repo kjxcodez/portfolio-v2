@@ -1,10 +1,10 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, Suspense } from "react";
 import { PortfolioMode, useModeStore } from "@/store/mode-store";
 import { motion, AnimatePresence } from "motion/react";
-import { GlobalBackground } from "./GlobalBackground";
 import { generateModeCSS } from "@/lib/mode-colors";
+import { useModeSyncWithURL } from "@/lib/use-mode-sync";
 
 interface ModeContextType {
   mode: PortfolioMode;
@@ -26,10 +26,13 @@ interface ModeProviderProps {
   children: React.ReactNode;
 }
 
-export function ModeProvider({ children }: ModeProviderProps) {
+function ModeProviderInner({ children }: ModeProviderProps) {
   const { mode, setMode: setStoreMode } = useModeStore();
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  // Sync mode with URL
+  useModeSyncWithURL();
 
   // Handle hydration
   useEffect(() => {
@@ -40,7 +43,6 @@ export function ModeProvider({ children }: ModeProviderProps) {
   useEffect(() => {
     if (!mounted) return;
 
-    // Create or update the mode colors style element
     let styleElement = document.getElementById('mode-colors');
     if (!styleElement) {
       styleElement = document.createElement('style');
@@ -56,12 +58,10 @@ export function ModeProvider({ children }: ModeProviderProps) {
 
     setIsTransitioning(true);
 
-    // Slightly longer delay for smoother visual transition
     setTimeout(() => {
       setStoreMode(newMode);
-      // Keep transition state longer for smoother experience
-      setTimeout(() => setIsTransitioning(false), 500);
-    }, 200);
+      setTimeout(() => setIsTransitioning(false), 300);
+    }, 100);
   };
 
   // Don't render until hydrated to prevent mismatch
@@ -77,8 +77,6 @@ export function ModeProvider({ children }: ModeProviderProps) {
 
   return (
     <ModeContext.Provider value={contextValue}>
-      <GlobalBackground mode={mode} />
-
       {/* Transition loading overlay */}
       <AnimatePresence>
         {isTransitioning && (
@@ -100,21 +98,15 @@ export function ModeProvider({ children }: ModeProviderProps) {
         )}
       </AnimatePresence>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={`mode-${mode}`}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{
-            duration: 0.5,
-            ease: [0.25, 0.1, 0.25, 1] // Custom easing for smoother feel
-          }}
-          className="relative z-10"
-        >
-          {children}
-        </motion.div>
-      </AnimatePresence>
+      {children}
     </ModeContext.Provider>
+  );
+}
+
+export function ModeProvider({ children }: ModeProviderProps) {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black" />}>
+      <ModeProviderInner>{children}</ModeProviderInner>
+    </Suspense>
   );
 }

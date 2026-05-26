@@ -1,10 +1,12 @@
 "use client";
 
 import { useModeContext } from "@/components/shared/ModeProvider";
+import { GlobalBackground } from "@/components/shared/GlobalBackground";
 import { MinimalPortfolio } from "./MinimalPortfolio";
 import { MacOSPortfolio } from "./MacOSPortfolio";
 import { RPGPortfolio } from "./RPGPortfolio";
 import { TerminalPortfolio } from "./TerminalPortfolio";
+import { motion, AnimatePresence } from "motion/react";
 import type { PostMeta } from "@/lib/mdx";
 
 interface AdaptiveHomepageProps {
@@ -14,16 +16,36 @@ interface AdaptiveHomepageProps {
 export function AdaptiveHomepage({ posts }: AdaptiveHomepageProps) {
   const { mode } = useModeContext();
 
-  switch (mode) {
-    case 1:
-      return <MinimalPortfolio />;
-    case 2:
-      return <MacOSPortfolio posts={posts} />;
-    case 3:
-      return <RPGPortfolio />;
-    case 4:
-      return <TerminalPortfolio />;
-    default:
-      return <MinimalPortfolio />;
-  }
+  const renderer = (() => {
+    switch (mode) {
+      case 1:
+        return <div className="mode-renderer professional-mode"><MinimalPortfolio /></div>;
+      case 2:
+        return <div className="mode-renderer desktop-mode"><MacOSPortfolio posts={posts} /></div>;
+      case 3:
+        return <div className="mode-renderer rpg-mode"><RPGPortfolio posts={posts} /></div>;
+      case 4:
+        return <div className="mode-renderer terminal-mode"><TerminalPortfolio posts={posts} /></div>;
+      default:
+        return <div className="mode-renderer professional-mode"><MinimalPortfolio /></div>;
+    }
+  })();
+
+  return (
+    <>
+      <GlobalBackground mode={mode} />
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`mode-${mode}`}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          className="relative z-10"
+        >
+          {renderer}
+        </motion.div>
+      </AnimatePresence>
+    </>
+  );
 }

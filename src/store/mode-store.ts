@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { trackModeSwitch } from '@/lib/analytics'
 
 export type PortfolioMode = 1 | 2 | 3 | 4
 
@@ -12,23 +13,27 @@ export const useModeStore = create<ModeStore>()(
   persist(
     (set) => ({
       mode: 1,
-      setMode: (mode) => set({ mode }),
+      setMode: (mode) => {
+        set({ mode });
+        try {
+          trackModeSwitch(MODE_LABELS[mode]);
+        } catch (e) {}
+      },
     }),
-    { name: 'kapil-portfolio-mode' }  // localStorage key
+    { name: 'kapil-portfolio-mode' }
   )
 )
 
-// Mode labels
 export const MODE_LABELS: Record<PortfolioMode, string> = {
-  1: 'Minimal',
-  2: 'macOS Desktop',
+  1: 'Professional',
+  2: 'Desktop OS',
   3: 'RPG World',
   4: 'Terminal OS',
 }
 
 export const MODE_DESCRIPTIONS: Record<PortfolioMode, string> = {
-  1: 'Clean, fast, professional',
-  2: 'Full desktop OS experience',
-  3: 'Top-down game world',
-  4: 'Real terminal, fake OS',
+  1: 'Fast and recruiter friendly',
+  2: 'Interactive OS experience',
+  3: 'Explore projects as a world',
+  4: 'CLI-powered portfolio',
 }

@@ -13,8 +13,8 @@ export interface Project {
 
 export interface Skill {
   name: string
-  icon: any          // icon component name or SVG path
-  category: 'frontend' | 'backend' | 'database' | 'tools'
+  icon: string
+  category: 'languages' | 'frontend' | 'backend' | 'databases' | 'integrations' | 'tools' | 'other'
   level: 1 | 2 | 3      // 1=learning, 2=proficient, 3=expert
 }
 
@@ -37,4 +37,33 @@ export interface BlogPost {
   date: string
   readingTime: string
   tags: string[]
+}
+
+export interface Experience {
+  id: string
+  company: string
+  companyUrl?: string
+  role: string
+  type: string
+  period: string
+  projects: ExperienceProject[]
+}
+
+export interface ExperienceProject {
+  name: string
+  achievements: string[]
+}
+
+export interface CurrentProject {
+  title: string
+  description: string
+  url?: string
+  status: string
+}
+
+export interface Socials {
+  github: string
+  twitter: string
+  linkedin?: string
+  email: string
 }

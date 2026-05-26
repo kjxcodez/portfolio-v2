@@ -1,0 +1,232 @@
+---
+title: "Building Products Taught Me More Than Tutorials Did"
+description: "I learned a lot from courses and tutorials, but building real products exposed problems that never show up in controlled learning environments."
+date: "2026-05-26"
+tags: ["Development", "Learning", "Products", "Experience"]
+cover: "/blog/building-products.png"
+---
+
+I spent a lot of time learning through tutorials.
+
+React tutorials.
+
+Node.js tutorials.
+
+Authentication tutorials.
+
+Database tutorials.
+
+They helped me understand concepts and gave me enough confidence to build things on my own.
+
+There is nothing wrong with tutorials.
+
+The problem starts when you think understanding a concept means understanding how to build a product.
+
+I learned very quickly that those are different things.
+
+## Tutorials Live In Perfect Worlds
+
+Tutorials are designed to teach one thing at a time.
+
+The environment is controlled.
+
+The requirements are already decided.
+
+The APIs behave correctly.
+
+The data structure already exists.
+
+Nothing changes halfway through.
+
+Everything is predictable.
+
+A typical tutorial looks like this:
+
+```tsx
+const user = await getUser()
+
+return (
+  <Dashboard user={user} />
+)
+```
+
+Everything works.
+
+No unexpected states.
+
+No missing fields.
+
+No broken APIs.
+
+No weird edge cases.
+
+Real products are different.
+
+## Products Start Breaking Assumptions
+
+The first time I noticed this was while building larger projects.
+
+Initially everything feels straightforward.
+
+You think:
+
+```txt
+Users sign up
+
+Users create data
+
+Users manage data
+```
+
+Simple.
+
+Then reality starts showing up.
+
+Questions appear that you never thought about before:
+
+- What happens if users refresh midway through a process?
+- What if an external API fails?
+- What if a webhook arrives twice?
+- What if authentication expires?
+- What if users do something completely unexpected?
+
+Suddenly you are not building pages anymore.
+
+You are building systems.
+
+## Building Features Is Different From Building Workflows
+
+Earlier I used to think in terms of features.
+
+I would ask:
+
+> What feature should I add next?
+
+Now I think differently.
+
+I ask:
+
+> What workflow am I trying to support?
+
+For example:
+
+Creating a billing page sounds simple.
+
+Until you start asking:
+
+```txt
+What happens after payment?
+
+What if payment fails?
+
+What if webhooks arrive late?
+
+What if users refresh the page?
+
+What if subscriptions change?
+```
+
+One button suddenly becomes multiple connected systems.
+
+That was something tutorials never taught me.
+
+## Debugging Became The Real Teacher
+
+I used to think writing code was where learning happened.
+
+Now I think debugging teaches more.
+
+Because debugging forces you to understand:
+
+- how data moves
+- where assumptions fail
+- why systems behave unexpectedly
+- where architecture starts becoming important
+
+Some of my biggest learning moments came from situations where something completely broke.
+
+Not because breaking things is good.
+
+Because fixing them forces understanding.
+
+## Products Also Change Constantly
+
+Tutorials usually end with:
+
+```txt
+Project completed
+```
+
+Real products rarely feel complete.
+
+Ideas change.
+
+Requirements change.
+
+Design changes.
+
+Your own thinking changes.
+
+Sometimes you rewrite things because your earlier decisions no longer make sense.
+
+Sometimes the solution itself changes.
+
+I used to think rewriting meant I failed.
+
+Now I think it usually means I learned something.
+
+## Building Changes The Questions You Ask
+
+Earlier my questions looked like this:
+
+```txt
+How do I build this?
+```
+
+Now they look more like:
+
+```txt
+Should I build this?
+
+What problem does it solve?
+
+What happens after launch?
+
+How difficult is this to maintain?
+```
+
+The interesting part is that technical skill was not the biggest shift.
+
+Thinking changed more than coding did.
+
+## Final Thought
+
+Tutorials gave me a starting point.
+
+They taught me syntax.
+
+They taught me tools.
+
+They taught me concepts.
+
+But building products forced me to deal with uncertainty.
+
+And uncertainty teaches different lessons.
+
+The biggest thing I learned was this:
+
+```txt
+Knowing how something works
+
+is not the same as
+
+knowing how to build something people can actually use
+```
+
+I still watch tutorials.
+
+I still learn from courses.
+
+But now I try to move from learning to building as quickly as possible.
+
+Because eventually real projects start asking questions that tutorials never do.

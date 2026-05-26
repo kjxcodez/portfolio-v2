@@ -1,6 +1,6 @@
-import type { Project, Skill, Contribution } from '@/types/portfolio'
+import type { Project, Skill, Contribution, Experience, CurrentProject, Socials } from '@/types/portfolio'
 
-
+// ─── Personal ────────────────────────────────────────────────────
 export const PERSONAL = {
   name: 'Kapil Kumar Jangid',
   title: 'Full Stack Developer & Open Source Contributor',
@@ -12,7 +12,60 @@ export const PERSONAL = {
   available: true,
 } as const
 
+// ─── Socials ─────────────────────────────────────────────────────
+export const SOCIALS: Socials = {
+  github: 'https://github.com/kjxcodez',
+  twitter: 'https://x.com/kjxcodez',
+  email: 'kapil@kapiljangid.pro',
+}
+
+// ─── Resume ──────────────────────────────────────────────────────
+export const RESUME_URL = '/resume.pdf'
+
+// ─── Experience ──────────────────────────────────────────────────
+export const EXPERIENCE: Experience[] = [
+  {
+    id: 'rapidquest',
+    company: 'RapidQuest Solutions',
+    role: 'Software Development Engineer',
+    type: 'Remote, India',
+    period: 'Feb 2025 – May 2026',
+    projects: [
+      {
+        name: 'WhatsApp Marketing Shopify App',
+        achievements: [
+          'Owned end-to-end merchant onboarding via Meta Cloud API including WABA connection, template builder UI, automated template submission, and per-merchant webhook routing.',
+          'Built 5+ automation workflows including abandoned checkout recovery, cart reminders, order confirmation, COD confirmation, and shipping updates.',
+          'Implemented bulk campaign and broadcast messaging for segmented user lists.',
+          'Added internal team email alert systems for Meta template approval workflows.',
+          'Platform reached 1,000+ Shopify installs and 100+ paying merchants.',
+        ],
+      },
+      {
+        name: 'Email Marketing Shopify App',
+        achievements: [
+          'Owned the complete drag-and-drop email template builder.',
+          'Built reusable content blocks and layout templates.',
+          'Automated template previews using Playwright + headless Chromium.',
+          'Removed manual screenshot workflows entirely.',
+        ],
+      },
+    ],
+  },
+]
+
+// ─── Projects ────────────────────────────────────────────────────
 export const PROJECTS: Project[] = [
+  {
+    id: 'flowcms',
+    title: 'FlowCMS',
+    description: 'A headless CMS with drag-and-drop page builder and real-time preview',
+    longDescription:
+      'A modern headless CMS built for speed and flexibility. Features a drag-and-drop visual page builder, real-time content preview, role-based access, and an API-first architecture. Built with Next.js, PostgreSQL, and Prisma.',
+    tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Tailwind CSS', 'shadcn/ui'],
+    featured: true,
+    year: 2025,
+  },
   {
     id: 'rune-lang',
     title: 'Rune Lang',
@@ -21,29 +74,6 @@ export const PROJECTS: Project[] = [
       'Rune Lang is a custom-built, interpreted programming language designed for learning and experimentation. It features a natural, readable syntax built entirely from scratch in Python — including its own lexer, parser, AST system, and tree-walk interpreter. A companion VS Code extension adds syntax highlighting and developer ergonomics.',
     tags: ['Python', 'Lexer', 'Parser', 'AST', 'Interpreter', 'Language Design'],
     url: 'https://rune.kapiljangid.live',
-    featured: true,
-    year: 2024,
-  },
-  {
-    id: 'percept-ui',
-    title: 'Percept UI',
-    description: 'A comprehensive React component library',
-    longDescription:
-      'A modern, accessible, and customizable component library for React. Includes high-quality UI components, templates, and a CLI for scaffolding projects. Published on npm.',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Nextra', 'Next.js', 'npm', 'Vite'],
-    url: 'https://perceptui.codebrise.tech',
-    github: 'https://github.com/perceptui/ui',
-    featured: true,
-    year: 2024,
-  },
-  {
-    id: 'rune-lang-vscode',
-    title: 'Rune Lang VS Code Extension',
-    description: 'Official VS Code support for Rune Lang',
-    longDescription:
-      'Provides first-class VS Code support for Rune Lang — syntax highlighting via TextMate grammars, code snippets, and in-editor execution. Published to the VS Code Marketplace.',
-    tags: ['VS Code Extension API', 'TypeScript', 'VSCE', 'TextMate Grammars', 'Marketplace'],
-    url: 'https://marketplace.visualstudio.com/items?itemName=kjxcodez.rune',
     featured: true,
     year: 2024,
   },
@@ -57,6 +87,29 @@ export const PROJECTS: Project[] = [
     url: 'https://marketplace.visualstudio.com/items?itemName=kjxcodez.ai-commitbot',
     github: 'https://github.com/kjxcodez/ai-commitbot',
     featured: true,
+    year: 2024,
+  },
+  {
+    id: 'percept-ui',
+    title: 'Percept UI',
+    description: 'A comprehensive React component library',
+    longDescription:
+      'A modern, accessible, and customizable component library for React. Includes high-quality UI components, templates, and a CLI for scaffolding projects. Published on npm.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Nextra', 'Next.js', 'npm', 'Vite'],
+    url: 'https://perceptui.codebrise.tech',
+    github: 'https://github.com/perceptui/ui',
+    featured: false,
+    year: 2024,
+  },
+  {
+    id: 'rune-lang-vscode',
+    title: 'Rune Lang VS Code Extension',
+    description: 'Official VS Code support for Rune Lang',
+    longDescription:
+      'Provides first-class VS Code support for Rune Lang — syntax highlighting via TextMate grammars, code snippets, and in-editor execution. Published to the VS Code Marketplace.',
+    tags: ['VS Code Extension API', 'TypeScript', 'VSCE', 'TextMate Grammars', 'Marketplace'],
+    url: 'https://marketplace.visualstudio.com/items?itemName=kjxcodez.rune',
+    featured: false,
     year: 2024,
   },
   {
@@ -85,30 +138,66 @@ export const PROJECTS: Project[] = [
   },
 ]
 
+// ─── Skills ──────────────────────────────────────────────────────
 export const SKILLS: Skill[] = [
+  // Languages
+  { name: 'JavaScript',   icon: 'javascript', category: 'languages', level: 3 },
+  { name: 'TypeScript',   icon: 'typescript', category: 'languages', level: 3 },
+  { name: 'Python',       icon: 'python',     category: 'languages', level: 2 },
   // Frontend
-  { name: 'HTML5',        icon: 'html5',      category: 'frontend', level: 3 },
-  { name: 'CSS3',         icon: 'css3',       category: 'frontend', level: 3 },
-  { name: 'JavaScript',   icon: 'javascript', category: 'frontend', level: 3 },
-  { name: 'TypeScript',   icon: 'typescript', category: 'frontend', level: 3 },
-  { name: 'React',        icon: 'react',      category: 'frontend', level: 3 },
-  { name: 'Next.js',      icon: 'ri_nextjs',     category: 'frontend', level: 3 },
-  { name: 'Tailwind CSS', icon: 'tailwind',   category: 'frontend', level: 3 },
+  { name: 'React',        icon: 'react',      category: 'frontend',  level: 3 },
+  { name: 'Next.js',      icon: 'ri_nextjs',  category: 'frontend',  level: 3 },
+  { name: 'Tailwind CSS', icon: 'tailwind',   category: 'frontend',  level: 3 },
+  { name: 'ShadCN',       icon: 'ri_shadcn',  category: 'frontend',  level: 3 },
+  { name: 'MUI',          icon: 'ri_mui',     category: 'frontend',  level: 2 },
+  { name: 'Chakra UI',    icon: 'ri_chakra',  category: 'frontend',  level: 2 },
   // Backend
-  { name: 'Node.js',      icon: 'ri_nodejs',     category: 'backend',  level: 2 },
-  { name: 'Python',       icon: 'python',     category: 'backend',  level: 2 },
-  { name: 'Express',      icon: 'ri_express',    category: 'backend',  level: 2 },
-  // Database
-  { name: 'MongoDB',      icon: 'ri_mongodb',    category: 'database', level: 2 },
-  { name: 'Postgres',     icon: 'ri_postgresql',   category: 'database', level: 2 },
-  { name: 'Prisma',       icon: 'ri_prisma',     category: 'database', level: 2 },
-  { name: 'Supabase',     icon: 'ri_supabase',   category: 'database', level: 2 },
+  { name: 'Node.js',      icon: 'ri_nodejs',     category: 'backend',  level: 3 },
+  { name: 'Express',      icon: 'ri_express',    category: 'backend',  level: 3 },
+  { name: 'REST APIs',    icon: 'ri_api',        category: 'backend',  level: 3 },
+  { name: 'Webhooks',     icon: 'ri_webhook',    category: 'backend',  level: 3 },
+  { name: 'Redis',        icon: 'ri_redis',      category: 'backend',  level: 2 },
+  { name: 'Better Auth',  icon: 'ri_auth',       category: 'backend',  level: 2 },
+  // Databases
+  { name: 'PostgreSQL',   icon: 'ri_postgresql', category: 'databases', level: 3 },
+  { name: 'MongoDB',      icon: 'ri_mongodb',    category: 'databases', level: 2 },
+  { name: 'Prisma',       icon: 'ri_prisma',     category: 'databases', level: 3 },
+  { name: 'Supabase',     icon: 'ri_supabase',   category: 'databases', level: 2 },
+  // Integrations
+  { name: 'Meta Cloud API',      icon: 'ri_meta',     category: 'integrations', level: 3 },
+  { name: 'WhatsApp Business',   icon: 'ri_whatsapp', category: 'integrations', level: 3 },
+  { name: 'Shopify API',         icon: 'ri_shopify',  category: 'integrations', level: 3 },
+  { name: 'Razorpay',            icon: 'ri_razorpay', category: 'integrations', level: 2 },
+  { name: 'Gemini',              icon: 'ri_gemini',   category: 'integrations', level: 2 },
+  { name: 'Resend',              icon: 'ri_resend',   category: 'integrations', level: 2 },
   // Tools
-  { name: 'Git',          icon: 'git',        category: 'tools',    level: 3 },
-  { name: 'VS Code',      icon: 'vscode',     category: 'tools',    level: 3 },
-  { name: 'React Native', icon: 'ri_react_native', category: 'tools',    level: 1 },
+  { name: 'Git',                 icon: 'git',         category: 'tools',    level: 3 },
+  { name: 'Playwright',          icon: 'ri_playwright', category: 'tools',  level: 2 },
+  { name: 'VS Code Extensions',  icon: 'vscode',      category: 'tools',   level: 3 },
+  { name: 'Sentry',              icon: 'ri_sentry',   category: 'tools',    level: 2 },
+  { name: 'Cloudflare',          icon: 'ri_cloudflare', category: 'tools',  level: 2 },
+  // Other
+  { name: 'CLI Tooling',              icon: 'ri_cli',       category: 'other', level: 3 },
+  { name: 'SaaS Billing',             icon: 'ri_billing',   category: 'other', level: 2 },
+  { name: 'Idempotent Webhooks',      icon: 'ri_idempotent', category: 'other', level: 2 },
 ]
 
+// ─── Currently Building ─────────────────────────────────────────
+export const CURRENTLY_BUILDING: CurrentProject[] = [
+  {
+    title: 'kapil-portfolio',
+    description: 'This portfolio — 4 modes, RPG world, macOS desktop, terminal OS. You\'re looking at it.',
+    url: 'https://github.com/kjxcodez',
+    status: 'In progress',
+  },
+  {
+    title: 'Percept UI v2',
+    description: 'Rebuilding the component library with Tailwind v4 and React 19 server components.',
+    status: 'Early design',
+  },
+]
+
+// ─── Open Source Contributions ───────────────────────────────────
 // Seeded from GitHub API — live data fetched via lib/github.ts at runtime (ISR)
 export const CONTRIBUTIONS: Contribution[] = [
   {
@@ -200,3 +289,6 @@ export const CONTRIBUTIONS: Contribution[] = [
     description: 'Set up project scaffolding with full TypeScript and Tailwind configuration.',
   },
 ]
+
+// ─── Metadata ────────────────────────────────────────────────────
+export const LAST_UPDATED = '2026-05-26'
