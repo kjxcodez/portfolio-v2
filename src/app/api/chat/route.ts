@@ -1,68 +1,5 @@
 import { NextRequest } from 'next/server'
-import { PERSONAL, PROJECTS, SKILLS, EXPERIENCE, CONTRIBUTIONS, CURRENTLY_BUILDING } from '@/lib/data'
-
-// Build system context from portfolio data
-function buildSystemPrompt(): string {
-  const experienceText = EXPERIENCE.map((exp) => {
-    const projects = exp.projects
-      .map(
-        (p) =>
-          `  Project: ${p.name}\n  Achievements:\n${p.achievements.map((a) => `    - ${a}`).join('\n')}`
-      )
-      .join('\n\n')
-    return `Company: ${exp.company}\nRole: ${exp.role}\nType: ${exp.type}\nPeriod: ${exp.period}\n\n${projects}`
-  }).join('\n\n---\n\n')
-
-  const projectsText = PROJECTS.map(
-    (p) =>
-      `- ${p.title}: ${p.description}\n  Tags: ${p.tags.join(', ')}\n  ${p.url ? `URL: ${p.url}` : ''}\n  ${p.github ? `GitHub: ${p.github}` : ''}`
-  ).join('\n')
-
-  const skillsText = SKILLS.map((s) => `${s.name} (${s.category}, level ${s.level}/3)`).join(', ')
-
-  const contributionsText = CONTRIBUTIONS.map(
-    (c) => `- ${c.title} (${c.repo}) — ${c.type} ${c.status} (${c.date})`
-  ).join('\n')
-
-  const buildingText = CURRENTLY_BUILDING.map(
-    (c) => `- ${c.title}: ${c.description} (${c.status})`
-  ).join('\n')
-
-  return `You are an AI assistant for Kapil Kumar Jangid's portfolio website. You ONLY answer questions related to Kapil's professional profile, skills, projects, experience, and contributions.
-
-RULES:
-- Only answer questions about Kapil's portfolio, skills, projects, experience, and professional background.
-- If the information is not available in the context below, say "I don't have that information about Kapil."
-- NEVER invent or hallucinate information. Only use facts from the context.
-- Be concise and professional.
-- If asked about unrelated topics, politely redirect to portfolio-related questions.
-
-=== KAPIL'S PROFILE ===
-Name: ${PERSONAL.name}
-Title: ${PERSONAL.title}
-Location: ${PERSONAL.location}
-Email: ${PERSONAL.email}
-Bio: ${PERSONAL.bio}
-Available for work: ${PERSONAL.available ? 'Yes' : 'No'}
-GitHub: ${PERSONAL.github}
-Twitter: ${PERSONAL.twitter}
-
-=== WORK EXPERIENCE ===
-${experienceText}
-
-=== PROJECTS ===
-${projectsText}
-
-=== SKILLS ===
-${skillsText}
-
-=== OPEN SOURCE CONTRIBUTIONS ===
-${contributionsText}
-
-=== CURRENTLY BUILDING ===
-${buildingText}
-`
-}
+import { buildFullSystemPrompt } from '@/lib/ai/buildPortfolioContext'
 
 interface Message {
   role: 'user' | 'assistant'
@@ -86,7 +23,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const systemPrompt = buildSystemPrompt()
+    const systemPrompt = buildFullSystemPrompt()
 
     // Build Gemini API request
     const geminiMessages = [

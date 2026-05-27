@@ -14,6 +14,7 @@ const schema = z.object({
     required_error: "Select an inquiry type",
   }),
   message: z.string().min(20, "Message must be at least 20 characters"),
+  companyWebsite: z.string().max(0).optional(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -62,6 +63,15 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      {/* Honeypot — hidden from humans, bots fill it */}
+      <input
+        {...register("companyWebsite")}
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        style={{ position: "absolute", left: "-9999px", width: "1px", height: "1px", overflow: "hidden" }}
+      />
       {/* Name */}
       <div>
         <label className="block text-[0.625rem] font-mono uppercase tracking-wide text-muted-foreground mb-1.5">
