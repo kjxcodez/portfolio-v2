@@ -6,6 +6,7 @@ import { QuickNav } from "@/components/shared/QuickNav";
 import { ModeProvider } from "@/components/shared/ModeProvider";
 import { GlobalNav } from "@/components/shared/GlobalNav";
 import { AIChatButton } from "@/components/shared/AIChatButton";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -95,6 +96,7 @@ export default function RootLayout({
           {/* Page content */}
           {children}
         </ModeProvider>
+        <Analytics />
       </body>
     </html>
   );
