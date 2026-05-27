@@ -74,7 +74,7 @@ export const PROJECTS: Project[] = [
     featured: true,
     year: 2025,
     status: 'Live',
-    screenshots: ['/flowcms.png'],
+    screenshots: ['/flowcms.png', '/flowcms-demo.png', '/flowcms-dashboard.png', '/flowcms-api-keys.png'],
     keyFeatures: [
       'Drag-and-drop visual page builder',
       'Real-time content preview',
@@ -90,12 +90,12 @@ export const PROJECTS: Project[] = [
     longDescription:
       'Rune Lang is a custom-built, interpreted programming language designed for learning and experimentation. It features a natural, readable syntax built entirely from scratch in Python — including its own lexer, parser, AST system, and tree-walk interpreter. A companion VS Code extension adds syntax highlighting and developer ergonomics.',
     tags: ['Python', 'Lexer', 'Parser', 'AST', 'Interpreter', 'Language Design'],
-    url: 'https://rune.kapiljangid.live',
+    url: 'https://rune.kapiljangid.pro',
     type: 'language',
     featured: true,
     year: 2024,
     status: 'Live',
-    screenshots: ['/rune-dark.png', '/rune-light.png'],
+    screenshots: ['/rune-dark.png', '/rune-light.png', '/rune-docs.png'],
     keyFeatures: [
       'Custom lexer and tokenizer built from scratch',
       'Recursive descent parser',
@@ -139,13 +139,13 @@ export const PROJECTS: Project[] = [
     longDescription:
       'A modern, accessible, and customizable component library for React. Includes high-quality UI components, templates, and a CLI for scaffolding projects. Published on npm.',
     tags: ['React', 'TypeScript', 'Tailwind CSS', 'Nextra', 'Next.js', 'npm', 'Vite'],
-    url: 'https://perceptui.codebrise.tech',
+    url: 'https://v1.perceptui.kapiljangid.live',
     github: 'https://github.com/perceptui/ui',
     type: 'tool',
     featured: false,
     year: 2024,
     status: 'Live',
-    screenshots: ['/perceptui.png'],
+    screenshots: ['/perceptui.png', '/perceptui-cli.png', '/perceptui-doc-1.png', '/perceptui-avatar-example.png'],
     keyFeatures: [
       'React component library with full TypeScript support',
       'CLI for scaffolding projects with Percept components',
