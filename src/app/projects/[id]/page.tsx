@@ -17,7 +17,7 @@ import {
 import { GithubIcon } from "@/components/shared/icons";
 import { ProjectGallery } from "@/components/shared/ProjectGallery";
 import { PROJECTS } from "@/lib/data";
-import type { ProjectType } from "@/types/portfolio";
+import type { Project, ProjectType } from "@/types/portfolio";
 
 const TYPE_LABEL: Record<ProjectType, string> = {
   web: "Web App",
@@ -34,6 +34,43 @@ const TYPE_ICON: Record<ProjectType, React.ReactNode> = {
   extension: <Puzzle size={10} />,
   language: <Code2 size={10} />,
 };
+
+function getRelatedProjects(
+  current: Project,
+  projects: Project[]
+): Project[] {
+  const candidates = projects.filter((p) => p.id !== current.id);
+
+  const scored = candidates.map((p) => {
+    let score = 0;
+
+    if (p.type === current.type) score += 3;
+
+    for (const tag of p.tags) {
+      if (current.tags.includes(tag)) score += 2;
+    }
+
+    if (Math.abs(p.year - current.year) <= 1) score += 1;
+
+    return { project: p, score, sharedTags: p.tags.filter((t) => current.tags.includes(t)).length };
+  });
+
+  const relevant = scored
+    .filter((s) => s.score > 0)
+    .sort((a, b) => b.score - a.score || b.sharedTags - a.sharedTags)
+    .map((s) => s.project)
+    .slice(0, 3);
+
+  if (relevant.length < 3) {
+    const relevantIds = new Set(relevant.map((p) => p.id));
+    const fallbacks = candidates
+      .filter((p) => !relevantIds.has(p.id))
+      .sort((a, b) => b.year - a.year);
+    return [...relevant, ...fallbacks].slice(0, 3);
+  }
+
+  return relevant;
+}
 
 export async function generateStaticParams() {
   return PROJECTS.map((p) => ({ id: p.id }));
@@ -77,7 +114,7 @@ export default async function ProjectPage({
   const project = PROJECTS.find((p) => p.id === id);
   if (!project) notFound();
 
-  const related = PROJECTS.filter((p) => p.id !== project.id).slice(0, 3);
+  const related = getRelatedProjects(project, PROJECTS);
   const screenshots = project.screenshots ?? [];
 
   const primaryActionLabel =
