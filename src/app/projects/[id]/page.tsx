@@ -189,7 +189,8 @@ export default async function ProjectPage({
           {project.apkUrl && (
             <a
               href={project.apkUrl}
-              download
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors border hover:border-(--border-strong) text-(--text-secondary) hover:text-(--text-primary) hover:bg-(--bg-elevated)] font-ui"
             >
               <Download size={12} />

@@ -98,7 +98,8 @@ export function MobileProjectCard({ project, idx }: MobileProjectCardProps) {
           {project.apkUrl && (
             <a
               href={project.apkUrl}
-              download
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs transition-colors font-ui bg-foreground hover:bg-[var(--accent-hover)] text-[var(--text-inverse)] border border-[var(--accent)] hover:border-[var(--accent-hover)]"
             >
               <Download size={12} />

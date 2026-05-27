@@ -569,7 +569,7 @@ export const PROJECTS: Project[] = [
       '/aura-5.jpeg',
     ],
     github: "https://github.com/kjxcodez/aura-wallpaper-apk",
-    apkUrl: '/apk/aura-preview.apk',
+    apkUrl: 'https://github.com/kjxcodez/aura-wallpaper-apk/releases/download/v0.1.0/aura-preview.1.apk',
     timeline: '2025',
     highlights: [
       'Prompt-to-wallpaper generation using Pollinations.ai with no user authentication required',
