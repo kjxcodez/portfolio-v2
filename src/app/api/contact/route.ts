@@ -4,7 +4,8 @@ import { z } from 'zod'
 import { checkContactRateLimit } from '@/lib/rate-limit'
 import { generateContactReply } from '@/lib/ai/generateContactReply'
 import { fallbackReplyByType } from '@/lib/contact/fallbackReplies'
-import { renderNotificationEmail, renderAutoReplyEmail } from '@/lib/emails/templates'
+import { renderContactNotificationEmail } from '../../../../emails/ContactNotification'
+import { renderContactAutoReplyEmail } from '../../../../emails/ContactAutoReply'
 
 const schema = z.object({
   name: z.string().min(1).max(100).trim(),
@@ -92,7 +93,7 @@ export async function POST(req: NextRequest) {
           from: 'Portfolio <noreply@kapiljangid.pro>',
           to: 'hello@kapiljangid.pro',
           subject: `[contact] ${name} — ${type}`,
-          html: renderNotificationEmail({
+          html: await renderContactNotificationEmail({
             name,
             email,
             type,
@@ -109,7 +110,7 @@ export async function POST(req: NextRequest) {
           replyTo: 'hello@kapiljangid.pro',
           to: email,
           subject: `Re: your message`,
-          html: renderAutoReplyEmail({ name, reply: aiReply }),
+          html: await renderContactAutoReplyEmail({ name, reply: aiReply }),
         }),
       ])
     }
