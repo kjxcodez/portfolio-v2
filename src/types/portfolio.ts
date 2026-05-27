@@ -5,6 +5,11 @@ export interface TechnicalDecision {
   body: string
 }
 
+export interface TechnicalChallenge {
+  problem: string
+  solution: string
+}
+
 export interface Project {
   id: string
   title: string
@@ -22,6 +27,14 @@ export interface Project {
   apkUrl?: string
   keyFeatures?: string[]
   technicalDecisions?: TechnicalDecision[]
+
+  timeline?: string
+  highlights?: string[]
+  technicalChallenges?: TechnicalChallenge[]
+  architecture?: string[]
+  learnings?: string[]
+  futurePlans?: string[]
+  impact?: string[]
 }
 
 export interface Skill {

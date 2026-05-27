@@ -273,6 +273,12 @@ export const PROJECTS: Project[] = [
       'Smooth animations using Framer Motion',
       'Gesture-based interactions using use-gesture'
     ],
+    technicalChallenges: [
+      {
+        problem: 'Drag and swipe interactions conflicted with each other',
+        solution: 'Implemented gesture thresholds and drag boundaries'
+      }
+    ],
   },
   {
     id: 'aura-wallpaper-app',
