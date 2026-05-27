@@ -22,7 +22,7 @@ export function HintSystem({ onClose }: HintSystemProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[140]"
+      className="fixed inset-0 z-140"
       onClick={onClose}
     >
       <div

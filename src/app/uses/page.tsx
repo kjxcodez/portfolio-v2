@@ -117,7 +117,7 @@ const SETUP: {
 
 export default function UsesPage() {
   return (
-    <div className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen">
+    <div className="mx-auto w-full max-w-175 px-4 pt-24 pb-20 min-h-screen">
       <Link
         href="/"
         className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-300 transition-colors mb-8"
