@@ -128,7 +128,7 @@ export default async function ProjectPage({
     <div className="mx-auto w-full max-w-175 px-4 pt-24 pb-20 min-h-screen ">
       {/* Back */}
       <Link
-        href="/#projects"
+        href="/"
         className="inline-flex items-center gap-1.5 text-xs transition-colors mb-10 text-muted-foreground hover:text-muted-foreground/80 font-ui"
       >
         <ArrowLeft size={12} /> Back to portfolio
