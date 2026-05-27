@@ -1,9 +1,27 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/mdx";
 import { Clock, ArrowLeft } from "lucide-react";
+import { blogListOGUrl } from "@/lib/og";
 
-export const metadata = { title: "Blog — Kapil Kumar Jangid" };
+export const metadata: Metadata = {
+  title: "Blog — Kapil Kumar Jangid",
+  description: "Writing about building things — web, tools, and open source.",
+  openGraph: {
+    title: "Blog — Kapil Kumar Jangid",
+    description: "Writing about building things — web, tools, and open source.",
+    url: "https://kapiljangid.pro/blog",
+    type: "website",
+    images: [{ url: blogListOGUrl(), width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog — Kapil Kumar Jangid",
+    description: "Writing about building things — web, tools, and open source.",
+    images: [blogListOGUrl()],
+  },
+};
 
 export default function BlogPage() {
   const posts = getAllPosts();

@@ -18,6 +18,7 @@ import { GithubIcon } from "@/components/shared/icons";
 import { ProjectGallery } from "@/components/shared/ProjectGallery";
 import { PROJECTS } from "@/lib/data";
 import type { Project, ProjectType } from "@/types/portfolio";
+import { projectOGUrl } from "@/lib/og";
 
 const TYPE_LABEL: Record<ProjectType, string> = {
   web: "Web App",
@@ -84,6 +85,13 @@ export async function generateMetadata({
   const { id } = await params;
   const project = PROJECTS.find((p) => p.id === id);
   if (!project) return {};
+  const ogImage = projectOGUrl({
+    title: project.title,
+    category: project.type,
+    year: project.year,
+    status: project.status?.toLowerCase() === "live" ? "live" : project.status ? "wip" : undefined,
+    description: project.description,
+  });
   return {
     title: `${project.title} — Kapil Kumar Jangid`,
     description: project.description,
@@ -92,15 +100,13 @@ export async function generateMetadata({
       description: project.description,
       url: `https://kapiljangid.pro/projects/${project.id}`,
       type: "website",
-      images: [
-        { url: `/og-image.png`, width: 1200, height: 630, alt: project.title },
-      ],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: project.title }],
     },
     twitter: {
       card: "summary_large_image",
       title: `${project.title} — Kapil Kumar Jangid`,
       description: project.description,
-      images: [`/og-image.png`],
+      images: [ogImage],
     },
   };
 }

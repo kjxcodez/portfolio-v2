@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, Instrument_Serif, DM_Sans } from "next/font/google";
 import "./globals.css";
+import { homeOGUrl } from "@/lib/og";
 import { cn } from "@/lib/utils";
 import { QuickNav } from "@/components/shared/QuickNav";
 import { ModeProvider } from "@/components/shared/ModeProvider";
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: homeOGUrl("professional"),
         width: 1200,
         height: 630,
         alt: "Kapil Kumar Jangid — Full Stack Developer & Open Source Contributor"
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
     description:
       "Full Stack Developer & Open Source Contributor based in Rajasthan, India.",
     creator: "@kjxcodez",
-    images: ["/og-image.png"],
+    images: [homeOGUrl("professional")],
   },
 };
 
