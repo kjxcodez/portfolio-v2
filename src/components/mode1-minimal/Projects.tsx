@@ -1,20 +1,28 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { motion } from 'motion/react';
-import { SquareArrowOutUpRight, ArrowRight, Smartphone, Wrench, Code2, Globe, Puzzle } from 'lucide-react';
-import { GithubIcon } from '@/components/shared/icons';
-import { MobileProjectCard } from './MobileProjectCard';
-import { PROJECTS } from '@/lib/data';
-import type { Project, ProjectType } from '@/types/portfolio';
+import Link from "next/link";
+import { motion } from "motion/react";
+import {
+  SquareArrowOutUpRight,
+  ArrowRight,
+  Smartphone,
+  Wrench,
+  Code2,
+  Globe,
+  Puzzle,
+} from "lucide-react";
+import { GithubIcon } from "@/components/shared/icons";
+import { MobileProjectCard } from "./MobileProjectCard";
+import { PROJECTS } from "@/lib/data";
+import type { Project, ProjectType } from "@/types/portfolio";
 
 // ─── Type badge ──────────────────────────────────────────────────
 const TYPE_LABEL: Record<ProjectType, string> = {
-  web: 'Web App',
-  mobile: 'Mobile App',
-  tool: 'Developer Tool',
-  extension: 'VS Code Extension',
-  language: 'Language',
+  web: "Web App",
+  mobile: "Mobile App",
+  tool: "Developer Tool",
+  extension: "VS Code Extension",
+  language: "Language",
 };
 
 const TYPE_ICON: Record<ProjectType, React.ReactNode> = {
@@ -41,18 +49,41 @@ function WebProjectCard({ project, idx }: { project: Project; idx: number }) {
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ y: -2 }}
-      viewport={{ once: true, margin: '-40px' }}
+      viewport={{ once: true, margin: "-40px" }}
       transition={{ delay: idx * 0.06, duration: 0.35 }}
       className="flex flex-col rounded-lg transition-colors duration-150 bg-(--bg-surface) border border hover:border-(--accent-border)"
     >
       <div className="p-4 flex flex-col gap-2">
         <div className="flex items-start justify-between gap-2">
-          <Link
-            href={`/projects/${project.id}`}
-            className="text-sm font-medium transition-colors font-ui text-(--text-primary) hover:text-(--accent)"
+          <motion.div
+            initial="rest"
+            whileHover="hover"
+            className="relative w-fit"
           >
-            {project.title}
-          </Link>
+            <Link
+              href={`/projects/${project.id}`}
+              className="relative text-sm font-medium font-ui text-(--text-primary) hover:font-bold transition-all duration-400"
+            >
+              {project.title}
+              <motion.span
+                variants={{
+                  rest: {
+                    scaleX: 0,
+                    opacity: 0,
+                  },
+                  hover: {
+                    scaleX: 1,
+                    opacity: 1,
+                  },
+                }}
+                transition={{
+                  duration: 0.25,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="absolute left-0 -bottom-1 h-[1px] w-full origin-left bg-blue-500"
+              />
+            </Link>
+          </motion.div>
           <div className="flex items-center gap-2 shrink-0">
             <span className="font-mono [font-size:var(--text-xs)] text-muted-foreground tracking-[0.04em]">
               {project.year}
@@ -123,7 +154,7 @@ export function FeaturedProjects() {
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{ y: -2 }}
-            viewport={{ once: true, margin: '-40px' }}
+            viewport={{ once: true, margin: "-40px" }}
             transition={{ delay: idx * 0.08, duration: 0.4 }}
             className="group relative rounded-lg transition-colors duration-150 bg-(--bg-surface) border border hover:border-(--accent-border)"
           >
@@ -131,12 +162,35 @@ export function FeaturedProjects() {
               {/* Title row */}
               <div className="flex items-start justify-between gap-3 mb-2">
                 <div className="flex items-center gap-2 min-w-0">
-                  <Link
-                    href={`/projects/${project.id}`}
-                    className="text-sm font-medium transition-colors truncate font-ui text-(--text-primary) hover:text-(--accent)"
+                  <motion.div
+                    initial="rest"
+                    whileHover="hover"
+                    className="relative w-fit"
                   >
-                    {project.title}
-                  </Link>
+                    <Link
+                      href={`/projects/${project.id}`}
+                      className="relative text-sm font-medium font-ui text-(--text-primary) hover:font-bold transition-all duration-400"
+                    >
+                      {project.title}
+                      <motion.span
+                        variants={{
+                          rest: {
+                            scaleX: 0,
+                            opacity: 0,
+                          },
+                          hover: {
+                            scaleX: 1,
+                            opacity: 1,
+                          },
+                        }}
+                        transition={{
+                          duration: 0.25,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                        className="absolute left-0 -bottom-1 h-[1px] w-full origin-left bg-blue-500"
+                      />
+                    </Link>
+                  </motion.div>
                   <span className="font-mono [font-size:var(--text-xs)] text-muted-foreground tracking-[0.04em] shrink-0">
                     {project.year}
                   </span>
@@ -215,11 +269,11 @@ export function OtherProjects() {
 
       <div className="grid sm:grid-cols-2 grid-cols-1 w-full gap-3">
         {other.map((project, idx) =>
-          project.type === 'mobile' ? (
+          project.type === "mobile" ? (
             <MobileProjectCard key={project.id} project={project} idx={idx} />
           ) : (
             <WebProjectCard key={project.id} project={project} idx={idx} />
-          )
+          ),
         )}
       </div>
 

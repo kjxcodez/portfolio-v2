@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { motion } from 'motion/react';
-import { Download, Smartphone } from 'lucide-react';
-import { GithubIcon } from '@/components/shared/icons';
-import type { Project } from '@/types/portfolio';
+import Link from "next/link";
+import { motion } from "motion/react";
+import { Download, Smartphone } from "lucide-react";
+import { GithubIcon } from "@/components/shared/icons";
+import type { Project } from "@/types/portfolio";
 
 interface MobileProjectCardProps {
   project: Project;
@@ -17,19 +17,42 @@ export function MobileProjectCard({ project, idx }: MobileProjectCardProps) {
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ y: -2 }}
-      viewport={{ once: true, margin: '-40px' }}
+      viewport={{ once: true, margin: "-40px" }}
       transition={{ delay: idx * 0.06, duration: 0.35 }}
       className="flex flex-col rounded-lg transition-colors duration-150 bg-(--bg-surface) border hover:border-(--accent-border)"
     >
       <div className="p-4 flex flex-col gap-2">
         {/* Title row */}
         <div className="flex items-start justify-between gap-2">
-          <Link
-            href={`/projects/${project.id}`}
-            className="text-sm font-medium transition-colors font-ui text-(--text-primary)"
+          <motion.div
+            initial="rest"
+            whileHover="hover"
+            className="relative w-fit"
           >
-            {project.title}
-          </Link>
+            <Link
+              href={`/projects/${project.id}`}
+              className="relative text-sm font-medium font-ui text-(--text-primary) hover:font-bold transition-all duration-400"
+            >
+              {project.title}
+              <motion.span
+                variants={{
+                  rest: {
+                    scaleX: 0,
+                    opacity: 0,
+                  },
+                  hover: {
+                    scaleX: 1,
+                    opacity: 1,
+                  },
+                }}
+                transition={{
+                  duration: 0.25,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="absolute left-0 -bottom-1 h-[1px] w-full origin-left bg-blue-500"
+              />
+            </Link>
+          </motion.div>
           <span className="font-mono [font-size:var(--text-xs)] text-muted-foreground tracking-[0.04em] shrink-0">
             {project.year}
           </span>
