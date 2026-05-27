@@ -58,12 +58,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     <>
       <ScrollProgress />
       <BlogReader />
-      <div className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen bg-[var(--bg-base)]">
+      <div className="mx-auto w-full max-w-175 px-4 pt-24 pb-20 min-h-screen ">
         {/* Back */}
         <Link
           href="/blog"
-          className="inline-flex items-center gap-1.5 text-xs transition-colors mb-8 text-muted-foreground hover:text-[var(--text-secondary)]"
-          style={{ fontFamily: 'var(--font-ui)' }}
+          className="inline-flex items-center gap-1.5 text-xs transition-colors mb-8 text-muted-foreground hover:text-muted-foreground/80 font-ui"
         >
           <ArrowLeft size={12} /> All posts
         </Link>
@@ -74,33 +73,24 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             {post.tags.map(tag => (
               <span
                 key={tag}
-                className="rounded border border-[var(--tag-border)] bg-[var(--tag-bg)] text-[var(--tag-text)]"
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.625rem',
-                  letterSpacing: '0.04em',
-                  padding: '2px 8px',
-                }}
+                className="rounded border bg-(--tag-bg) text-(--tag-text) font-mono text-[0.625rem] tracking-tight px-2 py-1"
               >
                 {tag}
               </span>
             ))}
           </div>
           <h1
-            className="text-2xl font-bold leading-snug mb-3 text-(--text-primary)"
-            style={{ fontFamily: 'var(--font-ui)' }}
+            className="text-2xl font-bold leading-snug mb-3 text-(--text-primary) font-ui"
           >
             {post.title}
           </h1>
           <p
-            className="text-sm mb-4 text-[var(--text-secondary)]"
-            style={{ fontFamily: 'var(--font-ui)' }}
+            className="text-sm mb-4 text-muted-foreground font-ui"
           >
             {post.description}
           </p>
           <div
-            className="flex items-center gap-2 text-xs text-muted-foreground"
-            style={{ fontFamily: 'var(--font-mono)' }}
+            className="flex items-center gap-2 text-xs text-muted-foreground font-mono"
           >
             <span>{post.date}</span>
             <span>·</span>
@@ -113,7 +103,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {/* Cover image */}
         {post.cover && (
-          <div className="w-full aspect-video rounded-xl overflow-hidden mb-10 border border">
+          <div className="w-full aspect-video rounded-xl overflow-hidden mb-10 border">
             <Image
               src={post.cover}
               alt={post.title}
@@ -134,14 +124,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           {prev ? (
             <Link href={`/blog/${prev.slug}`} className="group flex flex-col gap-1 max-w-[45%]">
               <span
-                className="text-[11px] text-muted-foreground"
-                style={{ fontFamily: 'var(--font-mono)' }}
+                className="text-[11px] text-muted-foreground font-mono"
               >
                 ← Previous
               </span>
               <span
-                className="text-sm font-medium group-hover:underline line-clamp-2 text-(--text-primary)"
-                style={{ fontFamily: 'var(--font-ui)' }}
+                className="text-sm font-medium group-hover:underline line-clamp-2 text-(--text-primary) font-ui"
               >
                 {prev.title}
               </span>
@@ -153,14 +141,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               className="group flex flex-col gap-1 items-end text-right max-w-[45%]"
             >
               <span
-                className="text-[11px] text-muted-foreground"
-                style={{ fontFamily: 'var(--font-mono)' }}
+                className="text-[11px] text-muted-foreground font-mono"
               >
                 Next →
               </span>
               <span
-                className="text-sm font-medium group-hover:underline line-clamp-2 text-(--text-primary)"
-                style={{ fontFamily: 'var(--font-ui)' }}
+                className="text-sm font-medium group-hover:underline line-clamp-2 text-(--text-primary) font-ui"
               >
                 {next.title}
               </span>

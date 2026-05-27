@@ -68,10 +68,13 @@ export const PROJECTS: Project[] = [
     longDescription:
       'A modern headless CMS built for speed and flexibility. Features a drag-and-drop visual page builder, real-time content preview, role-based access, and an API-first architecture. Built with Next.js, PostgreSQL, and Prisma.',
     tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Tailwind CSS', 'shadcn/ui'],
+    url: 'https://getflowcms.com',
+    github: "https://github.com/kjxcodez/flowcms",
     type: 'web',
     featured: true,
     year: 2025,
     status: 'Live',
+    screenshots: ['/flowcms.png'],
     keyFeatures: [
       'Drag-and-drop visual page builder',
       'Real-time content preview',

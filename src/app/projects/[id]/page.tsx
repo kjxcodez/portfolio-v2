@@ -1,5 +1,5 @@
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
+import { notFound } from "next/navigation";
+import Link from "next/link";
 import {
   ArrowLeft,
   ArrowRight,
@@ -11,19 +11,19 @@ import {
   Code2,
   Globe,
   CheckCircle2,
-} from 'lucide-react'
-import { GithubIcon } from '@/components/shared/icons'
-import { ProjectGallery } from '@/components/shared/ProjectGallery'
-import { PROJECTS } from '@/lib/data'
-import type { ProjectType } from '@/types/portfolio'
+} from "lucide-react";
+import { GithubIcon } from "@/components/shared/icons";
+import { ProjectGallery } from "@/components/shared/ProjectGallery";
+import { PROJECTS } from "@/lib/data";
+import type { ProjectType } from "@/types/portfolio";
 
 const TYPE_LABEL: Record<ProjectType, string> = {
-  web: 'Web App',
-  mobile: 'Mobile App',
-  tool: 'Developer Tool',
-  extension: 'VS Code Extension',
-  language: 'Language',
-}
+  web: "Web App",
+  mobile: "Mobile App",
+  tool: "Developer Tool",
+  extension: "VS Code Extension",
+  language: "Language",
+};
 
 const TYPE_ICON: Record<ProjectType, React.ReactNode> = {
   web: <Globe size={10} />,
@@ -31,16 +31,20 @@ const TYPE_ICON: Record<ProjectType, React.ReactNode> = {
   tool: <Wrench size={10} />,
   extension: <Puzzle size={10} />,
   language: <Code2 size={10} />,
-}
+};
 
 export async function generateStaticParams() {
-  return PROJECTS.map(p => ({ id: p.id }))
+  return PROJECTS.map((p) => ({ id: p.id }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
-  const project = PROJECTS.find(p => p.id === id)
-  if (!project) return {}
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const project = PROJECTS.find((p) => p.id === id);
+  if (!project) return {};
   return {
     title: `${project.title} — Kapil Kumar Jangid`,
     description: project.description,
@@ -48,38 +52,45 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
       title: `${project.title} — Kapil Kumar Jangid`,
       description: project.description,
       url: `https://kapiljangid.pro/projects/${project.id}`,
-      type: 'website',
-      images: [{ url: `/og-image.png`, width: 1200, height: 630, alt: project.title }],
+      type: "website",
+      images: [
+        { url: `/og-image.png`, width: 1200, height: 630, alt: project.title },
+      ],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: `${project.title} — Kapil Kumar Jangid`,
       description: project.description,
       images: [`/og-image.png`],
     },
-  }
+  };
 }
 
-export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
-  const project = PROJECTS.find(p => p.id === id)
-  if (!project) notFound()
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const project = PROJECTS.find((p) => p.id === id);
+  if (!project) notFound();
 
-  const related = PROJECTS.filter(p => p.id !== project.id).slice(0, 3)
-  const screenshots = project.screenshots ?? []
+  const related = PROJECTS.filter((p) => p.id !== project.id).slice(0, 3);
+  const screenshots = project.screenshots ?? [];
 
   const primaryActionLabel =
-    project.type === 'extension' ? 'Marketplace'
-    : project.type === 'language' ? 'Docs'
-    : 'Live Demo'
+    project.type === "extension"
+      ? "Marketplace"
+      : project.type === "language"
+        ? "Docs"
+        : "Live Demo";
 
   return (
-    <div className="mx-auto w-full max-w-[700px] px-4 pt-24 pb-20 min-h-screen ">
+    <div className="mx-auto w-full max-w-175 px-4 pt-24 pb-20 min-h-screen ">
       {/* Back */}
       <Link
         href="/#projects"
-        className="inline-flex items-center gap-1.5 text-xs transition-colors mb-10 text-muted-foreground hover:text-[var(--text-secondary)]"
-        style={{ fontFamily: 'var(--font-ui)' }}
+        className="inline-flex items-center gap-1.5 text-xs transition-colors mb-10 text-muted-foreground hover:text-muted-foreground/80 font-ui"
       >
         <ArrowLeft size={12} /> Back to portfolio
       </Link>
@@ -88,50 +99,25 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
       <div className="mb-8">
         {/* Meta row: type badge, year, status */}
         <div className="flex flex-wrap items-center gap-2 mb-3">
-          <span
-            className="inline-flex items-center gap-1 rounded border border bg-(--bg-elevated)] text-muted-foreground"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.625rem',
-              letterSpacing: '0.04em',
-              padding: '2px 8px',
-            }}
-          >
+          <span className="inline-flex items-center gap-1 rounded border bg-(--bg-elevated)] text-muted-foreground font-mono text-[0.625rem] tracking-tight px-2 py-1">
             {TYPE_ICON[project.type]}
             {TYPE_LABEL[project.type]}
           </span>
 
-          <span
-            className="text-muted-foreground"
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'var(--text-xs)',
-              letterSpacing: '0.04em',
-            }}
-          >
+          <span className="text-muted-foreground font-mono text-[0.625rem] tracking-tight">
             {project.year}
           </span>
 
           {project.status && (
-            <span
-              className="rounded border border-[var(--success)] bg-[var(--success-subtle)] text-[var(--success)]"
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.625rem',
-                letterSpacing: '0.04em',
-                padding: '2px 8px',
-              }}
-            >
+            <span className="rounded border border-(--success) bg-[ (--success-subtle)] text-(--success) font-mono text-[0.625rem] tracking-tight px-2 py-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-(--success) inline-block mr-1 animate-pulse" />
               {project.status}
             </span>
           )}
         </div>
 
         {/* Title */}
-        <h1
-          className="text-2xl font-bold mb-4 leading-tight text-(--text-primary)"
-          style={{ fontFamily: 'var(--font-ui)' }}
-        >
+        <h1 className="text-2xl font-bold mb-4 leading-tight text-(--text-primary) font-ui">
           {project.title}
         </h1>
 
@@ -142,8 +128,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors bg-[var(--accent)] hover:bg-[var(--accent-hover)] border border-[var(--accent)] hover:border-[var(--accent-hover)] text-[var(--text-inverse)]"
-              style={{ fontFamily: 'var(--font-ui)' }}
+              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors bg-foreground hover:text-white hover:bg-(--accent-hover) border border-accent hover:border-(--accent-hover) text-(--text-inverse) font-ui"
             >
               <ExternalLink size={12} />
               {primaryActionLabel}
@@ -155,8 +140,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors border border hover:border-[var(--border-strong)] text-[var(--text-secondary)] hover:text-(--text-primary) hover:bg-(--bg-elevated)]"
-              style={{ fontFamily: 'var(--font-ui)' }}
+              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors border hover:border-(--border-strong) text-muted-foreground hover:text-(--text-primary) hover:bg-(--bg-elevated)] font-ui"
             >
               <GithubIcon size={12} />
               Source
@@ -167,8 +151,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
             <a
               href={project.apkUrl}
               download
-              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors border border hover:border-[var(--border-strong)] text-[var(--text-secondary)] hover:text-(--text-primary) hover:bg-(--bg-elevated)]"
-              style={{ fontFamily: 'var(--font-ui)' }}
+              className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg transition-colors border hover:border-(--border-strong) text-(--text-secondary) hover:text-(--text-primary) hover:bg-(--bg-elevated)] font-ui"
             >
               <Download size={12} />
               APK
@@ -179,10 +162,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
 
       {/* ── Overview ───────────────────────────────────────────────── */}
       <Section label="Overview">
-        <p
-          className="text-sm leading-relaxed text-[var(--text-secondary)]"
-          style={{ fontFamily: 'var(--font-ui)' }}
-        >
+        <p className="text-sm leading-relaxed text-muted-foreground font-ui">
           {project.longDescription}
         </p>
       </Section>
@@ -195,12 +175,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
               <li key={i} className="flex items-start gap-2">
                 <CheckCircle2
                   size={13}
-                  className="mt-0.5 shrink-0 text-[var(--success)]"
+                  className="mt-0.5 shrink-0 text-(--success)"
                 />
-                <span
-                  className="text-sm text-[var(--text-secondary)]"
-                  style={{ fontFamily: 'var(--font-ui)' }}
-                >
+                <span className="text-sm text-(--text-secondary) font-ui">
                   {feature}
                 </span>
               </li>
@@ -212,16 +189,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
       {/* ── Technology Stack ───────────────────────────────────────── */}
       <Section label="Technology Stack">
         <div className="flex flex-wrap gap-1.5">
-          {project.tags.map(tag => (
+          {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded border border-[var(--tag-border)] bg-[var(--tag-bg)] text-[var(--tag-text)]"
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'var(--text-xs)',
-                letterSpacing: '0.04em',
-                padding: '3px 8px',
-              }}
+              className="rounded border shadow-sm bg-(--tag-bg) text-(--tag-text) font-mono text-[0.625rem] tracking-tight px-2 py-1"
             >
               {tag}
             </span>
@@ -241,20 +212,17 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         <Section label="Technical Decisions">
           <div className="flex flex-col gap-4">
             {project.technicalDecisions.map((decision, i) => (
-              <div
-                key={i}
-                className="rounded-lg p-4 border border bg-(--bg-surface)"
-              >
+              <div key={i} className="rounded-lg p-4 border bg-(--bg-surface)">
                 <p
                   className="text-xs font-medium mb-2 text-(--text-primary)"
-                  style={{ fontFamily: 'var(--font-mono)', letterSpacing: '0.04em' }}
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    letterSpacing: "0.04em",
+                  }}
                 >
                   {decision.title}
                 </p>
-                <p
-                  className="text-sm leading-relaxed text-[var(--text-secondary)]"
-                  style={{ fontFamily: 'var(--font-ui)' }}
-                >
+                <p className="text-sm leading-relaxed text-(--text-secondary) font-ui">
                   {decision.body}
                 </p>
               </div>
@@ -269,31 +237,25 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
           <p
             className="uppercase mb-4 text-muted-foreground"
             style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'var(--text-xs)',
-              letterSpacing: '0.1em',
+              fontFamily: "var(--font-mono)",
+              fontSize: "var(--text-xs)",
+              letterSpacing: "0.1em",
             }}
           >
             Related Projects
           </p>
           <div className="flex flex-col gap-2">
-            {related.map(p => (
+            {related.map((p) => (
               <Link
                 key={p.id}
                 href={`/projects/${p.id}`}
-                className="group flex items-center justify-between p-3 rounded-xl transition-colors border border hover:bg-(--bg-surface) hover:border-[var(--border-strong)]"
+                className="group flex items-center justify-between p-3 rounded-xl transition-colors border hover:bg-(--bg-surface) hover:border-(--border-strong)"
               >
                 <div>
-                  <p
-                    className="text-sm font-medium text-(--text-primary)"
-                    style={{ fontFamily: 'var(--font-ui)' }}
-                  >
+                  <p className="text-sm font-medium text-(--text-primary) font-ui">
                     {p.title}
                   </p>
-                  <p
-                    className="text-xs mt-0.5 text-muted-foreground"
-                    style={{ fontFamily: 'var(--font-ui)' }}
-                  >
+                  <p className="text-xs mt-0.5 text-muted-foreground font-ui">
                     {p.description}
                   </p>
                 </div>
@@ -307,23 +269,29 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         </div>
       )}
     </div>
-  )
+  );
 }
 
-function Section({ label, children }: { label: string; children: React.ReactNode }) {
+function Section({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="mb-8">
       <p
         className="uppercase mb-3 text-muted-foreground"
         style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 'var(--text-xs)',
-          letterSpacing: '0.1em',
+          fontFamily: "var(--font-mono)",
+          fontSize: "var(--text-xs)",
+          letterSpacing: "0.1em",
         }}
       >
         {label}
       </p>
       {children}
     </div>
-  )
+  );
 }
