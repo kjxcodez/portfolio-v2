@@ -75,12 +75,44 @@ export const PROJECTS: Project[] = [
     year: 2025,
     status: 'Live',
     screenshots: ['/flowcms.png', '/flowcms-demo.png', '/flowcms-dashboard.png', '/flowcms-api-keys.png'],
+    timeline: 'Early 2025',
+    highlights: [
+      'Drag-and-drop visual page builder with a portable JSON block schema',
+      'Role-based access control with separate author, editor, and admin permissions',
+      'API-first content delivery with REST endpoints for headless consumption',
+      'Content versioning with draft and publish states',
+    ],
     keyFeatures: [
       'Drag-and-drop visual page builder',
       'Real-time content preview',
       'Role-based access control',
       'API-first headless architecture',
       'Content versioning and drafts',
+    ],
+    architecture: [
+      'Next.js App Router - frontend and API routes in a single deployment',
+      'Prisma ORM with PostgreSQL for schema-managed content and user storage',
+      'shadcn/ui component system for consistent design across builder and dashboard',
+      'Role-based middleware applied at the API route level',
+    ],
+    technicalChallenges: [
+      {
+        problem: 'Serializing drag-and-drop block state to a portable, database-storable schema',
+        solution: 'Designed a JSON block schema using ordered arrays of typed components, enabling predictable serialization, hydration, and block reordering without data loss',
+      },
+    ],
+    learnings: [
+      'Portable block schemas require upfront constraint decisions — self-referential or nested blocks add significant complexity',
+      'Role-based access is cleaner when permissions are modeled as data rather than hardcoded conditionals',
+    ],
+    futurePlans: [
+      'Webhook support for post-publish events to trigger downstream integrations',
+      'Plugin system for registering custom block types',
+      'GraphQL endpoint alongside the existing REST API',
+    ],
+    impact: [
+      'Working CMS with live demo at getflowcms.com',
+      'Supports drag-and-drop editing, role management, and draft workflows in a single deployable package',
     ],
   },
   {
@@ -97,6 +129,13 @@ export const PROJECTS: Project[] = [
     year: 2024,
     status: 'Live',
     screenshots: ['/rune-dark.png', '/rune-light.png', '/rune-docs.png'],
+    timeline: 'Late 2024',
+    highlights: [
+      'Complete interpreter built from scratch — lexer, parser, AST, and tree-walk evaluator',
+      'Recursive descent parser without any parser generator or combinator library',
+      'Operator precedence handled using Pratt parsing inside expression functions',
+      'Environment-based scope chain for nested functions and variable resolution',
+    ],
     keyFeatures: [
       'Custom lexer and tokenizer built from scratch',
       'Recursive descent parser',
@@ -104,11 +143,42 @@ export const PROJECTS: Project[] = [
       'Variables, control flow, and functions',
       'Companion VS Code extension for syntax highlighting',
     ],
+    architecture: [
+      'Lexer — tokenizes source text into a flat token stream with type annotations',
+      'Parser — recursive descent with Pratt expressions produces a typed AST',
+      'Evaluator — tree-walk interpreter traverses the AST and resolves values at runtime',
+      'Environment — linked scope chain for variable lookup across function boundaries',
+    ],
     technicalDecisions: [
       {
         title: 'Why Python',
         body: 'Python allowed rapid prototyping of the interpreter without C-level memory management. The standard library covers tokenization utilities, and the language\'s dynamic typing made AST node representation straightforward.',
       },
+    ],
+    technicalChallenges: [
+      {
+        problem: 'Handling operator precedence without introducing grammar ambiguity',
+        solution: 'Encoded precedence levels as integer constants and used Pratt parsing — each expression function consumes tokens up to its own precedence level before returning',
+      },
+      {
+        problem: 'Maintaining correct variable scoping across nested function calls',
+        solution: 'Implemented a linked environment chain where each function call creates a new scope object with a pointer to its enclosing scope for lexical lookup',
+      },
+    ],
+    learnings: [
+      'Pratt parsers handle operator precedence as a data problem — precedence tables are cleaner than grammar rule layering',
+      'A tree-walk interpreter sacrifices execution speed for debuggability and simplicity of implementation',
+      'Writing a language from scratch forces precise understanding of scope, evaluation order, and call semantics',
+    ],
+    futurePlans: [
+      'Bytecode compilation pass for improved execution performance',
+      'Standard library functions for string and list manipulation',
+      'REPL with persistent history',
+    ],
+    impact: [
+      'Fully working interpreter supporting variables, control flow, functions, and closures',
+      'Live documentation site at rune.kapiljangid.pro',
+      'Companion VS Code extension published to the Marketplace',
     ],
   },
   {
@@ -125,12 +195,46 @@ export const PROJECTS: Project[] = [
     year: 2024,
     status: 'Live',
     screenshots: ['/ai-commit.png'],
+    timeline: '2024',
+    highlights: [
+      'VS Code extension that writes AI-generated commit messages directly into the Source Control input box',
+      'Gemini API integration for staged diff summarization',
+      'simple-git for accurate diff extraction from the active repository',
+    ],
     keyFeatures: [
       'One-click commit message generation from staged diffs',
       'Gemini API integration for AI-powered summaries',
       'Writes directly into VS Code Source Control input box',
       'simple-git for accurate diff extraction',
       'Published on the VS Code Marketplace',
+    ],
+    architecture: [
+      'VS Code Extension API — activation on SCM commands, Source Control input injection',
+      'simple-git — staged diff extraction from the workspace root',
+      'Gemini API — diff summarization and commit message generation',
+    ],
+    technicalChallenges: [
+      {
+        problem: 'Writing to the VS Code Source Control input box without clipboard operations',
+        solution: 'Used the VS Code SCM API (vscode.scm.inputBox) to set the message value directly, avoiding clipboard dependency',
+      },
+      {
+        problem: 'Keeping diff content within model input token limits',
+        solution: 'Truncated diffs above a configurable line threshold and summarized file names in the prompt context',
+      },
+    ],
+    learnings: [
+      'VS Code Extension API provides direct access to most IDE surfaces — understanding the activation lifecycle is the main learning curve',
+      'Few-shot prompting with format examples improves commit message consistency from the model',
+    ],
+    futurePlans: [
+      'Conventional commit format support',
+      'Custom prompt templates configurable per project',
+      'Support for additional AI providers',
+    ],
+    impact: [
+      'Published and live on the VS Code Marketplace',
+      'Eliminates manual commit message writing for staged changes',
     ],
   },
   {
@@ -147,11 +251,48 @@ export const PROJECTS: Project[] = [
     year: 2024,
     status: 'Live',
     screenshots: ['/perceptui.png', '/perceptui-cli.png', '/perceptui-doc-1.png', '/perceptui-avatar-example.png'],
+    timeline: '2024',
+    highlights: [
+      'React component library with full TypeScript support, bundled with Vite',
+      'Separate CLI tool for scaffolding new projects using Percept components',
+      'Both library and CLI published to npm',
+      'Nextra-powered documentation site with MDX component examples',
+    ],
     keyFeatures: [
       'React component library with full TypeScript support',
       'CLI for scaffolding projects with Percept components',
       'Published on npm',
       'Nextra-powered documentation site',
+    ],
+    architecture: [
+      'Vite build pipeline producing ESM and CJS bundles for the component library',
+      'Tailwind CSS utility classes with a namespace prefix to avoid consumer conflicts',
+      'CLI built as a standalone Node.js package with interactive prompts',
+      'Nextra documentation site with MDX component examples',
+    ],
+    technicalChallenges: [
+      {
+        problem: 'Bundling Tailwind CSS without purging consumer project classes',
+        solution: 'Applied a package-level Tailwind prefix to namespace all component styles, preventing selector conflicts with consumer Tailwind configurations',
+      },
+      {
+        problem: 'Avoiding duplicate React instances when the library is installed alongside a React project',
+        solution: 'Marked React and ReactDOM as peerDependencies in package.json and configured Vite to externalize them from the bundle output',
+      },
+    ],
+    learnings: [
+      'React library bundling requires careful peerDependency configuration to avoid duplicate module instances',
+      'Tailwind namespacing prevents style collisions but requires consumers to add the prefix to their content scan paths',
+      'Documentation quality directly affects whether a component library gets adopted',
+    ],
+    futurePlans: [
+      'Rebuild with Tailwind v4 and React 19 server component support (Percept UI v2)',
+      'Storybook integration for interactive component development',
+      'Expanded component coverage including data tables and advanced form controls',
+    ],
+    impact: [
+      'Library and CLI published on npm',
+      'Documentation site live at perceptui-v1.kapiljangid.pro',
     ],
   },
   {
@@ -168,10 +309,33 @@ export const PROJECTS: Project[] = [
     year: 2024,
     status: 'Live',
     screenshots: ['/rune-extension.png'],
+    timeline: '2024',
+    highlights: [
+      'Authored TextMate grammar for Rune Lang syntax tokenization',
+      'Published as the official VS Code extension for Rune Lang',
+      'Code snippets for common Rune language constructs',
+    ],
     keyFeatures: [
       'Syntax highlighting via TextMate grammars',
       'Code snippets for common Rune patterns',
       'Published to the VS Code Marketplace',
+    ],
+    architecture: [
+      'TextMate grammar (tmLanguage JSON) defining token patterns via regex scopes',
+      'VS Code snippet definitions for common Rune patterns',
+      'Extension manifest wiring grammar and snippets to the Rune file type',
+    ],
+    learnings: [
+      'TextMate grammars use regex-based scope matching — scope names must align with theme color rules for correct highlighting',
+      'VS Code extension activation events should be scoped narrowly to avoid slowing editor startup',
+    ],
+    futurePlans: [
+      'Language server implementation for hover documentation and inline error reporting',
+      'In-editor run output display via output panels',
+    ],
+    impact: [
+      'Published and functional on the VS Code Marketplace',
+      'Provides syntax highlighting and snippets for all Rune Lang files in VS Code',
     ],
   },
   {
@@ -188,11 +352,42 @@ export const PROJECTS: Project[] = [
     year: 2024,
     status: 'Live',
     screenshots: ['/brainly.png', '/brainly-light.png'],
+    timeline: '2024',
+    highlights: [
+      'Full-stack content management app — React frontend with an Express + MongoDB backend',
+      'Tag-based content organization with full-text search',
+      'Public collection sharing via generated share links',
+    ],
     keyFeatures: [
       'Save and organise links, notes, and documents',
       'Tag-based categorisation and full-text search',
       'Share collections with a public link',
       'Full-stack: React + Vite frontend, Express + MongoDB backend',
+    ],
+    architecture: [
+      'React + Vite frontend for fast HMR during development',
+      'Express.js REST API with Zod schema validation on all request bodies',
+      'MongoDB for flexible document storage supporting mixed content types',
+      'shadcn/ui component system for consistent UI across the app',
+    ],
+    technicalChallenges: [
+      {
+        problem: 'Validating mixed content payloads (links, notes, documents) through a shared API endpoint',
+        solution: 'Used Zod discriminated unions keyed on content type, validating each variant against its own schema while sharing one route handler',
+      },
+    ],
+    learnings: [
+      'MongoDB document modeling suits user-owned content with variable structure — schema flexibility is useful when content types differ',
+      'Zod discriminated unions cleanly handle polymorphic API payloads without branching validation logic',
+    ],
+    futurePlans: [
+      'Browser extension for one-click link saving from any page',
+      'AI-powered content summarization on save',
+      'Collaborative shared spaces for team collections',
+    ],
+    impact: [
+      'Working full-stack app with live demo at brainlyv1.vercel.app',
+      'Supports tagging, search, and public collection sharing',
     ],
   },
   {
@@ -209,10 +404,33 @@ export const PROJECTS: Project[] = [
     year: 2024,
     status: 'Live',
     screenshots: ['/url-shortner.png'],
+    timeline: '2024',
+    highlights: [
+      'Next.js full-stack app with server actions, Postgres, and Prisma',
+      'Custom slug support for vanity short URLs',
+      'Per-link click tracking stored in Postgres',
+    ],
     keyFeatures: [
       'Instant URL shortening with custom slugs',
       'Click tracking per link',
       'Next.js + Postgres + Prisma stack',
+    ],
+    architecture: [
+      'Next.js App Router with server actions handling URL creation and redirect logic',
+      'Prisma ORM with PostgreSQL for URL records and click event storage',
+      'shadcn/ui for the UI layer',
+    ],
+    learnings: [
+      'URL redirect handling in Next.js requires correct middleware ordering to avoid conflicts with static file serving',
+      'Custom slug uniqueness is best enforced at the database constraint level rather than in application code',
+    ],
+    futurePlans: [
+      'Link expiration and password protection options',
+      'Analytics dashboard with click trends over time',
+    ],
+    impact: [
+      'Working URL shortener with custom slug and click tracking',
+      'Live at shorturlmaker.vercel.app',
     ],
   },
   {
@@ -236,6 +454,12 @@ export const PROJECTS: Project[] = [
     year: 2025,
     status: 'Live',
     screenshots: ['/greentechmodelers.png'],
+    timeline: '2025',
+    highlights: [
+      'Multi-section corporate website for an agricultural technology company',
+      'Responsive layout optimized for presentation of large-scale master plans',
+      'Covers hydroponic systems, greenhouse technologies, and rural infrastructure',
+    ],
     keyFeatures: [
       'Interactive presentation of agricultural master plans',
       'Responsive multi-section corporate website',
@@ -243,6 +467,22 @@ export const PROJECTS: Project[] = [
       'Integrated project information and partnerships sections',
       'Contact and lead generation functionality',
       'Optimized user experience across devices'
+    ],
+    architecture: [
+      'Next.js App Router with static generation for fast page loads on content-heavy pages',
+      'Tailwind CSS for responsive layout across screen sizes',
+    ],
+    learnings: [
+      'Static generation is preferable for content-heavy pages without dynamic data needs',
+      'Corporate information sites benefit from minimal navigation depth and clear section hierarchy',
+    ],
+    futurePlans: [
+      'CMS integration to allow non-technical content updates',
+      'Multilingual support for broader reach',
+    ],
+    impact: [
+      'Live at greentechmodelers.com',
+      'Presents full project portfolio, technology descriptions, and contact channels',
     ],
   },
   {
@@ -265,6 +505,12 @@ export const PROJECTS: Project[] = [
     featured: false,
     year: 2025,
     status: 'Live',
+    timeline: 'Early 2025',
+    highlights: [
+      'Drag-and-drop event scheduling using dnd-kit with pointer and touch support',
+      'Mobile swipe navigation using use-gesture with conflict-free gesture handling',
+      'Smooth layout animations and transitions via Framer Motion',
+    ],
     keyFeatures: [
       'Drag-and-drop event movement across days',
       'Mobile swipe navigation and desktop week navigation',
@@ -273,11 +519,35 @@ export const PROJECTS: Project[] = [
       'Smooth animations using Framer Motion',
       'Gesture-based interactions using use-gesture'
     ],
+    architecture: [
+      'Next.js frontend with client-side state managing calendar events',
+      'dnd-kit for accessible drag-and-drop with configurable sensors',
+      'use-gesture/react for mobile swipe detection with configurable thresholds',
+      'Framer Motion for layout and transition animations tied to calendar state',
+    ],
     technicalChallenges: [
       {
-        problem: 'Drag and swipe interactions conflicted with each other',
-        solution: 'Implemented gesture thresholds and drag boundaries'
-      }
+        problem: 'Drag-and-drop and swipe gestures share the same pointer events, causing accidental triggers',
+        solution: 'Implemented gesture-specific thresholds and directional constraints — horizontal swipes were filtered from dnd-kit sensors while vertical drag was excluded from swipe detection',
+      },
+      {
+        problem: 'Layout animations glitching during drag reorder due to unstable React keys',
+        solution: 'Keyed calendar slot components on stable date strings rather than array indices, allowing Framer Motion to correctly track and animate each slot across re-renders',
+      },
+    ],
+    learnings: [
+      'Gesture conflict resolution requires explicit directional constraints rather than relying on library defaults',
+      'Framer Motion layout animations depend on key stability — index-based keys cause identity confusion during reorders',
+      'Calendar date math at week and month boundaries is error-prone and benefits from centralized utility functions',
+    ],
+    futurePlans: [
+      'Recurring event support with RRULE parsing',
+      'iCal export for calendar interoperability',
+      'Backend persistence with user accounts for saved events',
+    ],
+    impact: [
+      'Working calendar with drag-and-drop and gesture navigation on desktop and mobile',
+      'Live at calendly.kapiljangid.pro',
     ],
   },
   {
@@ -300,6 +570,13 @@ export const PROJECTS: Project[] = [
     ],
     github: "https://github.com/kjxcodez/aura-wallpaper-apk",
     apkUrl: '/apk/aura-preview.apk',
+    timeline: '2025',
+    highlights: [
+      'Prompt-to-wallpaper generation using Pollinations.ai with no user authentication required',
+      'Daily Drop feature serving a fresh AI wallpaper each morning via on-device scheduling',
+      'Masonry gallery with save-to-camera-roll and favorites collection',
+      'Style presets for guided prompt generation — neon, minimal, nature, cyberpunk',
+    ],
     keyFeatures: [
       'Prompt-to-wallpaper generation via Pollinations.ai',
       'Daily Drop — fresh AI wallpaper every morning',
@@ -307,6 +584,13 @@ export const PROJECTS: Project[] = [
       'Masonry gallery with save to camera roll',
       'Favorites collection',
       'Daily push notifications',
+    ],
+    architecture: [
+      'Expo managed workflow targeting Android with EAS Build for APK distribution',
+      'NativeWind for Tailwind utility classes applied to native React Native components',
+      'Pollinations.ai REST API for text-to-image generation without authentication',
+      'Expo Notifications for daily wallpaper drop alerts',
+      'Expo SecureStore for local persistence of favorites and daily state',
     ],
     technicalDecisions: [
       {
@@ -321,6 +605,30 @@ export const PROJECTS: Project[] = [
         title: 'Why React Native',
         body: 'A single TypeScript codebase that targets Android natively. NativeWind brings familiar Tailwind utility classes to native components, keeping styling consistent with web projects.',
       },
+    ],
+    technicalChallenges: [
+      {
+        problem: 'Delivering a fresh daily wallpaper without a backend scheduler',
+        solution: 'Persisted the daily wallpaper seed and generation timestamp in Expo SecureStore on-device, regenerating only when the stored date differs from the current day',
+      },
+      {
+        problem: 'Rendering a masonry gallery with variable-height images efficiently on a native list',
+        solution: 'Pre-fetched image dimensions at load time and used a two-column height-tracking algorithm to assign each image to the shorter column, producing a balanced layout without a dedicated library',
+      },
+    ],
+    learnings: [
+      'Pollinations.ai generation latency varies — the UI must handle indeterminate loading states without blocking navigation',
+      'On-device persistence with SecureStore is sufficient for ephemeral state like daily content, avoiding a backend for simple time-based features',
+      'NativeWind class compilation differs from web Tailwind in edge cases and requires on-device validation',
+    ],
+    futurePlans: [
+      'Google Play Store submission',
+      'User accounts for cross-device favorites sync',
+      'Multi-prompt and style-mixing generation modes',
+    ],
+    impact: [
+      'Working Android app with APK available for direct download',
+      'Fully free wallpaper generation with no API keys required from the user',
     ],
   },
 ]

@@ -120,7 +120,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </article>
 
         {/* Prev / Next */}
-        <div className="flex justify-between gap-4 mt-16 pt-8 border-t border">
+        <div className="flex justify-between gap-4 mt-16 pt-8 border-t">
           {prev ? (
             <Link href={`/blog/${prev.slug}`} className="group flex flex-col gap-1 max-w-[45%]">
               <span

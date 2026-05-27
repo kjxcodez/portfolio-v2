@@ -11,6 +11,8 @@ import {
   Code2,
   Globe,
   CheckCircle2,
+  ChevronRight,
+  Clock,
 } from "lucide-react";
 import { GithubIcon } from "@/components/shared/icons";
 import { ProjectGallery } from "@/components/shared/ProjectGallery";
@@ -167,6 +169,53 @@ export default async function ProjectPage({
         </p>
       </Section>
 
+      {/* ── Highlights ─────────────────────────────────────────────── */}
+      {project.highlights && project.highlights.length > 0 && (
+        <Section label="Highlights">
+          <ul className="flex flex-col gap-2">
+            {project.highlights.map((highlight, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <ChevronRight
+                  size={12}
+                  className="mt-0.5 shrink-0 text-muted-foreground"
+                />
+                <span className="text-sm text-(--text-secondary) font-ui">
+                  {highlight}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+
+      {/* ── Impact ─────────────────────────────────────────────────── */}
+      {project.impact && project.impact.length > 0 && (
+        <Section label="Impact">
+          <ul className="flex flex-col gap-2">
+            {project.impact.map((item, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <span className="text-muted-foreground font-mono text-xs mt-0.5 shrink-0 select-none">
+                  —
+                </span>
+                <span className="text-sm text-(--text-secondary) font-ui">
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+
+      {/* ── Timeline ───────────────────────────────────────────────── */}
+      {project.timeline && (
+        <Section label="Timeline">
+          <span className="inline-flex items-center gap-1.5 rounded border bg-(--bg-surface) text-(--text-secondary) font-mono text-xs tracking-tight px-3 py-1.5">
+            <Clock size={11} className="text-muted-foreground" />
+            {project.timeline}
+          </span>
+        </Section>
+      )}
+
       {/* ── Key Features ───────────────────────────────────────────── */}
       {project.keyFeatures && project.keyFeatures.length > 0 && (
         <Section label="Key Features">
@@ -183,6 +232,101 @@ export default async function ProjectPage({
               </li>
             ))}
           </ul>
+        </Section>
+      )}
+
+      {/* ── Architecture ───────────────────────────────────────────── */}
+      {project.architecture && project.architecture.length > 0 && (
+        <Section label="Architecture">
+          <div className="flex flex-col gap-2">
+            {project.architecture.map((layer, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-3 rounded-lg p-3 border bg-(--bg-surface)"
+              >
+                <span
+                  className="text-muted-foreground shrink-0 tabular-nums"
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "var(--text-xs)",
+                  }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-sm text-(--text-secondary) font-ui">
+                  {layer}
+                </span>
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+
+      {/* ── Technical Challenges ───────────────────────────────────── */}
+      {project.technicalChallenges && project.technicalChallenges.length > 0 && (
+        <Section label="Technical Challenges">
+          <div className="flex flex-col gap-4">
+            {project.technicalChallenges.map((challenge, i) => (
+              <div key={i} className="rounded-lg p-4 border bg-(--bg-surface)">
+                <div className="mb-3">
+                  <p
+                    className="text-muted-foreground mb-1"
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "var(--text-xs)",
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Problem
+                  </p>
+                  <p className="text-sm text-(--text-primary) font-ui">
+                    {challenge.problem}
+                  </p>
+                </div>
+                <div>
+                  <p
+                    className="text-muted-foreground mb-1"
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: "var(--text-xs)",
+                      letterSpacing: "0.1em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Solution
+                  </p>
+                  <p className="text-sm leading-relaxed text-(--text-secondary) font-ui">
+                    {challenge.solution}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+
+      {/* ── Technical Decisions ────────────────────────────────────── */}
+      {project.technicalDecisions && project.technicalDecisions.length > 0 && (
+        <Section label="Technical Decisions">
+          <div className="flex flex-col gap-4">
+            {project.technicalDecisions.map((decision, i) => (
+              <div key={i} className="rounded-lg p-4 border bg-(--bg-surface)">
+                <p
+                  className="text-xs font-medium mb-2 text-(--text-primary)"
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    letterSpacing: "0.04em",
+                  }}
+                >
+                  {decision.title}
+                </p>
+                <p className="text-sm leading-relaxed text-(--text-secondary) font-ui">
+                  {decision.body}
+                </p>
+              </div>
+            ))}
+          </div>
         </Section>
       )}
 
@@ -207,24 +351,42 @@ export default async function ProjectPage({
         </Section>
       )}
 
-      {/* ── Technical Decisions ────────────────────────────────────── */}
-      {project.technicalDecisions && project.technicalDecisions.length > 0 && (
-        <Section label="Technical Decisions">
-          <div className="flex flex-col gap-4">
-            {project.technicalDecisions.map((decision, i) => (
-              <div key={i} className="rounded-lg p-4 border bg-(--bg-surface)">
-                <p
-                  className="text-xs font-medium mb-2 text-(--text-primary)"
+      {/* ── Learnings ──────────────────────────────────────────────── */}
+      {project.learnings && project.learnings.length > 0 && (
+        <Section label="Learnings">
+          <ul className="flex flex-col gap-2">
+            {project.learnings.map((learning, i) => (
+              <li key={i} className="flex items-start gap-2">
+                <span className="text-muted-foreground font-mono text-xs mt-0.5 shrink-0 select-none">
+                  —
+                </span>
+                <span className="text-sm text-(--text-secondary) font-ui">
+                  {learning}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+
+      {/* ── Future Plans ───────────────────────────────────────────── */}
+      {project.futurePlans && project.futurePlans.length > 0 && (
+        <Section label="Future Plans">
+          <div className="flex flex-col gap-2">
+            {project.futurePlans.map((plan, i) => (
+              <div key={i} className="flex items-start gap-3">
+                <span
+                  className="text-muted-foreground shrink-0 tabular-nums mt-0.5"
                   style={{
                     fontFamily: "var(--font-mono)",
-                    letterSpacing: "0.04em",
+                    fontSize: "var(--text-xs)",
                   }}
                 >
-                  {decision.title}
-                </p>
-                <p className="text-sm leading-relaxed text-(--text-secondary) font-ui">
-                  {decision.body}
-                </p>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-sm text-(--text-secondary) font-ui">
+                  {plan}
+                </span>
               </div>
             ))}
           </div>
