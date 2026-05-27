@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter, Instrument_Serif, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { homeOGUrl } from "@/lib/og";
+import { BASE_URL } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import { QuickNav } from "@/components/shared/QuickNav";
 import { ModeProvider } from "@/components/shared/ModeProvider";
 import { GlobalNav } from "@/components/shared/GlobalNav";
 import { AIChatButton } from "@/components/shared/AIChatButton";
 import { Analytics } from "@vercel/analytics/next";
+import { JsonLd } from "@/components/JsonLd";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -34,18 +36,47 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Kapil Kumar Jangid — Full Stack Developer",
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "Kapil Kumar Jangid — Full Stack Developer",
+    template: "%s | Kapil Kumar Jangid",
+  },
   description:
     "Portfolio of Kapil Kumar Jangid — Full Stack Developer & Open Source Contributor based in Rajasthan, India.",
-  metadataBase: new URL("https://kapiljangid.pro"),
+  keywords: [
+    "Kapil Kumar Jangid",
+    "Full Stack Developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Node.js",
+    "Open Source",
+    "Rajasthan",
+    "India",
+    "Software Engineer",
+    "Web Developer",
+  ],
+  authors: [{ name: "Kapil Kumar Jangid", url: BASE_URL }],
+  creator: "Kapil Kumar Jangid",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
   alternates: {
-    canonical: "https://kapiljangid.pro",
+    canonical: BASE_URL,
   },
   openGraph: {
     title: "Kapil Kumar Jangid — Full Stack Developer",
     description:
       "Portfolio of Kapil Kumar Jangid — Full Stack Developer & Open Source Contributor based in Rajasthan, India.",
-    url: "https://kapiljangid.pro",
+    url: BASE_URL,
     siteName: "kapiljangid.pro",
     locale: "en_US",
     type: "website",
@@ -88,6 +119,27 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col max-w-dvw overflow-x-hidden">
+        <JsonLd schema={{
+          "@type": "Person",
+          "@id": `${BASE_URL}/#person`,
+          name: "Kapil Kumar Jangid",
+          url: BASE_URL,
+          sameAs: [
+            "https://github.com/kjxcodez",
+            "https://twitter.com/kjxcodez",
+          ],
+          jobTitle: "Full Stack Developer",
+          knowsAbout: ["React", "Next.js", "TypeScript", "Node.js", "Open Source"],
+          address: { "@type": "PostalAddress", addressRegion: "Rajasthan", addressCountry: "IN" },
+        }} />
+        <JsonLd schema={{
+          "@type": "WebSite",
+          "@id": `${BASE_URL}/#website`,
+          url: BASE_URL,
+          name: "Kapil Kumar Jangid",
+          description: "Portfolio of Kapil Kumar Jangid — Full Stack Developer & Open Source Contributor",
+          author: { "@id": `${BASE_URL}/#person` },
+        }} />
         <ModeProvider>
           {/* Global persistent layer */}
           <GlobalNav />

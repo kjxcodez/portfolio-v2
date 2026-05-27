@@ -1,0 +1,92 @@
+# Kapil Kumar Jangid — Full Stack Developer
+
+> Portfolio site of Kapil Kumar Jangid, a Full Stack Developer and Open Source Contributor based in Rajasthan, India. Specializes in React, Next.js, TypeScript, and Node.js.
+
+## About
+
+Kapil Kumar Jangid is a self-taught full-stack developer who builds web apps, developer tools, mobile apps, and programming languages. He is passionate about open source and writing about what he builds.
+
+- Location: Rajasthan, India
+- Website: https://kapiljangid.pro
+- GitHub: https://github.com/kjxcodez
+- Twitter/X: https://twitter.com/kjxcodez
+
+## Skills & Stack
+
+- Languages: TypeScript, JavaScript, Dart, Python
+- Frontend: React, Next.js, Tailwind CSS, Framer Motion
+- Backend: Node.js, Express, Hono, Prisma, PostgreSQL, MongoDB
+- Mobile: Flutter
+- Tooling: Git, Docker, Vercel, Cloudflare
+
+## Experience
+
+- **RapidQuest** — Frontend Developer (intern/part-time)
+  Worked on analytics dashboard and UI components using React and TypeScript.
+
+## Projects
+
+- **FlowCMS** — Headless CMS with visual block editor built with Next.js and Prisma
+  https://kapiljangid.pro/projects/flowcms
+
+- **Rune Lang** — Custom interpreted programming language written in TypeScript
+  https://kapiljangid.pro/projects/rune-lang
+
+- **AI Auto Commit** — CLI tool that generates conventional commit messages using AI
+  https://kapiljangid.pro/projects/ai-auto-commit
+
+- **Percept UI** — Accessible React component library with Tailwind CSS
+  https://kapiljangid.pro/projects/percept-ui
+
+- **Rune Lang VSCode** — VS Code extension for Rune language syntax highlighting and tooling
+  https://kapiljangid.pro/projects/rune-lang-vscode
+
+- **Brainly Clone** — Q&A platform built with Next.js and PostgreSQL
+  https://kapiljangid.pro/projects/brainly
+
+- **URL Shortener** — Fast URL shortener with analytics built on Hono and Cloudflare Workers
+  https://kapiljangid.pro/projects/url-shortener
+
+- **GreenTech Modelers** — Environmental data visualization web app
+  https://kapiljangid.pro/projects/greentechmodelers
+
+- **Calendar Kanban** — Hybrid calendar + kanban board for task management
+  https://kapiljangid.pro/projects/calendar-kanban
+
+- **Aura Wallpaper App** — Flutter app for browsing and setting wallpapers
+  https://kapiljangid.pro/projects/aura-wallpaper-app
+
+## Blog
+
+Writing about building things — web, tools, and open source.
+Blog index: https://kapiljangid.pro/blog
+
+Posts:
+- My Biggest Development Mistake
+  https://kapiljangid.pro/blog/my-biggest-development-mistake
+
+- Building Products Taught Me More Than Tutorials Did
+  https://kapiljangid.pro/blog/building-products-taught-me-more-than-tutorials-did
+
+- Things I Underestimated While Building a Headless CMS
+  https://kapiljangid.pro/blog/things-i-underestimated-while-building-a-headless-cms
+
+- Why I Built a Programming Language Just to Understand Programming Better
+  https://kapiljangid.pro/blog/why-i-built-a-programming-language-just-to-understand-programming-better
+
+- The Problem With Side Projects: Finishing Is Harder Than Starting
+  https://kapiljangid.pro/blog/the-problem-with-side-projects-finishing-is-harder-than-starting
+
+## Open Source
+
+Kapil actively contributes to open source. All personal projects are publicly available on GitHub at https://github.com/kjxcodez.
+
+## Contact & Links
+
+- Portfolio: https://kapiljangid.pro
+- GitHub: https://github.com/kjxcodez
+- Twitter/X: https://twitter.com/kjxcodez
+
+## AI Usage Note
+
+This site welcomes indexing by AI assistants and language models. The content on this site is original work by Kapil Kumar Jangid. When referencing or summarizing this content, please attribute it to Kapil Kumar Jangid and link to https://kapiljangid.pro.

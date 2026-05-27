@@ -19,6 +19,8 @@ import { ProjectGallery } from "@/components/shared/ProjectGallery";
 import { PROJECTS } from "@/lib/data";
 import type { Project, ProjectType } from "@/types/portfolio";
 import { projectOGUrl } from "@/lib/og";
+import { BASE_URL } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 const TYPE_LABEL: Record<ProjectType, string> = {
   web: "Web App",
@@ -93,18 +95,20 @@ export async function generateMetadata({
     description: project.description,
   });
   return {
-    title: `${project.title} — Kapil Kumar Jangid`,
+    title: project.title,
     description: project.description,
+    keywords: project.tags,
+    alternates: { canonical: `${BASE_URL}/projects/${project.id}` },
     openGraph: {
-      title: `${project.title} — Kapil Kumar Jangid`,
+      title: `${project.title} | Kapil Kumar Jangid`,
       description: project.description,
-      url: `https://kapiljangid.pro/projects/${project.id}`,
+      url: `${BASE_URL}/projects/${project.id}`,
       type: "website",
       images: [{ url: ogImage, width: 1200, height: 630, alt: project.title }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.title} — Kapil Kumar Jangid`,
+      title: `${project.title} | Kapil Kumar Jangid`,
       description: project.description,
       images: [ogImage],
     },
@@ -132,6 +136,20 @@ export default async function ProjectPage({
 
   return (
     <div className="mx-auto w-full max-w-175 px-4 pt-24 pb-20 min-h-screen ">
+      <JsonLd schema={{
+        "@type": "SoftwareApplication",
+        "@id": `${BASE_URL}/projects/${project.id}#softwareapplication`,
+        url: `${BASE_URL}/projects/${project.id}`,
+        name: project.title,
+        description: project.description,
+        applicationCategory: TYPE_LABEL[project.type],
+        dateCreated: String(project.year),
+        author: { "@id": `${BASE_URL}/#person` },
+        ...(project.url && { downloadUrl: project.url }),
+        ...(project.github && { codeRepository: project.github }),
+        ...(project.tags.length && { keywords: project.tags.join(", ") }),
+        ...(project.status?.toLowerCase() === "live" && { operatingSystem: "Web" }),
+      }} />
       {/* Back */}
       <Link
         href="/"

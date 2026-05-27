@@ -8,6 +8,8 @@ import { ArrowLeft, Clock } from 'lucide-react'
 import { ScrollProgress } from '@/components/mode1-minimal/ScrollUI'
 import { BlogReader } from '@/components/easter-eggs/BlogReader'
 import { blogPostOGUrl } from '@/lib/og'
+import { BASE_URL } from '@/lib/seo'
+import { JsonLd } from '@/components/JsonLd'
 
 export async function generateStaticParams() {
   return getAllPostSlugs().map((slug) => ({ slug }))
@@ -25,19 +27,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: post.description,
   })
   return {
-    title: `${post.title} — Kapil Kumar Jangid`,
+    title: post.title,
     description: post.description,
+    keywords: post.tags,
+    alternates: { canonical: `${BASE_URL}/blog/${post.slug}` },
     openGraph: {
-      title: `${post.title} — Kapil Kumar Jangid`,
+      title: `${post.title} | Kapil Kumar Jangid`,
       description: post.description,
-      url: `https://kapiljangid.pro/blog/${post.slug}`,
+      url: `${BASE_URL}/blog/${post.slug}`,
       type: 'article',
       publishedTime: post.date,
+      authors: [`${BASE_URL}/#person`],
       images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${post.title} — Kapil Kumar Jangid`,
+      title: `${post.title} | Kapil Kumar Jangid`,
       description: post.description,
       images: [ogImage],
     },
@@ -62,8 +67,25 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const prev = allPosts[idx + 1] ?? null
   const next = allPosts[idx - 1] ?? null
 
+  const wordCount = parseInt(post.readingTime, 10) * 200
+
   return (
     <>
+      <JsonLd schema={{
+        "@type": "BlogPosting",
+        "@id": `${BASE_URL}/blog/${post.slug}#blogposting`,
+        url: `${BASE_URL}/blog/${post.slug}`,
+        headline: post.title,
+        description: post.description,
+        datePublished: post.date,
+        dateModified: post.date,
+        wordCount,
+        keywords: post.tags.join(", "),
+        author: { "@id": `${BASE_URL}/#person` },
+        publisher: { "@id": `${BASE_URL}/#person` },
+        mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}/blog/${post.slug}` },
+        ...(post.cover && { image: { "@type": "ImageObject", url: `${BASE_URL}${post.cover}` } }),
+      }} />
       <ScrollProgress />
       <BlogReader />
       <div className="mx-auto w-full max-w-175 px-4 pt-24 pb-20 min-h-screen ">
