@@ -26,7 +26,7 @@ export function MobileProjectCard({ project, idx }: MobileProjectCardProps) {
         <div className="flex items-start justify-between gap-2">
           <Link
             href={`/projects/${project.id}`}
-            className="text-sm font-medium transition-colors font-ui text-(--text-primary) hover:text-(--accent)"
+            className="text-sm font-medium transition-colors font-ui text-(--text-primary)"
           >
             {project.title}
           </Link>
@@ -76,7 +76,7 @@ export function MobileProjectCard({ project, idx }: MobileProjectCardProps) {
             <a
               href={project.apkUrl}
               download
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs transition-colors font-ui bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-[var(--text-inverse)] border border-[var(--accent)] hover:border-[var(--accent-hover)]"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs transition-colors font-ui bg-foreground hover:bg-[var(--accent-hover)] text-[var(--text-inverse)] border border-[var(--accent)] hover:border-[var(--accent-hover)]"
             >
               <Download size={12} />
               APK
