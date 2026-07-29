@@ -62,6 +62,90 @@ export const EXPERIENCE: Experience[] = [
 // ─── Projects ────────────────────────────────────────────────────
 export const PROJECTS: Project[] = [
   {
+    id: 'coding-agent-nero',
+    title: 'Coding Agent - NERO',
+    description: 'Autonomous AI coding agent CLI for understanding, modifying, and verifying codebases',
+    longDescription:
+      'NERO is an autonomous AI coding agent built in Python that explores unfamiliar repositories, understands their architecture, creates execution plans, modifies code using sandboxed tools, verifies its changes, and produces human-readable summaries. Designed around a modular agent pipeline with provider-agnostic LLM integrations, secure tooling, and an interactive REPL experience.',
+    tags: [
+      'Python',
+      'AI Agents',
+      'LLMs',
+      'OpenAI',
+      'Anthropic',
+      'OpenRouter',
+      'Gemini',
+      'Typer',
+      'Rich',
+      'Git'
+    ],
+    url: '',
+    github: 'https://github.com/kjxcodez/coding-agent-nero', // replace with actual repo
+    type: 'tool',
+    featured: true,
+    year: 2026,
+    status: 'Live',
+    screenshots: [
+      '/nero-home.png',
+      '/nero-analysis.png',
+      '/nero-planning.png',
+      '/nero-execution.png'
+    ],
+    timeline: '2026',
+    highlights: [
+      'Autonomously explores unfamiliar repositories before making code changes',
+      'Creates structured execution plans and identifies relevant files automatically',
+      'Sandboxed tool-calling architecture with filesystem, search, Git, and command execution',
+      'Interactive REPL supporting natural language requests for repository analysis and code modifications',
+      'Verification, repair, and review pipeline before producing a final implementation summary'
+    ],
+    keyFeatures: [
+      'Repository discovery and architecture analysis',
+      'Autonomous planning and execution pipeline',
+      'Provider-agnostic LLM architecture (OpenAI, Anthropic, OpenRouter, Gemini)',
+      'Interactive REPL with natural language commands',
+      'Sandboxed filesystem and Git tooling',
+      'Verification, repair loop, and PR-style summaries'
+    ],
+    architecture: [
+      'Modular pipeline separating discovery, planning, execution, verification, repair, review, and summarization',
+      'Provider abstraction enabling multiple LLM backends without changing agent logic',
+      'Tool-based architecture exposing filesystem, code search, Git, and command execution through controlled interfaces',
+      'Rich + Typer powered CLI with persistent interactive REPL'
+    ],
+    technicalChallenges: [
+      {
+        problem: 'Understanding unfamiliar repositories without relying on hardcoded project knowledge',
+        solution: 'Implemented a repository discovery pipeline that inspects project structure, identifies architecture, and supplies focused context to the agent instead of the entire codebase.'
+      },
+      {
+        problem: 'Preventing unsafe filesystem operations performed by an autonomous agent',
+        solution: 'Introduced sandboxed tools with repository-bound path validation and command allow-listing, ensuring operations cannot escape the target workspace.'
+      },
+      {
+        problem: 'Supporting multiple LLM providers without coupling agent logic to a specific API',
+        solution: 'Designed a provider abstraction and routing layer capable of switching between OpenAI, Anthropic, OpenRouter, and Gemini while keeping the agent pipeline provider-agnostic.'
+      }
+    ],
+    learnings: [
+      'Repository understanding is more valuable than simply generating code.',
+      'Tool-calling agents require deterministic tooling and clear boundaries to remain reliable.',
+      'Separating planning, execution, verification, and review improves maintainability and makes debugging autonomous workflows significantly easier.'
+    ],
+    futurePlans: [
+      'Language-aware symbol indexing',
+      'Repository knowledge graph',
+      'Incremental repository analysis and caching',
+      'Persistent working memory across sessions',
+      'Semantic code search and AST-aware editing',
+      'Multi-agent task delegation'
+    ],
+    impact: [
+      'Built as part of an AI coding agent assignment and capable of autonomously analyzing and modifying real-world repositories.',
+      'Serves as the foundation for future research into repository intelligence, autonomous software engineering, and developer tooling.'
+    ]
+  },
+  {
     id: 'flowcms',
     title: 'FlowCMS',
     description: 'A headless CMS with drag-and-drop page builder and real-time preview',
@@ -786,4 +870,4 @@ export const CONTRIBUTIONS: Contribution[] = [
 ]
 
 // ─── Metadata ────────────────────────────────────────────────────
-export const LAST_UPDATED = '2026-05-26'
+export const LAST_UPDATED = '2026-07-29'

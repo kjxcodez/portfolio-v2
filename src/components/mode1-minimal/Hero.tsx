@@ -64,7 +64,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.25 }}
-          className="relative shrink-0 self-start"
+          className="relative shrink-0 self-start max-md:w-full"
         >
           <div
             onClick={handleAvatarClick}
