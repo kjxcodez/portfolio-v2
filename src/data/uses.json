@@ -1,0 +1,179 @@
+{
+  "intro": "Everything I use regularly to design, build, ship, debug, and maintain software.",
+  "categories": [
+    {
+      "category": "Current Favorites",
+      "items": [
+        {
+          "name": "Next.js 15",
+          "desc": "Still my favorite full-stack web framework."
+        },
+        {
+          "name": "Prisma",
+          "desc": "Makes relational database work enjoyable."
+        },
+        {
+          "name": "Playwright",
+          "desc": "Probably the best testing tool I've used."
+        },
+        {
+          "name": "TypeScript",
+          "desc": "The language I reach for first."
+        },
+        {
+          "name": "VS Code",
+          "desc": "Home."
+        }
+      ]
+    },
+    {
+      "category": "AI & Integrations",
+      "items": [
+        {
+          "name": "Claude Code / OpenAI / Gemini",
+          "desc": "Used as engineering assistants for brainstorming, debugging, architecture reviews, and repetitive implementation work."
+        },
+        {
+          "name": "AI Agents",
+          "desc": "Autonomous AI agents for planning, tool calling, and long-running workflows."
+        },
+        {
+          "name": "LLM Integrations",
+          "desc": "Integrating LLMs into products for search, summarization, and other AI-powered features."
+        }
+      ]
+    },
+    {
+      "category": "Editor",
+      "items": [
+        {
+          "name": "Visual Studio Code",
+          "desc": "My primary editor for everything from web apps and APIs to AI agents, VS Code extensions, and CLI tools."
+        },
+        {
+          "name": "Claude Code / OpenAI / Gemini",
+          "desc": "Used as engineering assistants for brainstorming, debugging, architecture reviews, and repetitive implementation work."
+        },
+        {
+          "name": "GitHub",
+          "desc": "Source control, project management, releases, and open source."
+        }
+      ]
+    },
+    {
+      "category": "Languages",
+      "items": [
+        {
+          "name": "TypeScript",
+          "desc": "The language I write the majority of my production code in."
+        },
+        {
+          "name": "Python",
+          "desc": "Used for AI systems, developer tooling, interpreters, scripting, and automation."
+        },
+        {
+          "name": "JavaScript",
+          "desc": "Still used where TypeScript isn't necessary."
+        }
+      ]
+    },
+    {
+      "category": "Frameworks",
+      "items": [
+        {
+          "name": "Next.js",
+          "desc": "My default framework for SaaS products and full-stack web applications."
+        },
+        {
+          "name": "React",
+          "desc": "Component architecture for web interfaces."
+        },
+        {
+          "name": "Tailwind CSS",
+          "desc": "Utility-first styling for fast UI development."
+        },
+        {
+          "name": "Node.js",
+          "desc": "Backend APIs, CLIs, automation, and developer tools."
+        }
+      ]
+    },
+    {
+      "category": "Backend",
+      "items": [
+        {
+          "name": "Prisma",
+          "desc": "Primary ORM for relational applications."
+        },
+        {
+          "name": "PostgreSQL",
+          "desc": "Default relational database."
+        },
+        {
+          "name": "MongoDB",
+          "desc": "Used for document-oriented systems and flexible schemas."
+        },
+        {
+          "name": "Redis",
+          "desc": "Caching, rate limiting, queues, and temporary state."
+        },
+        {
+          "name": "Better Auth",
+          "desc": "Authentication and session management."
+        }
+      ]
+    },
+    {
+      "category": "Cloud & Infrastructure",
+      "items": [
+        {
+          "name": "Vercel",
+          "desc": "Frontend hosting and deployments."
+        },
+        {
+          "name": "Cloudflare",
+          "desc": "DNS, caching, security, email routing, and edge services."
+        },
+        {
+          "name": "Supabase",
+          "desc": "Managed PostgreSQL and storage for rapid product development."
+        }
+      ]
+    },
+    {
+      "category": "Developer Tools",
+      "items": [
+        {
+          "name": "Playwright",
+          "desc": "End-to-end testing and browser automation."
+        },
+        {
+          "name": "Sentry",
+          "desc": "Error monitoring and production debugging."
+        },
+        {
+          "name": "Git",
+          "desc": "Version control for everything."
+        }
+      ]
+    },
+    {
+      "category": "Design",
+      "items": [
+        {
+          "name": "Figma",
+          "desc": "Wireframes, rough UI exploration, and design iteration."
+        }
+      ]
+    },
+    {
+      "category": "Hardware",
+      "items": [
+        {
+          "name": "Windows Desktop",
+          "desc": "My primary development workstation."
+        }
+      ]
+    }
+  ]
+}

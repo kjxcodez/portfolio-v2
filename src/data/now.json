@@ -1,0 +1,83 @@
+{
+  "updatedAt": "2026-07-29",
+  "sections": [
+    {
+      "id": "building",
+      "title": "Building",
+      "items": [
+        {
+          "label": "CXDE",
+          "description": "Building an AI-native coding assistant focused on repository understanding, autonomous software engineering, multi-agent workflows, and developer productivity."
+        },
+        {
+          "label": "FlowCMS",
+          "description": "Continuing to evolve FlowCMS into a production-ready headless CMS with plugin architecture, AI-assisted content workflows, stronger security, and developer APIs."
+        },
+        {
+          "label": "LeadForge",
+          "description": "Designing an AI-powered lead generation platform combining web scraping, CRM, outreach automation, and intelligent company discovery."
+        }
+      ]
+    },
+    {
+      "id": "learning",
+      "title": "Learning",
+      "items": [
+        {
+          "description": "Autonomous AI agents, planning systems, tool calling, and long-running workflows."
+        },
+        {
+          "description": "Programming language implementation, interpreters, parsers, ASTs, and compiler design."
+        },
+        {
+          "description": "Distributed systems, event-driven architectures, background workers, queues, and reliable backend design."
+        },
+        {
+          "description": "Building products people genuinely enjoy using instead of simply adding more features."
+        }
+      ]
+    },
+    {
+      "id": "writing",
+      "title": "Writing",
+      "items": [
+        {
+          "description": "Publishing engineering articles and long-form case studies documenting architecture decisions, debugging stories, security audits, and lessons learned while building products."
+        }
+      ]
+    },
+    {
+      "id": "using",
+      "title": "Using Every Day",
+      "items": [
+        {
+          "description": "TypeScript, Python, React, Next.js, Node.js, PostgreSQL, Prisma, Tailwind CSS, and Redis."
+        },
+        {
+          "description": "AI coding assistants for research, code reviews, debugging, and accelerating repetitive engineering work."
+        },
+        {
+          "description": "VS Code, GitHub, Playwright, Sentry, Cloudflare, and Vercel."
+        }
+      ]
+    },
+    {
+      "id": "thinking",
+      "title": "Thinking About",
+      "items": [
+        {
+          "description": "How AI changes software engineering beyond code generation."
+        },
+        {
+          "description": "Building products that compound over time instead of chasing short-lived trends."
+        },
+        {
+          "description": "Keeping software simple while still designing systems that can scale."
+        },
+        {
+          "description": "Documenting engineering work so every project teaches something beyond its codebase."
+        }
+      ]
+    }
+  ]
+}
