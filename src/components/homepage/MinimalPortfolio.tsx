@@ -7,9 +7,14 @@ import { Contact } from "@/components/mode1-minimal/Contact";
 import { CurrentlyBuilding } from "@/components/mode1-minimal/CurrentlyBuilding";
 import { ScrollProgress, BackToTop } from "@/components/mode1-minimal/ScrollUI";
 import { SecretProgress } from "@/components/easter-eggs/SecretProgress";
+import type { PostMeta } from "@/lib/mdx";
 import Link from "next/link";
 
-export function MinimalPortfolio() {
+interface MinimalPortfolioProps {
+  posts: PostMeta[];
+}
+
+export function MinimalPortfolio({ posts }: MinimalPortfolioProps) {
   return (
     <>
       {/* UI chrome */}
@@ -23,7 +28,7 @@ export function MinimalPortfolio() {
         <FeaturedProjects />
         <OtherProjects />
         <Skills />
-        <Blog />
+        <Blog posts={posts} />
         <Contact />
 
         <footer

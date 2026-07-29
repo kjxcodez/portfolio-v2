@@ -20,7 +20,7 @@ export function AdaptiveHomepage({ posts }: AdaptiveHomepageProps) {
   const renderer = (() => {
     switch (mode) {
       case 1:
-        return <div className="mode-renderer professional-mode"><MinimalPortfolio /></div>;
+        return <div className="mode-renderer professional-mode"><MinimalPortfolio posts={posts} /></div>;
       case 2:
         return <div className="mode-renderer desktop-mode"><MacOSPortfolio posts={posts} /></div>;
       case 3:
@@ -28,7 +28,7 @@ export function AdaptiveHomepage({ posts }: AdaptiveHomepageProps) {
       case 4:
         return <div className="mode-renderer terminal-mode"><TerminalPortfolio posts={posts} /></div>;
       default:
-        return <div className="mode-renderer professional-mode"><MinimalPortfolio /></div>;
+        return <div className="mode-renderer professional-mode"><MinimalPortfolio posts={posts} /></div>;
     }
   })();
 
