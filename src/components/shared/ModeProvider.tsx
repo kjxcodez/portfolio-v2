@@ -30,6 +30,7 @@ function ModeProviderInner({ children }: ModeProviderProps) {
   const { mode, setMode: setStoreMode } = useModeStore();
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [activeMode, setActiveMode] = useState<PortfolioMode>(1);
 
   // Sync mode with URL
   useModeSyncWithURL();
@@ -39,10 +40,15 @@ function ModeProviderInner({ children }: ModeProviderProps) {
     setMounted(true);
   }, []);
 
+  // Sync activeMode with Zustand mode store after mount
+  useEffect(() => {
+    if (mounted) {
+      setActiveMode(mode);
+    }
+  }, [mode, mounted]);
+
   // Inject mode-specific CSS
   useEffect(() => {
-    if (!mounted) return;
-
     let styleElement = document.getElementById('mode-colors');
     if (!styleElement) {
       styleElement = document.createElement('style');
@@ -50,11 +56,11 @@ function ModeProviderInner({ children }: ModeProviderProps) {
       document.head.appendChild(styleElement);
     }
 
-    styleElement.textContent = generateModeCSS(mode);
-  }, [mode, mounted]);
+    styleElement.textContent = generateModeCSS(activeMode);
+  }, [activeMode]);
 
   const setMode = (newMode: PortfolioMode) => {
-    if (newMode === mode) return;
+    if (newMode === activeMode) return;
 
     setIsTransitioning(true);
 
@@ -64,13 +70,8 @@ function ModeProviderInner({ children }: ModeProviderProps) {
     }, 100);
   };
 
-  // Don't render until hydrated to prevent mismatch
-  if (!mounted) {
-    return <div className="min-h-screen bg-black" />;
-  }
-
   const contextValue: ModeContextType = {
-    mode,
+    mode: activeMode,
     setMode,
     isTransitioning,
   };

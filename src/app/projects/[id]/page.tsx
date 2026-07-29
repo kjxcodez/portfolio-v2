@@ -150,6 +150,30 @@ export default async function ProjectPage({
         ...(project.tags.length && { keywords: project.tags.join(", ") }),
         ...(project.status?.toLowerCase() === "live" && { operatingSystem: "Web" }),
       }} />
+      <JsonLd schema={{
+        "@type": "BreadcrumbList",
+        "@id": `${BASE_URL}/projects/${project.id}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": BASE_URL
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Projects",
+            "item": `${BASE_URL}/projects`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": project.title,
+            "item": `${BASE_URL}/projects/${project.id}`
+          }
+        ]
+      }} />
       {/* Back */}
       <Link
         href="/"

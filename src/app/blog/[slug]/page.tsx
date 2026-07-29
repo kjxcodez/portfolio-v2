@@ -86,6 +86,30 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         mainEntityOfPage: { "@type": "WebPage", "@id": `${BASE_URL}/blog/${post.slug}` },
         ...(post.cover && { image: { "@type": "ImageObject", url: `${BASE_URL}${post.cover}` } }),
       }} />
+      <JsonLd schema={{
+        "@type": "BreadcrumbList",
+        "@id": `${BASE_URL}/blog/${post.slug}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": BASE_URL
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": `${BASE_URL}/blog`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": post.title,
+            "item": `${BASE_URL}/blog/${post.slug}`
+          }
+        ]
+      }} />
       <ScrollProgress />
       <BlogReader />
       <div className="mx-auto w-full max-w-175 px-4 pt-24 pb-20 min-h-screen ">

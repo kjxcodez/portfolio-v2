@@ -1,0 +1,176 @@
+# Kapil Kumar Jangid — Full Stack Developer & Open Source Contributor
+
+This is the full-text representation of Kapil Kumar Jangid's portfolio, including projects, experience, write-ups (blog posts), current focus (Now), and setup/tools (Uses).
+
+---
+
+## Profile & Biography
+
+- **Name**: Kapil Kumar Jangid
+- **Role**: Full Stack Developer / Open Source Contributor
+- **Location**: Rajasthan, India
+- **Website**: https://kapiljangid.pro
+- **GitHub**: https://github.com/kjxcodez
+- **Twitter/X**: https://twitter.com/kjxcodez
+- **Contact Email**: kapil@kapiljangid.pro
+
+### Summary
+Kapil Kumar Jangid is a self-taught full-stack developer who builds web applications, developer tools, mobile apps, and programming languages. He is passionate about open-source contribution and technical writing. His expertise spans React, Next.js, TypeScript, Node.js, and Flutter.
+
+---
+
+## Core Skills & Stack
+
+- **Languages**: TypeScript, JavaScript, Dart, Python, HTML, CSS, SQL
+- **Frontend**: React, Next.js, Tailwind CSS, Framer Motion, Radix UI, shadcn/ui
+- **Backend & Database**: Node.js, Express, Hono, Prisma ORM, PostgreSQL, MongoDB, Redis, Cloudflare Workers
+- **Mobile Development**: Flutter, Dart
+- **Tooling & Infrastructure**: Git, GitHub Actions, Docker, Vercel, Cloudflare, Supabase, Linux
+
+---
+
+## Experience
+
+### RapidQuest (Frontend Developer Intern / Part-Time)
+- Worked on developing interactive analytics dashboards and reusable UI components.
+- Technologies used: React, TypeScript, Tailwind CSS, Chart.js.
+
+---
+
+## Projects (Detailed)
+
+### 1. FlowCMS
+- **Description**: Headless CMS with a visual block editor built with Next.js and Prisma. Designed for creating and managing content with ease.
+- **URL**: https://kapiljangid.pro/projects/flowcms
+- **GitHub**: https://github.com/kjxcodez/flowcms
+- **Tech Stack**: Next.js, TypeScript, Tailwind CSS, Prisma, PostgreSQL
+- **Key Features**: Drag-and-drop block editor, roles & permissions, API key generation, rich content schema builder, media library.
+
+### 2. Rune Lang
+- **Description**: A custom, interpreted programming language written entirely in TypeScript to understand compilers, interpreters, and ASTs.
+- **URL**: https://kapiljangid.pro/projects/rune-lang
+- **GitHub**: https://github.com/kjxcodez/rune-lang
+- **Tech Stack**: TypeScript, Node.js
+- **Key Features**: Custom lexer, parser, abstract syntax tree (AST) generator, and tree-walk interpreter. Supports variables, control flow, functions, and closures.
+
+### 3. AI Auto Commit
+- **Description**: CLI tool that generates conventional commit messages using AI by analyzing git diffs.
+- **URL**: https://kapiljangid.pro/projects/ai-auto-commit
+- **GitHub**: https://github.com/kjxcodez/ai-auto-commit
+- **Tech Stack**: Node.js, TypeScript, Gemini API
+- **Key Features**: Automated git diff analysis, generates conventional commits, interactive prompt, quick configuration.
+
+### 4. Percept UI
+- **Description**: An accessible, unstyled, and highly customizable React component library designed with Tailwind CSS integration in mind.
+- **URL**: https://kapiljangid.pro/projects/percept-ui
+- **GitHub**: https://github.com/kjxcodez/percept-ui
+- **Tech Stack**: React, TypeScript, Tailwind CSS
+- **Key Features**: WAI-ARIA compliant, keyboard navigation out of the box, lightweight, modular imports.
+
+### 5. Rune Lang VSCode
+- **Description**: Official VS Code extension providing syntax highlighting and basic tooling support for the Rune Lang programming language.
+- **URL**: https://kapiljangid.pro/projects/rune-lang-vscode
+- **GitHub**: https://github.com/kjxcodez/rune-lang-vscode
+- **Tech Stack**: TypeScript, VS Code Extension API
+- **Key Features**: TextMate grammar for syntax highlighting, snippets, code completion, and configuration options.
+
+### 6. Brainly Clone
+- **Description**: A complete Q&A platform clone built with Next.js and PostgreSQL. Offers collaborative question and answer systems.
+- **URL**: https://kapiljangid.pro/projects/brainly
+- **GitHub**: https://github.com/kjxcodez/brainly
+- **Tech Stack**: Next.js, Tailwind CSS, Prisma, PostgreSQL, NextAuth
+- **Key Features**: Question creation, nested comments/replies, upvoting/downvoting system, tags, and user profiles.
+
+### 7. URL Shortener
+- **Description**: Extremely fast URL shortener with real-time analytics built on Hono and deployed globally on Cloudflare Workers.
+- **URL**: https://kapiljangid.pro/projects/url-shortener
+- **GitHub**: https://github.com/kjxcodez/url-shortener
+- **Tech Stack**: Hono, Cloudflare Workers, Cloudflare KV, Tailwind CSS (for dashboard)
+- **Key Features**: Sub-millisecond redirects, geo-location tracking, browser analytics, simple dashboard.
+
+### 8. GreenTech Modelers
+- **Description**: An environmental data visualization web application providing interactive charts and maps for sustainability metrics.
+- **URL**: https://kapiljangid.pro/projects/greentechmodelers
+- **GitHub**: https://github.com/kjxcodez/greentechmodelers
+- **Tech Stack**: React, Tailwind CSS, Recharts, Mapbox GL
+- **Key Features**: Interactive GIS maps, real-time sensor data charts, carbon footprint calculators.
+
+### 9. Calendar Kanban
+- **Description**: A hybrid productivity tool combining calendar views and Kanban boards for seamless task management.
+- **URL**: https://kapiljangid.pro/projects/calendar-kanban
+- **GitHub**: https://github.com/kjxcodez/calendar-kanban
+- **Tech Stack**: React, Tailwind CSS, DnD Kit, LocalStorage
+- **Key Features**: Drag-and-drop tasks between calendar days and kanban boards, recurring tasks, categories, and light/dark mode.
+
+### 10. Aura Wallpaper App
+- **Description**: A beautiful, native mobile wallpaper app built using Flutter for discovering and setting high-resolution wallpapers.
+- **URL**: https://kapiljangid.pro/projects/aura-wallpaper-app
+- **GitHub**: https://github.com/kjxcodez/aura-wallpaper
+- **Tech Stack**: Flutter, Dart, Unsplash API
+- **Key Features**: Infinite scroll, category filtering, one-click set wallpaper, favorites collection, smooth animations.
+
+---
+
+## Blog Posts (Full Text & Summaries)
+
+### 1. Building Products Taught Me More Than Tutorials Did
+- **Date**: 2026-03-06
+- **Link**: https://kapiljangid.pro/blog/building-products-taught-me-more-than-tutorials-did
+- **Key Takeaways**:
+  * Tutorials present a perfect, controlled environment where everything is predictable and goes according to plan.
+  * Real products force you to think about edge cases, late or failed webhooks, authentication expiration, page refreshes, and API failures.
+  * Developing a product requires thinking in terms of end-to-end workflows rather than just adding isolated features.
+  * Debugging is one of the greatest teachers because it forces you to understand data flow, state management, and architectural decisions.
+  * Rewriting code or shifting design decisions is a natural part of the learning and product-building process.
+
+### 2. My Biggest Development Mistake: Building Too Much Before Validation
+- **Date**: 2026-03-13
+- **Link**: https://kapiljangid.pro/blog/my-biggest-development-mistake
+- **Key Takeaways**:
+  * More features do not automatically equal more value or utility.
+  * In the early stages of a project, it's easy to waste time implementing features that users have not asked for (e.g., advanced role systems, complex analytics, future monetizations).
+  * Building feels productive, but it can increase future maintenance weight and obscure the core problem being solved.
+  * The portfolio redesign is an example: instead of building five separate websites for different modes, a single portfolio with multiple interchangeable visual experiences (modes) was cleaner and less complex.
+  * Removing features is a deliberate design decision that drives focus and clarity.
+
+### 3. The Problem With Side Projects: Finishing Is Harder Than Starting
+- **Date**: 2026-04-26
+- **Link**: https://kapiljangid.pro/blog/the-problem-with-side-projects-finishing-is-harder-than-starting
+- **Key Takeaways**:
+  * Starting a new project brings excitement and immediate gratification. Finishing a project, however, requires pushing through the "boring" final 10% (bugs, deployment, edge cases, responsiveness).
+  * Setting a tight MVP (Minimum Viable Product) scope is essential for ever shipping a side project.
+
+### 4. Things I Underestimated While Building a Headless CMS
+- **Date**: 2026-05-17
+- **Link**: https://kapiljangid.pro/blog/things-i-underestimated-while-building-a-headless-cms
+- **Key Takeaways**:
+  * Building a headless CMS involves complex data modeling, dynamic schema validations, block editor state management, and asset/media handling.
+  * Scaling content delivery APIs globally requires careful caching, invalidation strategies, and robust error handling.
+
+### 5. Why I Built a Programming Language Just to Understand Programming Better
+- **Date**: 2026-05-26
+- **Link**: https://kapiljangid.pro/blog/why-i-built-a-programming-language-just-to-understand-programming-better
+- **Key Takeaways**:
+  * Building Rune Lang demystified compilers and interpreters.
+  * Writing a lexer, a parser, and a tree-walk interpreter taught the mechanics of tokenization, AST generation, environment scopes, and closures.
+
+---
+
+## Now & Uses
+
+### Now (Current Focus)
+- **Current Projects**: Building full-stack SaaS tools, improving FlowCMS, and exploring Next.js 15 features.
+- **Learning**: Exploring AI model integration, advanced RAG architectures, and performance optimization in Next.js Server Components.
+- **Reading/Doing**: Enhancing portfolio UX/UI across the 4 core modes (Professional, Desktop OS, RPG, Terminal) and writing about web development.
+
+### Uses (Setup & Tools)
+- **Computer**: Windows 11 development machine.
+- **Code Editor**: VS Code (Custom themes and extensions).
+- **Terminal**: WSL2 (Ubuntu), Zsh, Oh My Zsh.
+- **Hosting / Cloud**: Vercel, Cloudflare, Supabase, Neon (PostgreSQL).
+- **Core Stack**: Next.js, React, TypeScript, Tailwind CSS, Prisma, Hono.
+
+---
+
+## AI Indexing and Crawling
+This file (`llms-full.txt`) provides a complete, context-rich index of Kapil Kumar Jangid's personal site, intended for consumption by LLMs, search engines, and agentic crawlers. All information is accurate and matches the live portfolio site.

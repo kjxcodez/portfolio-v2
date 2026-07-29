@@ -1,13 +1,19 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import usesDataRaw from '@/data/uses.json'
 import type { UsesData } from '@/types/content'
+import { buildPageMetadata } from '@/lib/seo'
 
 const usesData = usesDataRaw as UsesData
 
-export const metadata = {
-  title: 'Uses — Kapil Kumar Jangid',
-}
+export const metadata: Metadata = buildPageMetadata({
+  title: "Uses",
+  ogTitle: "Uses — Kapil Kumar Jangid",
+  description: "Tools, technologies, languages, frameworks, editor settings, and hardware I use daily.",
+  keywords: ["uses", "setup", "editor", "developer tools", "languages", "frameworks", "hardware", "Kapil Kumar Jangid"],
+  path: "/uses",
+});
 
 export default function UsesPage() {
   return (

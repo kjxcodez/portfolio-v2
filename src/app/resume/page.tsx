@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -10,5 +11,5 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function ResumePage() {
-  return null;
+  redirect("/resume.pdf");
 }

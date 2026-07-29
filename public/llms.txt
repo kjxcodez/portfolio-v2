@@ -26,6 +26,9 @@ Kapil Kumar Jangid is a self-taught full-stack developer who builds web apps, de
 
 ## Projects
 
+- **Coding Agent - NERO** — Autonomous AI coding agent CLI for repository understanding and modification
+  https://kapiljangid.pro/projects/coding-agent-nero
+
 - **FlowCMS** — Headless CMS with visual block editor built with Next.js and Prisma
   https://kapiljangid.pro/projects/flowcms
 
