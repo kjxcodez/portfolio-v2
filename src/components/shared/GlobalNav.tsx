@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import IMG from "@/assets/logo.png";
@@ -21,16 +22,24 @@ import {
   Moon,
   X,
   Menu,
-  TableOfContentsIcon
+  TableOfContentsIcon,
+  ChevronDown,
 } from "lucide-react";
 import { GithubIcon } from "@/components/shared/icons";
 
 export function GlobalNav() {
   const { mode, setMode, isTransitioning } = useModeContext();
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+  // Suppress the floating desktop pill when mode-specific chrome handles nav (Desktop OS, Terminal OS)
+  const suppressDesktopPill = isHome && (mode === 2 || mode === 4);
+
   const [modeOpen, setModeOpen] = useState(false);
+  const [writingOpen, setWritingOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const modeRef = useRef<HTMLDivElement>(null);
+  const writingRef = useRef<HTMLDivElement>(null);
 
   // Close mode popover on outside click
   useEffect(() => {
@@ -42,6 +51,17 @@ export function GlobalNav() {
     if (modeOpen) document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
   }, [modeOpen]);
+
+  // Close writing popover on outside click
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (writingRef.current && !writingRef.current.contains(e.target as Node)) {
+        setWritingOpen(false);
+      }
+    }
+    if (writingOpen) document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [writingOpen]);
 
   // Theme toggle
   function toggleTheme() {
@@ -70,14 +90,18 @@ export function GlobalNav() {
       href: PERSONAL.github,
       external: true,
     },
-    { label: "Blog", icon: BookOpen, href: "/blog", external: false },
     { label: "Projects", icon: TableOfContentsIcon, href: "/projects", external: false },
     { label: "Contact", icon: Mail, href: `/contact`, external: false },
   ];
 
+  const writingItems = [
+    { label: "Blog", description: "Writing about building things", href: "/blog" },
+  ];
+
   return (
     <>
-      {/* Desktop nav — top-right floating pill */}
+      {/* Desktop nav — top-right floating pill (hidden in Desktop OS / Terminal OS modes on home) */}
+      {!suppressDesktopPill && (
       <header className="fixed top-4 right-4 z-[60] hidden md:block">
         <nav className="flex items-center gap-1 p-1.5 rounded-2xl border border-white/10 bg-black/60 backdrop-blur-xl shadow-2xl shadow-black/20">
           {/* Logo */}
@@ -111,9 +135,47 @@ export function GlobalNav() {
             </a>
           ))}
 
+          {/* Writing dropdown */}
+          <div ref={writingRef} className="relative">
+            <button
+              onClick={() => setWritingOpen(!writingOpen)}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
+              title="Writing"
+            >
+              <BookOpen size={14} />
+              <span className="hidden lg:inline">Writing</span>
+              <ChevronDown size={10} className={`hidden lg:block transition-transform duration-150 ${writingOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            <AnimatePresence>
+              {writingOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 top-full mt-2 w-48 bg-black/90 backdrop-blur-xl border border-white/10 rounded-2xl p-2 shadow-2xl"
+                >
+                  {writingItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setWritingOpen(false)}
+                      className="flex flex-col gap-0.5 px-3 py-2.5 rounded-xl text-left transition-all text-zinc-400 hover:text-white hover:bg-white/5"
+                    >
+                      <span className="text-sm font-medium">{item.label}</span>
+                      <span className="text-[11px] text-zinc-500">{item.description}</span>
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           <div className="w-px h-5 bg-white/10 mx-1" />
 
-          {/* Mode switcher */}
+          {/* Mode switcher — only on home route */}
+          {isHome && (
           <div ref={modeRef} className="relative">
             <button
               onClick={() => setModeOpen(!modeOpen)}
@@ -170,6 +232,7 @@ export function GlobalNav() {
               )}
             </AnimatePresence>
           </div>
+          )}
 
           {/* Theme toggle */}
           <button
@@ -192,8 +255,9 @@ export function GlobalNav() {
           </button>
         </nav>
       </header>
+      )}
 
-      {/* Mobile nav — hamburger */}
+      {/* Mobile nav — hamburger (always rendered, all modes) */}
       <header className="fixed top-3 right-3 z-[60] md:hidden">
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
@@ -254,9 +318,25 @@ export function GlobalNav() {
                     {item.label}
                   </a>
                 ))}
+                {/* Writing group inline on mobile */}
+                <div>
+                  <p className="text-[10px] uppercase tracking-wider text-zinc-600 mb-1 px-3 mt-3">Writing</p>
+                  {writingItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-zinc-400 hover:text-white hover:bg-white/5 transition-all"
+                    >
+                      <BookOpen size={16} />
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
 
-              {/* Mode selector */}
+              {/* Mode selector — only on home route */}
+              {isHome && (
               <div className="border-t border-white/10 pt-3">
                 <p className="text-[10px] uppercase tracking-wider text-zinc-600 mb-2 px-3">
                   Mode
@@ -291,6 +371,7 @@ export function GlobalNav() {
                   ))}
                 </div>
               </div>
+              )}
 
               {/* Theme */}
               <div className="border-t border-white/10 pt-3 mt-3">

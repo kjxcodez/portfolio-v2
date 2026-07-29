@@ -29,11 +29,15 @@ import {
   Terminal,
   Webhook,
   Globe,
-  Shield,
-  CreditCard,
-  RefreshCw,
   Lock,
   FlaskConical,
+  Bot,
+  Boxes,
+  Network,
+  Database,
+  CreditCard,
+  RefreshCw,
+  Shield,
 } from "lucide-react";
 
 export const SKILL_ICONS: Record<string, any> = {
@@ -77,14 +81,21 @@ export const SKILL_ICONS: Record<string, any> = {
   ri_cli: <Terminal size={22} />,
   ri_billing: <CreditCard size={22} />,
   ri_idempotent: <RefreshCw size={22} />,
+  // Engineering
+  ri_system_design: <Boxes size={22} />,
+  ri_api_design: <Network size={22} />,
+  ri_rbac: <Shield size={22} />,
+  ri_cache: <Database size={22} />,
+  // AI
+  ri_agents: <Bot size={22} />,
 };
 
 export const SKILL_CATEGORY_LABELS: Record<string, string> = {
-  languages: 'Languages',
-  frontend: 'Frontend',
-  backend: 'Backend',
-  databases: 'Databases',
-  integrations: 'Integrations',
-  tools: 'Tools',
-  other: 'Other',
+  languages: "Languages",
+  frontend: "Frontend",
+  backend: "Backend",
+  databases: "Databases",
+  integrations: "Integrations",
+  tools: "Tools",
+  other: "Other",
 };

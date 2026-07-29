@@ -4,6 +4,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
 import { PROJECTS } from '@/lib/data';
+import type { PostMeta } from '@/lib/mdx';
 
 interface NavItem {
   label: string;
@@ -16,12 +17,6 @@ interface NavItem {
 const STATIC_ITEMS: NavItem[] = [
   // Main
   { label: 'Home', description: 'Mode selector', href: '/', category: 'Main', emoji: '🏠' },
-  { label: 'Portfolio', description: 'Minimal mode — full portfolio', href: '/modes/minimal', category: 'Main', emoji: '👤' },
-  // Content
-  { label: 'Blog', description: 'Writing about building things', href: '/blog', category: 'Writing', emoji: '✍️' },
-  { label: 'Building Rune Lang', description: 'How I built a programming language', href: '/blog/building-rune-lang', category: 'Writing', emoji: '📝' },
-  { label: 'Percept UI Story', description: 'Lessons from an open source component library', href: '/blog/percept-ui-story', category: 'Writing', emoji: '📝' },
-  { label: 'Open Source Journey', description: 'My first 10 merged PRs', href: '/blog/open-source-journey', category: 'Writing', emoji: '📝' },
   // Pages
   { label: 'Now', description: "What I'm focused on right now", href: '/now', category: 'Pages', emoji: '🕐' },
   { label: 'Uses', description: 'My tools and setup', href: '/uses', category: 'Pages', emoji: '🛠️' },
@@ -35,23 +30,41 @@ const PROJECT_ITEMS: NavItem[] = PROJECTS.map(p => ({
   emoji: '🚀',
 }));
 
-const ALL_ITEMS = [...STATIC_ITEMS, ...PROJECT_ITEMS];
+function buildItems(posts: PostMeta[]): NavItem[] {
+  const writingItems: NavItem[] = [
+    { label: 'Blog', description: 'Writing about building things', href: '/blog', category: 'Writing', emoji: '✍️' },
+    ...posts.map(p => ({
+      label: p.title,
+      description: p.description ?? '',
+      href: `/blog/${p.slug}`,
+      category: 'Writing',
+      emoji: '📝',
+    })),
+  ];
+  return [...STATIC_ITEMS, ...writingItems, ...PROJECT_ITEMS];
+}
 
-export function QuickNav() {
+interface QuickNavProps {
+  posts?: PostMeta[];
+}
+
+export function QuickNav({ posts = [] }: QuickNavProps) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
+  const allItems = buildItems(posts);
+
   const filtered = query.trim()
-    ? ALL_ITEMS.filter(
+    ? allItems.filter(
         item =>
           item.label.toLowerCase().includes(query.toLowerCase()) ||
           item.description.toLowerCase().includes(query.toLowerCase()) ||
           item.category.toLowerCase().includes(query.toLowerCase()),
       )
-    : ALL_ITEMS;
+    : allItems;
 
   const close = useCallback(() => {
     setOpen(false);
@@ -64,7 +77,7 @@ export function QuickNav() {
     router.push(href);
   }, [close, router]);
 
-  // Listen for custom event from SiteHeader trigger button
+  // Listen for custom event from GlobalNav trigger button
   useEffect(() => {
     const onOpen = () => setOpen(true);
     window.addEventListener('quicknav:open', onOpen);

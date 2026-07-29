@@ -711,61 +711,77 @@ export const PROJECTS: Project[] = [
 
 // ─── Skills ──────────────────────────────────────────────────────
 export const SKILLS: Skill[] = [
-  // Languages
-  { name: 'JavaScript', icon: 'javascript', category: 'languages', level: 3, core: true },
+  // ─── Languages ────────────────────────────────────────────────
   { name: 'TypeScript', icon: 'typescript', category: 'languages', level: 3, core: true },
-  { name: 'Python', icon: 'python', category: 'languages', level: 2, core: true },
-  // Frontend
+  { name: 'JavaScript', icon: 'javascript', category: 'languages', level: 3, core: true },
+  { name: 'Python', icon: 'python', category: 'languages', level: 3, core: true },
+
+  // ─── Frontend ─────────────────────────────────────────────────
   { name: 'React', icon: 'react', category: 'frontend', level: 3, core: true },
   { name: 'Next.js', icon: 'ri_nextjs', category: 'frontend', level: 3, core: true },
   { name: 'Tailwind CSS', icon: 'tailwind', category: 'frontend', level: 3, core: true },
-  { name: 'ShadCN', icon: 'ri_shadcn', category: 'frontend', level: 3 },
-  { name: 'MUI', icon: 'ri_mui', category: 'frontend', level: 2 },
-  { name: 'Chakra UI', icon: 'ri_chakra', category: 'frontend', level: 2 },
-  // Backend
+  { name: 'ShadCN UI', icon: 'ri_shadcn', category: 'frontend', level: 3 },
+
+  // ─── Backend ──────────────────────────────────────────────────
   { name: 'Node.js', icon: 'ri_nodejs', category: 'backend', level: 3, core: true },
   { name: 'Express', icon: 'ri_express', category: 'backend', level: 3 },
-  { name: 'REST APIs', icon: 'ri_api', category: 'backend', level: 3 },
+  { name: 'REST APIs', icon: 'ri_api', category: 'backend', level: 3, core: true },
+  { name: 'Authentication', icon: 'ri_auth', category: 'backend', level: 3 },
   { name: 'Webhooks', icon: 'ri_webhook', category: 'backend', level: 3 },
   { name: 'Redis', icon: 'ri_redis', category: 'backend', level: 2 },
-  { name: 'Better Auth', icon: 'ri_auth', category: 'backend', level: 2 },
-  // Databases
+
+  // ─── Databases ────────────────────────────────────────────────
   { name: 'PostgreSQL', icon: 'ri_postgresql', category: 'databases', level: 3, core: true },
-  { name: 'MongoDB', icon: 'ri_mongodb', category: 'databases', level: 2 },
+  { name: 'MongoDB', icon: 'ri_mongodb', category: 'databases', level: 3 },
   { name: 'Prisma', icon: 'ri_prisma', category: 'databases', level: 3, core: true },
   { name: 'Supabase', icon: 'ri_supabase', category: 'databases', level: 2 },
-  // Integrations
+
+  // ─── AI & Integrations ────────────────────────────────────────
+  { name: 'AI Agents', icon: 'ri_agents', category: 'integrations', level: 2, core: true },
+  { name: 'LLM Integrations', icon: 'ri_llm', category: 'integrations', level: 3, core: true },
+  { name: 'Gemini', icon: 'ri_gemini', category: 'integrations', level: 3 },
   { name: 'Meta Cloud API', icon: 'ri_meta', category: 'integrations', level: 3 },
   { name: 'WhatsApp Business', icon: 'ri_whatsapp', category: 'integrations', level: 3 },
   { name: 'Shopify API', icon: 'ri_shopify', category: 'integrations', level: 3 },
   { name: 'Razorpay', icon: 'ri_razorpay', category: 'integrations', level: 2 },
-  { name: 'Gemini', icon: 'ri_gemini', category: 'integrations', level: 2 },
   { name: 'Resend', icon: 'ri_resend', category: 'integrations', level: 2 },
-  // Tools
+
+  // ─── Tools ────────────────────────────────────────────────────
   { name: 'Git', icon: 'git', category: 'tools', level: 3 },
-  { name: 'Playwright', icon: 'ri_playwright', category: 'tools', level: 2 },
+  { name: 'Playwright', icon: 'ri_playwright', category: 'tools', level: 3 },
   { name: 'VS Code Extensions', icon: 'vscode', category: 'tools', level: 3 },
-  { name: 'Sentry', icon: 'ri_sentry', category: 'tools', level: 2 },
-  { name: 'Cloudflare', icon: 'ri_cloudflare', category: 'tools', level: 2 },
-  // Other
-  { name: 'CLI Tooling', icon: 'ri_cli', category: 'other', level: 3 },
-  { name: 'SaaS Billing', icon: 'ri_billing', category: 'other', level: 2 },
-  { name: 'Idempotent Webhooks', icon: 'ri_idempotent', category: 'other', level: 2 },
-]
+  { name: 'Cloudflare', icon: 'ri_cloudflare', category: 'tools', level: 3 },
+  { name: 'Sentry', icon: 'ri_sentry', category: 'tools', level: 3 },
+
+  // ─── Engineering ──────────────────────────────────────────────
+  { name: 'CLI Tooling', icon: 'ri_cli', category: 'other', level: 3, core: true },
+  { name: 'System Design', icon: 'ri_system_design', category: 'other', level: 3, core: true },
+  { name: 'API Design', icon: 'ri_api_design', category: 'other', level: 3 },
+  { name: 'RBAC', icon: 'ri_rbac', category: 'other', level: 3 },
+  { name: 'Caching', icon: 'ri_cache', category: 'other', level: 3 },
+];
 
 // ─── Currently Building ─────────────────────────────────────────
 export const CURRENTLY_BUILDING: CurrentProject[] = [
   {
-    title: 'kapil-portfolio',
-    description: 'This portfolio — 4 modes, RPG world, macOS desktop, terminal OS. You\'re looking at it.',
-    url: 'https://github.com/kjxcodez',
-    status: 'In progress',
+    title: 'CXDE',
+    description:
+      'An AI-native coding assistant focused on autonomous software engineering, multi-agent workflows, and repository intelligence.',
+    status: 'Active Development',
   },
   {
-    title: 'Percept UI v2',
-    description: 'Rebuilding the component library with Tailwind v4 and React 19 server components.',
-    status: 'Early design',
+    title: 'LeadForge',
+    description:
+      'AI-powered lead generation platform combining web scraping, CRM, outreach automation, and intelligent lead discovery.',
+    status: 'Architecture',
   },
+  {
+    title: 'FlowCMS',
+    description:
+      'Expanding FlowCMS with AI-assisted content generation, plugin architecture, developer APIs, and platform improvements.',
+    url: 'https://getflowcms.com',
+    status: 'Active Development',
+  }
 ]
 
 // ─── Open Source Contributions ───────────────────────────────────

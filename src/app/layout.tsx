@@ -5,6 +5,7 @@ import { homeOGUrl } from "@/lib/og";
 import { BASE_URL } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import { QuickNav } from "@/components/shared/QuickNav";
+import { getAllPosts } from "@/lib/mdx";
 import { ModeProvider } from "@/components/shared/ModeProvider";
 import { GlobalNav } from "@/components/shared/GlobalNav";
 import { AIChatButton } from "@/components/shared/AIChatButton";
@@ -104,6 +105,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const posts = getAllPosts();
   return (
     <html
       lang="en"
@@ -143,7 +145,7 @@ export default function RootLayout({
         <ModeProvider>
           {/* Global persistent layer */}
           <GlobalNav />
-          <QuickNav />
+          <QuickNav posts={posts} />
           <AIChatButton />
 
           {/* Page content */}
