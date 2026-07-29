@@ -75,7 +75,7 @@ export function GlobalNav() {
     }
   }
 
-  // Cmd+K for QuickNav
+  // ⌘K button — dispatches event that CommandPalette listens for
   function openQuickNav() {
     window.dispatchEvent(new CustomEvent("quicknav:open"));
   }

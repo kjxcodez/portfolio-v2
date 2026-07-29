@@ -4,7 +4,7 @@ import "./globals.css";
 import { homeOGUrl } from "@/lib/og";
 import { BASE_URL } from "@/lib/seo";
 import { cn } from "@/lib/utils";
-import { QuickNav } from "@/components/shared/QuickNav";
+import { CommandPalette } from "@/components/easter-eggs/CommandPalette";
 import { getAllPosts } from "@/lib/mdx";
 import { ModeProvider } from "@/components/shared/ModeProvider";
 import { GlobalNav } from "@/components/shared/GlobalNav";
@@ -145,7 +145,7 @@ export default function RootLayout({
         <ModeProvider>
           {/* Global persistent layer */}
           <GlobalNav />
-          <QuickNav posts={posts} />
+          <CommandPalette posts={posts} />
           <AIChatButton />
 
           {/* Page content */}

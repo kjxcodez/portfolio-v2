@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import { dispatchAchievement } from '@/lib/easter-eggs'
-import { RESUME_URL, PERSONAL } from '@/lib/data'
+import { RESUME_URL, PERSONAL, PROJECTS } from '@/lib/data'
+import type { PostMeta } from '@/lib/mdx'
+import { useModeContext } from '@/components/shared/ModeProvider'
 
 const MatrixRain = dynamic(() => import('./MatrixRain'), { ssr: false })
 
@@ -19,23 +21,44 @@ interface OutputItem {
   lines: string[]
 }
 
-export function CommandPalette() {
+interface NavItem {
+  id: string
+  label: string
+  hint: string
+  href: string
+}
+
+interface CommandPaletteProps {
+  posts?: PostMeta[]
+}
+
+export function CommandPalette({ posts = [] }: CommandPaletteProps) {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
+  const [selected, setSelected] = useState(0)
   const [output, setOutput] = useState<OutputItem | null>(null)
   const [showMatrix, setShowMatrix] = useState(false)
+  
   const inputRef = useRef<HTMLInputElement>(null)
+  const activeItemRef = useRef<HTMLButtonElement>(null)
   const openedOnce = useRef(false)
+  
   const router = useRouter()
+  const { setMode } = useModeContext()
 
+  // Visible action commands (with proper setMode triggers and routing to home page)
   const visibleCommands: Command[] = [
+    { id: 'mode-1', label: 'Professional mode', hint: 'Switch layout to Professional', action: () => { setMode(1); router.push('/'); setOpen(false) } },
+    { id: 'mode-2', label: 'Desktop OS mode', hint: 'Switch layout to Desktop OS', action: () => { setMode(2); router.push('/'); setOpen(false) } },
+    { id: 'mode-3', label: 'RPG World mode', hint: 'Switch layout to RPG World', action: () => { setMode(3); router.push('/'); setOpen(false) } },
+    { id: 'terminal', label: 'Terminal mode', hint: 'Switch layout to Terminal OS', action: () => { setMode(4); router.push('/'); setOpen(false) } },
     { id: 'blog', label: 'Open Blog', action: () => { router.push('/blog'); setOpen(false) } },
     { id: 'resume', label: 'Open Resume', action: () => { window.open(RESUME_URL, '_blank'); setOpen(false) } },
     { id: 'contact', label: 'Contact', action: () => { window.location.href = `mailto:${PERSONAL.email}`; setOpen(false) } },
-    { id: 'terminal', label: 'Terminal mode', hint: 'Switch to Terminal OS', action: () => { router.push('/?mode=4'); setOpen(false) } },
-    { id: 'secret', label: 'Secret Commands', hint: 'Some commands are hidden…', action: () => setQuery('') },
+    { id: 'secret', label: 'Secret Commands', hint: 'Some commands are hidden...', action: () => setQuery('') },
   ]
 
+  // Hidden easter-egg commands (unchanged from original)
   const hiddenCommands: Command[] = [
     {
       id: 'matrix', label: 'matrix', action: () => {
@@ -88,15 +111,68 @@ export function CommandPalette() {
     },
   ]
 
+  // Dynamic nav items (ported from retired QuickNav)
+  const navItems: NavItem[] = [
+    { id: 'nav-home',     label: 'Home',     hint: 'Mode selector',           href: '/'         },
+    { id: 'nav-projects', label: 'Projects', hint: 'All projects',            href: '/projects' },
+    { id: 'nav-now',      label: 'Now',      hint: "What I'm focused on now", href: '/now'      },
+    { id: 'nav-uses',     label: 'Uses',     hint: 'My tools and setup',      href: '/uses'     },
+    ...PROJECTS.map((p) => ({
+      id: `nav-project-${p.id}`,
+      label: p.title,
+      hint: p.description,
+      href: `/projects/${p.id}`,
+    })),
+    ...posts.map((p) => ({
+      id: `nav-post-${p.slug}`,
+      label: p.title,
+      hint: p.description ?? 'Blog post',
+      href: `/blog/${p.slug}`,
+    })),
+  ]
+
+  // Filtering -- hidden-command gate preserved exactly from original
   const q = query.trim().toLowerCase()
-  const allCommands = [...visibleCommands, ...hiddenCommands]
   const isHiddenQuery = hiddenCommands.some((c) => c.id === q)
-  const filtered = isHiddenQuery
+
+  const filteredCommands = isHiddenQuery
     ? hiddenCommands.filter((c) => c.id === q)
     : visibleCommands.filter((c) =>
         !q || c.label.toLowerCase().includes(q) || c.id.includes(q)
       )
 
+  const filteredNav = !isHiddenQuery
+    ? navItems.filter(
+        (n) =>
+          !q ||
+          n.label.toLowerCase().includes(q) ||
+          n.hint.toLowerCase().includes(q)
+      )
+    : []
+
+  // Combine commands and nav items for single flat list keyboard index selection
+  const combinedList = [
+    ...filteredCommands.map(c => ({ type: 'command' as const, data: c, id: c.id, label: c.label, hint: c.hint })),
+    ...filteredNav.map(n => ({ type: 'nav' as const, data: n, id: n.id, label: n.label, hint: n.hint }))
+  ]
+
+  const hasResults = combinedList.length > 0
+
+  // Reset selected index to 0 when query changes
+  useEffect(() => {
+    setSelected(0)
+  }, [query])
+
+  // Scroll active item into view
+  useEffect(() => {
+    if (activeItemRef.current) {
+      activeItemRef.current.scrollIntoView({
+        block: 'nearest',
+      })
+    }
+  }, [selected])
+
+  // Open/close listeners
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
@@ -121,6 +197,23 @@ export function CommandPalette() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [])
 
+  // Listen for GlobalNav cmdk button dispatch
+  useEffect(() => {
+    function onOpen() {
+      setOpen((v) => {
+        if (!v && !openedOnce.current) {
+          openedOnce.current = true
+          dispatchAchievement('command-palette', 'Explorer')
+        }
+        return true
+      })
+      setQuery('')
+      setOutput(null)
+    }
+    window.addEventListener('quicknav:open', onOpen)
+    return () => window.removeEventListener('quicknav:open', onOpen)
+  }, [])
+
   useEffect(() => {
     if (open) {
       setOutput(null)
@@ -135,9 +228,33 @@ export function CommandPalette() {
     }
   }
 
+  function handleNavSelect(item: NavItem) {
+    setOpen(false)
+    setQuery('')
+    setOutput(null)
+    router.push(item.href)
+  }
+
+  function handleItemSelect(item: typeof combinedList[0]) {
+    if (item.type === 'command') {
+      handleSelect(item.data)
+    } else {
+      handleNavSelect(item.data)
+    }
+  }
+
   function handleKeyDown(e: React.KeyboardEvent) {
-    if (e.key === 'Enter' && filtered.length === 1) {
-      handleSelect(filtered[0])
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      setSelected((s) => Math.min(s + 1, combinedList.length - 1))
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      setSelected((s) => Math.max(s - 1, 0))
+    } else if (e.key === 'Enter') {
+      const activeItem = combinedList[selected]
+      if (activeItem) {
+        handleItemSelect(activeItem)
+      }
     }
   }
 
@@ -150,24 +267,22 @@ export function CommandPalette() {
           onClick={() => { setOpen(false); setQuery(''); setOutput(null) }}
         >
           <div
-            className="w-full max-w-sm bg-black/95 border border-zinc-700 rounded-xl shadow-2xl overflow-hidden"
+            className="w-full max-w-md bg-black/95 border border-zinc-700 rounded-xl shadow-2xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Input */}
             <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800">
-              <span className="text-zinc-500 text-xs font-mono">⌘</span>
+              <span className="text-zinc-500 text-xs font-mono">cmd</span>
               <input
                 ref={inputRef}
                 value={query}
                 onChange={(e) => { setQuery(e.target.value); setOutput(null) }}
                 onKeyDown={handleKeyDown}
-                placeholder="Type a command…"
+                placeholder="Type a command or page name..."
                 className="flex-1 bg-transparent text-sm text-white placeholder-zinc-600 outline-none font-mono"
               />
               <kbd className="text-[10px] text-zinc-600 border border-zinc-700 px-1 rounded">esc</kbd>
             </div>
 
-            {/* Output panel */}
             {output ? (
               <div className="px-4 py-3 font-mono">
                 {output.lines.map((line, i) => (
@@ -179,31 +294,58 @@ export function CommandPalette() {
                   onClick={() => setOutput(null)}
                   className="mt-3 text-[10px] text-zinc-600 hover:text-zinc-400 transition-colors"
                 >
-                  ← back
+                  back
                 </button>
               </div>
             ) : (
-              <ul className="py-1 max-h-56 overflow-y-auto">
-                {filtered.length === 0 ? (
-                  <li className="px-4 py-3 text-xs text-zinc-600 font-mono">No commands found</li>
+              <div className="max-h-80 overflow-y-auto">
+                {!hasResults ? (
+                  <p className="px-4 py-3 text-xs text-zinc-600 font-mono">No commands found</p>
                 ) : (
-                  filtered.map((cmd) => (
-                    <li key={cmd.id}>
-                      <button
-                        onClick={() => handleSelect(cmd)}
-                        className="w-full text-left px-4 py-2.5 hover:bg-zinc-800/60 transition-colors flex items-center justify-between gap-4"
-                      >
-                        <span className="text-sm text-zinc-200 font-mono">{cmd.label}</span>
-                        {cmd.hint && <span className="text-[10px] text-zinc-600">{cmd.hint}</span>}
-                      </button>
-                    </li>
-                  ))
+                  <ul className="py-1">
+                    {combinedList.map((item, idx) => {
+                      const isSelected = idx === selected
+                      const showCommandsHeader = idx === 0 && item.type === 'command' && q === ''
+                      const isFirstNav = item.type === 'nav' && (idx === 0 || combinedList[idx - 1].type === 'command')
+                      const showNavHeader = isFirstNav && (q === '' || filteredCommands.length > 0)
+
+                      return (
+                        <li key={item.id}>
+                          {showCommandsHeader && (
+                            <div className="px-4 pt-2 pb-1">
+                              <span className="text-[10px] text-zinc-600 font-mono uppercase tracking-widest">Commands</span>
+                            </div>
+                          )}
+                          {showNavHeader && (
+                            <div className={`px-4 pt-2 pb-1 ${idx > 0 ? 'border-t border-zinc-800/60 mt-1' : ''}`}>
+                              <span className="text-[10px] text-zinc-600 font-mono uppercase tracking-widest">Go to</span>
+                            </div>
+                          )}
+                          <button
+                            ref={isSelected ? activeItemRef : undefined}
+                            onClick={() => handleItemSelect(item)}
+                            onMouseEnter={() => setSelected(idx)}
+                            className={`w-full text-left px-4 py-2.5 transition-colors flex items-center justify-between gap-4 ${
+                              isSelected ? 'bg-zinc-800/60' : ''
+                            }`}
+                          >
+                            <span className="text-sm text-zinc-200 font-mono">{item.label}</span>
+                            {item.hint && (
+                              <span className={`text-[10px] ${isSelected ? 'text-zinc-400' : 'text-zinc-600'} truncate max-w-[150px]`}>
+                                {item.hint}
+                              </span>
+                            )}
+                          </button>
+                        </li>
+                      )
+                    })}
+                  </ul>
                 )}
-              </ul>
+              </div>
             )}
 
             <div className="px-4 py-2 border-t border-zinc-800/60 flex items-center gap-3">
-              <span className="text-[10px] text-zinc-700">↵ select</span>
+              <span className="text-[10px] text-zinc-700">enter select</span>
               <span className="text-[10px] text-zinc-700">esc close</span>
               <span className="text-[10px] text-zinc-700 ml-auto">ctrl+k</span>
             </div>
@@ -213,3 +355,4 @@ export function CommandPalette() {
     </>
   )
 }
+
