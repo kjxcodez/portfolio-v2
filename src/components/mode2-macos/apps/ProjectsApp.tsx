@@ -10,6 +10,7 @@ import { trackEvent } from '@/lib/analytics';
 export function ProjectsApp() {
   const [activeCategory, setActiveCategory] = useState<'featured' | 'all'>('featured');
   const [selected, setSelected] = useState<Project>(PROJECTS[0]);
+  const [mobileDetailOpen, setMobileDetailOpen] = useState(false);
 
   const filteredProjects = PROJECTS.filter(p => {
     if (activeCategory === 'featured') return p.featured;
@@ -26,7 +27,7 @@ export function ProjectsApp() {
   return (
     <div className="h-full flex overflow-hidden text-white font-sans select-none">
       {/* 1. Left Sidebar: Category Selectors */}
-      <div className="w-40 shrink-0 border-r border-white/10 overflow-y-auto bg-zinc-950/40 p-2.5 flex flex-col gap-1">
+      <div className="hidden md:flex w-40 shrink-0 border-r border-white/10 overflow-y-auto bg-zinc-950/40 p-2.5 flex-col gap-1">
         <div className="px-2 py-1 text-[9px] font-semibold uppercase tracking-widest text-zinc-500 mb-1">
           Explore
         </div>
@@ -55,7 +56,7 @@ export function ProjectsApp() {
       </div>
 
       {/* 2. Center Area: Project Cards Grid */}
-      <div className="flex-1 overflow-y-auto p-4 border-r border-white/10 bg-zinc-900/10">
+      <div className={`flex-1 overflow-y-auto p-4 border-r border-white/10 bg-zinc-900/10 ${mobileDetailOpen ? 'hidden md:block' : 'block'}`}>
         <h3 className="text-[10px] font-semibold uppercase tracking-widest text-zinc-500 mb-3 select-none">
           {activeCategory === 'featured' ? 'Featured Items' : 'All Work'}
         </h3>
@@ -65,6 +66,7 @@ export function ProjectsApp() {
               key={p.id}
               onClick={() => {
                 setSelected(p);
+                setMobileDetailOpen(true);
                 try {
                   trackEvent('project_open', { projectId: p.id, source: 'Kapil OS' });
                 } catch (e) {}
@@ -88,9 +90,17 @@ export function ProjectsApp() {
       </div>
 
       {/* 3. Right Panel: Dynamic Details Sheet */}
-      <div className="w-64 shrink-0 overflow-y-auto p-5 bg-zinc-950/20 flex flex-col select-text">
+      <div className={`overflow-y-auto p-5 bg-zinc-950/20 flex flex-col select-text ${mobileDetailOpen ? 'w-full flex' : 'hidden md:flex md:w-64 md:shrink-0'}`}>
         {selected ? (
           <>
+            {/* Mobile Back Button */}
+            <button
+              onClick={() => setMobileDetailOpen(false)}
+              className="md:hidden flex items-center gap-1 text-xs text-blue-400 font-semibold mb-4 focus:outline-none active:opacity-75 cursor-pointer self-start"
+            >
+              <span>←</span> Back to list
+            </button>
+
             <div className="flex items-start justify-between gap-4 mb-4 select-none">
               <div className="min-w-0">
                 <h2 className="text-sm font-bold text-white leading-tight break-words">{selected.title}</h2>

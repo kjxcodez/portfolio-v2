@@ -48,7 +48,7 @@ export default function BlogPage() {
           >
             <ArrowLeft size={12} /> Back to portfolio
           </Link>
-          <p className="uppercase mb-1 text-muted-foreground font-mono text-xs tracking-wide">
+          <p className="uppercase mb-1 text-foreground/60 font-semibold font-mono text-xs tracking-wide">
             Writing
           </p>
           <h1 className="text-2xl font-bold text-(--text-primary) font-ui">

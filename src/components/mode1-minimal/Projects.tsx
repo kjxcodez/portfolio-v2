@@ -44,6 +44,8 @@ function TypeBadge({ type }: { type: ProjectType }) {
 
 // ─── Web / Tool / Extension / Language compact card ─────────────────
 function WebProjectCard({ project, idx }: { project: Project; idx: number }) {
+  const cardImage = project.image || project.screenshots?.[0];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -51,9 +53,18 @@ function WebProjectCard({ project, idx }: { project: Project; idx: number }) {
       whileHover={{ y: -2 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ delay: idx * 0.06, duration: 0.35 }}
-      className="flex flex-col rounded-lg transition-colors duration-150 bg-(--bg-surface) border border hover:border-(--accent-border)"
+      className="flex flex-col rounded-lg transition-colors duration-150 bg-(--bg-surface) border border hover:border-(--accent-border) overflow-hidden"
     >
-      <div className="p-4 flex flex-col gap-2">
+      {cardImage && (
+        <div className="w-full aspect-video overflow-hidden border-b border-[var(--border-default)] relative bg-zinc-950/20">
+          <img
+            src={cardImage}
+            alt={project.title}
+            className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-300"
+          />
+        </div>
+      )}
+      <div className="p-4 flex flex-col gap-2 flex-1">
         <div className="flex items-start justify-between gap-2">
           <motion.div
             initial="rest"
@@ -80,7 +91,7 @@ function WebProjectCard({ project, idx }: { project: Project; idx: number }) {
                   duration: 0.25,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="absolute left-0 -bottom-1 h-[1px] w-full origin-left bg-blue-500"
+                className="absolute left-0 -bottom-1 h-[1px] w-full origin-left bg-[var(--accent)]"
               />
             </Link>
           </motion.div>
@@ -143,55 +154,66 @@ export function FeaturedProjects() {
 
   return (
     <div className="flex flex-col items-start w-full my-6 gap-4">
-      <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-muted-foreground">
+      <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-foreground/60 font-semibold">
         Featured Projects
       </h2>
 
       <div className="flex flex-col w-full gap-3">
-        {featured.map((project, idx) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -2 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ delay: idx * 0.08, duration: 0.4 }}
-            className="group relative rounded-lg transition-colors duration-150 bg-(--bg-surface) border border hover:border-(--accent-border)"
-          >
-            <div className="p-5">
-              {/* Title row */}
-              <div className="flex items-start justify-between gap-3 mb-2">
-                <div className="flex items-center gap-2 min-w-0">
-                  <motion.div
-                    initial="rest"
-                    whileHover="hover"
-                    className="relative w-fit"
-                  >
-                    <Link
-                      href={`/projects/${project.id}`}
-                      className="relative text-sm font-medium font-ui text-(--text-primary) hover:font-bold transition-all duration-400"
+        {featured.map((project, idx) => {
+          const cardImage = project.image || project.screenshots?.[0];
+          return (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -2 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ delay: idx * 0.08, duration: 0.4 }}
+              className="group relative rounded-lg transition-colors duration-150 bg-(--bg-surface) border border hover:border-(--accent-border) overflow-hidden"
+            >
+              {cardImage && (
+                <div className="w-full aspect-video overflow-hidden border-b border-[var(--border-default)] relative bg-zinc-950/20">
+                  <img
+                    src={cardImage}
+                    alt={project.title}
+                    className="w-full h-full object-cover object-top group-hover:scale-[1.02] transition-transform duration-300"
+                  />
+                </div>
+              )}
+              <div className="p-5">
+                {/* Title row */}
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <motion.div
+                      initial="rest"
+                      whileHover="hover"
+                      className="relative w-fit"
                     >
-                      {project.title}
-                      <motion.span
-                        variants={{
-                          rest: {
-                            scaleX: 0,
-                            opacity: 0,
-                          },
-                          hover: {
-                            scaleX: 1,
-                            opacity: 1,
-                          },
-                        }}
-                        transition={{
-                          duration: 0.25,
-                          ease: [0.22, 1, 0.36, 1],
-                        }}
-                        className="absolute left-0 -bottom-1 h-[1px] w-full origin-left bg-blue-500"
-                      />
-                    </Link>
-                  </motion.div>
-                  <span className="font-mono [font-size:var(--text-xs)] text-muted-foreground tracking-[0.04em] shrink-0">
+                      <Link
+                        href={`/projects/${project.id}`}
+                        className="relative text-sm font-medium font-ui text-(--text-primary) hover:font-bold transition-all duration-400"
+                      >
+                        {project.title}
+                        <motion.span
+                          variants={{
+                            rest: {
+                              scaleX: 0,
+                              opacity: 0,
+                            },
+                            hover: {
+                              scaleX: 1,
+                              opacity: 1,
+                            },
+                          }}
+                          transition={{
+                            duration: 0.25,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
+                          className="absolute left-0 -bottom-1 h-[1px] w-full origin-left bg-[var(--accent)]"
+                        />
+                      </Link>
+                    </motion.div>
+                    <span className="font-mono [font-size:var(--text-xs)] text-muted-foreground tracking-[0.04em] shrink-0">
                     {project.year}
                   </span>
                 </div>
@@ -250,7 +272,8 @@ export function FeaturedProjects() {
               </Link>
             </div>
           </motion.div>
-        ))}
+        );
+      })}
       </div>
     </div>
   );
@@ -263,7 +286,7 @@ export function OtherProjects() {
 
   return (
     <div className="flex flex-col items-start w-full my-4 gap-4">
-      <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-muted-foreground">
+      <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-foreground/60 font-semibold">
         Other Projects
       </h2>
 

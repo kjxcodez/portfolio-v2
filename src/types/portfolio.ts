@@ -42,6 +42,7 @@ export interface Skill {
   icon: string
   category: 'languages' | 'frontend' | 'backend' | 'databases' | 'integrations' | 'tools' | 'other'
   level: 1 | 2 | 3      // 1=learning, 2=proficient, 3=expert
+  core?: boolean
 }
 
 export interface Contribution {

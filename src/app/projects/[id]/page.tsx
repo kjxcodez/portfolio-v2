@@ -224,6 +224,17 @@ export default async function ProjectPage({
         </div>
       </div>
 
+      {/* Featured Cover Image */}
+      {(project.image || (project.screenshots && project.screenshots.length > 0)) && (
+        <div className="mb-8 w-full aspect-video rounded-xl overflow-hidden border border-[var(--border-default)] bg-zinc-950/20 relative">
+          <img
+            src={project.image || project.screenshots?.[0]}
+            alt={project.title}
+            className="w-full h-full object-cover object-top"
+          />
+        </div>
+      )}
+
       {/* ── Overview ───────────────────────────────────────────────── */}
       <Section label="Overview">
         <p className="text-sm leading-relaxed text-muted-foreground font-ui">

@@ -91,7 +91,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: -4 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -4 }}
-                className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] px-2 py-0.5 rounded whitespace-nowrap transition-colors font-mono border border-accent"
+                className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] px-2 py-0.5 rounded whitespace-nowrap transition-colors font-mono border border-[var(--accent)]"
               >
                 Resume.pdf
               </motion.a>
@@ -112,7 +112,7 @@ export function Hero() {
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => trackEvent('resume_click', { source: 'Professional Hero' })}
-          className="inline-flex items-center gap-2 active:scale-[0.98] font-ui text-sm font-medium px-4 py-2 rounded-lg transition-colors border border-accent hover:text-white hover:bg-purple-600"
+          className="inline-flex items-center gap-2 active:scale-[0.98] font-ui text-sm font-medium px-4 py-2 rounded-lg transition-colors border border-[var(--accent)] hover:text-white hover:bg-[var(--accent-hover)] hover:border-[var(--accent-hover)]"
         >
           <FileText size={15} />
           Resume

@@ -41,7 +41,7 @@ export function Blog({ posts }: BlogProps) {
   return (
     <div className="flex flex-col items-start w-full my-6 gap-4">
       <div className="flex items-center justify-between w-full">
-        <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-muted-foreground">
+        <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-foreground/60 font-semibold">
           Blog
         </h2>
         <a

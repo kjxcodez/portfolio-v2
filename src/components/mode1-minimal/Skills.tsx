@@ -63,14 +63,53 @@ export function Skills() {
   }
 
   const grouped = groupSkills();
+  const coreSkills = SKILLS.filter((s) => s.core);
 
   return (
     <div ref={ref} className="flex flex-col items-start w-full gap-5 my-6">
       <div className="flex items-center justify-between w-full">
-        <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-muted-foreground">
+        <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-foreground/60 font-semibold">
           Skills <span className="font-normal">({SKILLS.length})</span>
         </h2>
       </div>
+
+      {coreSkills.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.4 }}
+          className="w-full mb-3"
+        >
+          <h3 className="mb-3 uppercase font-mono [font-size:var(--text-xs)] tracking-[0.08em] text-muted-foreground font-semibold">
+            Core Stack
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 w-full">
+            {coreSkills.map((skill, idx) => {
+              const icon = SKILL_ICONS[skill.icon];
+              const isReactElement = skill.icon.startsWith("ri_");
+              return (
+                <motion.div
+                  key={`core-${skill.name}`}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={inView ? { opacity: 1, scale: 1 } : {}}
+                  whileHover={{ y: -1 }}
+                  transition={{ delay: idx * 0.04, duration: 0.25 }}
+                  className="group flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl transition-all cursor-default bg-(--bg-surface) border border-[var(--accent-border)] hover:bg-(--bg-elevated) hover:border-[var(--accent)] hover:shadow-sm"
+                  title={`${skill.name} — Expert Core Skill`}
+                  onMouseEnter={() => handleSkillHover(skill.name)}
+                >
+                  <span className="text-[var(--text-secondary)] group-hover:scale-105 transition-transform flex items-center justify-center">
+                    {isReactElement ? icon : icon ? <HugeiconsIcon icon={icon} size={18} /> : null}
+                  </span>
+                  <span className="text-xs font-semibold font-ui text-[var(--text-primary)]">
+                    {skill.name}
+                  </span>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+      )}
 
       <div className="flex flex-col w-full gap-6">
         {grouped.map((group, groupIdx) => (

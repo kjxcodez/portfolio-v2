@@ -62,68 +62,80 @@ function FilterPill({
 function ProjectCard({ project }: { project: Project }) {
   const isLive = project.status?.toLowerCase() === "live";
   const isWip = !!project.status && !isLive;
+  const cardImage = project.image || project.screenshots?.[0];
 
   return (
     <Link
       href={`/projects/${project.id}`}
-      className="group flex flex-col gap-3 p-4 rounded-xl border bg-(--bg-surface) hover:border-(--border-strong) hover:bg-(--bg-elevated) transition-all duration-200"
+      className="group flex flex-col rounded-xl border bg-(--bg-surface) hover:border-(--border-strong) hover:bg-(--bg-elevated) transition-all duration-200 overflow-hidden"
     >
-      {/* Meta row */}
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="inline-flex items-center gap-1 rounded border bg-(--tag-bg) text-(--tag-text) font-mono text-[0.625rem] tracking-tight px-2 py-0.5">
-          {TYPE_ICON[project.type]}
-          {TYPE_LABEL[project.type]}
-        </span>
-        <span className="text-muted-foreground font-mono text-[0.625rem] tracking-tight">
-          {project.year}
-        </span>
-        {isLive && (
-          <span className="inline-flex items-center rounded border border-(--success) bg-(--success-subtle) text-(--success) font-mono text-[0.625rem] tracking-tight px-2 py-0.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-(--success) inline-block mr-1 animate-pulse" />
-            Live
+      {cardImage && (
+        <div className="w-full aspect-video overflow-hidden border-b border-(--border-default) relative bg-zinc-950/20">
+          <img
+            src={cardImage}
+            alt={project.title}
+            className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-300"
+          />
+        </div>
+      )}
+      <div className="p-4 flex flex-col gap-3 flex-1">
+        {/* Meta row */}
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="inline-flex items-center gap-1 rounded border bg-(--tag-bg) text-(--tag-text) font-mono text-[0.625rem] tracking-tight px-2 py-0.5">
+            {TYPE_ICON[project.type]}
+            {TYPE_LABEL[project.type]}
           </span>
-        )}
-        {isWip && (
-          <span className="inline-flex items-center rounded border border-(--warning) bg-(--warning-subtle) text-(--warning) font-mono text-[0.625rem] tracking-tight px-2 py-0.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-(--warning) inline-block mr-1" />
-            {project.status}
+          <span className="text-muted-foreground font-mono text-[0.625rem] tracking-tight">
+            {project.year}
           </span>
-        )}
-      </div>
+          {isLive && (
+            <span className="inline-flex items-center rounded border border-(--success) bg-(--success-subtle) text-(--success) font-mono text-[0.625rem] tracking-tight px-2 py-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-(--success) inline-block mr-1 animate-pulse" />
+              Live
+            </span>
+          )}
+          {isWip && (
+            <span className="inline-flex items-center rounded border border-(--warning) bg-(--warning-subtle) text-(--warning) font-mono text-[0.625rem] tracking-tight px-2 py-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-(--warning) inline-block mr-1" />
+              {project.status}
+            </span>
+          )}
+        </div>
 
-      {/* Title & description */}
-      <div className="flex-1">
-        <h2 className="text-sm font-semibold leading-snug text-(--text-primary) font-ui group-hover:underline mb-1">
-          {project.title}
-        </h2>
-        <p className="text-xs text-muted-foreground font-ui line-clamp-2">
-          {project.description}
-        </p>
-      </div>
+        {/* Title & description */}
+        <div className="flex-1">
+          <h2 className="text-sm font-semibold leading-snug text-(--text-primary) font-ui group-hover:underline mb-1">
+            {project.title}
+          </h2>
+          <p className="text-xs text-muted-foreground font-ui line-clamp-2">
+            {project.description}
+          </p>
+        </div>
 
-      {/* Tags */}
-      <div className="flex flex-wrap gap-1">
-        {project.tags.slice(0, 4).map((tag) => (
-          <span
-            key={tag}
-            className="rounded border bg-(--tag-bg) text-(--tag-text) font-mono text-[0.625rem] tracking-tight px-2 py-0.5"
-          >
-            {tag}
-          </span>
-        ))}
-        {project.tags.length > 4 && (
-          <span className="text-muted-foreground font-mono text-[0.625rem] py-0.5">
-            +{project.tags.length - 4}
-          </span>
-        )}
-      </div>
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1">
+          {project.tags.slice(0, 4).map((tag) => (
+            <span
+              key={tag}
+              className="rounded border bg-(--tag-bg) text-(--tag-text) font-mono text-[0.625rem] tracking-tight px-2 py-0.5"
+            >
+              {tag}
+            </span>
+          ))}
+          {project.tags.length > 4 && (
+            <span className="text-muted-foreground font-mono text-[0.625rem] py-0.5">
+              +{project.tags.length - 4}
+            </span>
+          )}
+        </div>
 
-      {/* View link */}
-      <div className="flex justify-end mt-auto">
-        <span className="inline-flex items-center gap-1 text-xs font-ui text-accent group-hover:gap-1.5 transition-all duration-150">
-          View Project
-          <ArrowRight size={11} />
-        </span>
+        {/* View link */}
+        <div className="flex justify-end mt-auto">
+          <span className="inline-flex items-center gap-1 text-xs font-ui text-foreground/50 group-hover:gap-1.5 transition-all duration-150">
+            View Project
+            <ArrowRight size={11} />
+          </span>
+        </div>
       </div>
     </Link>
   );
@@ -161,7 +173,7 @@ export function ProjectsClient() {
         >
           <ArrowLeft size={12} /> Back to portfolio
         </Link>
-        <p className="uppercase mb-1 text-muted-foreground font-mono text-xs tracking-wide">
+        <p className="uppercase mb-1 text-foreground/60 font-semibold font-mono text-xs tracking-wide">
           Work
         </p>
         <h1 className="text-2xl font-bold text-(--text-primary) font-ui">

@@ -9,6 +9,8 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const cardImage = project.image || project.screenshots?.[0];
+
   return (
     <div
       className="flex flex-col gap-4 rounded-lg p-6 transition-all duration-150"
@@ -25,6 +27,15 @@ export function ProjectCard({ project }: ProjectCardProps) {
         (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
       }}
     >
+      {cardImage && (
+        <div className="w-full aspect-video rounded-md overflow-hidden border border-white/5 relative bg-zinc-950/20 shrink-0">
+          <img
+            src={cardImage}
+            alt={project.title}
+            className="w-full h-full object-cover object-top"
+          />
+        </div>
+      )}
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">

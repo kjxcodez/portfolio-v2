@@ -133,12 +133,9 @@ export const PROJECTS: Project[] = [
       'Separating planning, execution, verification, and review improves maintainability and makes debugging autonomous workflows significantly easier.'
     ],
     futurePlans: [
-      'Language-aware symbol indexing',
-      'Repository knowledge graph',
       'Incremental repository analysis and caching',
       'Persistent working memory across sessions',
       'Semantic code search and AST-aware editing',
-      'Multi-agent task delegation'
     ],
     impact: [
       'Built as part of an AI coding agent assignment and capable of autonomously analyzing and modifying real-world repositories.',
@@ -255,7 +252,6 @@ export const PROJECTS: Project[] = [
       'Writing a language from scratch forces precise understanding of scope, evaluation order, and call semantics',
     ],
     futurePlans: [
-      'Bytecode compilation pass for improved execution performance',
       'Standard library functions for string and list manipulation',
       'REPL with persistent history',
     ],
@@ -371,7 +367,6 @@ export const PROJECTS: Project[] = [
     ],
     futurePlans: [
       'Rebuild with Tailwind v4 and React 19 server component support (Percept UI v2)',
-      'Storybook integration for interactive component development',
       'Expanded component coverage including data tables and advanced form controls',
     ],
     impact: [
@@ -413,10 +408,7 @@ export const PROJECTS: Project[] = [
       'TextMate grammars use regex-based scope matching — scope names must align with theme color rules for correct highlighting',
       'VS Code extension activation events should be scoped narrowly to avoid slowing editor startup',
     ],
-    futurePlans: [
-      'Language server implementation for hover documentation and inline error reporting',
-      'In-editor run output display via output panels',
-    ],
+    futurePlans: [],
     impact: [
       'Published and functional on the VS Code Marketplace',
       'Provides syntax highlighting and snippets for all Rune Lang files in VS Code',
@@ -583,8 +575,12 @@ export const PROJECTS: Project[] = [
       '@dnd-kit',
       '@use-gesture/react'
     ],
+    screenshots: [
+      '/calendly-1.png',
+      '/calendly-2.png'
+    ],
     url: 'https://calendly.kapiljangid.pro',
-    github: 'https://github.com/CuriousCoder00/kanban-calendar',
+    github: 'https://github.com/kjxcodez/kanban-calendar',
     type: 'web',
     featured: false,
     year: 2025,
@@ -624,11 +620,7 @@ export const PROJECTS: Project[] = [
       'Framer Motion layout animations depend on key stability — index-based keys cause identity confusion during reorders',
       'Calendar date math at week and month boundaries is error-prone and benefits from centralized utility functions',
     ],
-    futurePlans: [
-      'Recurring event support with RRULE parsing',
-      'iCal export for calendar interoperability',
-      'Backend persistence with user accounts for saved events',
-    ],
+    futurePlans: [],
     impact: [
       'Working calendar with drag-and-drop and gesture navigation on desktop and mobile',
       'Live at calendly.kapiljangid.pro',
@@ -720,27 +712,27 @@ export const PROJECTS: Project[] = [
 // ─── Skills ──────────────────────────────────────────────────────
 export const SKILLS: Skill[] = [
   // Languages
-  { name: 'JavaScript', icon: 'javascript', category: 'languages', level: 3 },
-  { name: 'TypeScript', icon: 'typescript', category: 'languages', level: 3 },
-  { name: 'Python', icon: 'python', category: 'languages', level: 2 },
+  { name: 'JavaScript', icon: 'javascript', category: 'languages', level: 3, core: true },
+  { name: 'TypeScript', icon: 'typescript', category: 'languages', level: 3, core: true },
+  { name: 'Python', icon: 'python', category: 'languages', level: 2, core: true },
   // Frontend
-  { name: 'React', icon: 'react', category: 'frontend', level: 3 },
-  { name: 'Next.js', icon: 'ri_nextjs', category: 'frontend', level: 3 },
-  { name: 'Tailwind CSS', icon: 'tailwind', category: 'frontend', level: 3 },
+  { name: 'React', icon: 'react', category: 'frontend', level: 3, core: true },
+  { name: 'Next.js', icon: 'ri_nextjs', category: 'frontend', level: 3, core: true },
+  { name: 'Tailwind CSS', icon: 'tailwind', category: 'frontend', level: 3, core: true },
   { name: 'ShadCN', icon: 'ri_shadcn', category: 'frontend', level: 3 },
   { name: 'MUI', icon: 'ri_mui', category: 'frontend', level: 2 },
   { name: 'Chakra UI', icon: 'ri_chakra', category: 'frontend', level: 2 },
   // Backend
-  { name: 'Node.js', icon: 'ri_nodejs', category: 'backend', level: 3 },
+  { name: 'Node.js', icon: 'ri_nodejs', category: 'backend', level: 3, core: true },
   { name: 'Express', icon: 'ri_express', category: 'backend', level: 3 },
   { name: 'REST APIs', icon: 'ri_api', category: 'backend', level: 3 },
   { name: 'Webhooks', icon: 'ri_webhook', category: 'backend', level: 3 },
   { name: 'Redis', icon: 'ri_redis', category: 'backend', level: 2 },
   { name: 'Better Auth', icon: 'ri_auth', category: 'backend', level: 2 },
   // Databases
-  { name: 'PostgreSQL', icon: 'ri_postgresql', category: 'databases', level: 3 },
+  { name: 'PostgreSQL', icon: 'ri_postgresql', category: 'databases', level: 3, core: true },
   { name: 'MongoDB', icon: 'ri_mongodb', category: 'databases', level: 2 },
-  { name: 'Prisma', icon: 'ri_prisma', category: 'databases', level: 3 },
+  { name: 'Prisma', icon: 'ri_prisma', category: 'databases', level: 3, core: true },
   { name: 'Supabase', icon: 'ri_supabase', category: 'databases', level: 2 },
   // Integrations
   { name: 'Meta Cloud API', icon: 'ri_meta', category: 'integrations', level: 3 },

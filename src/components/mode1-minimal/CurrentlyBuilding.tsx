@@ -7,7 +7,7 @@ import { CURRENTLY_BUILDING } from '@/lib/data';
 export function CurrentlyBuilding() {
   return (
     <div className="flex flex-col items-start w-full my-4 gap-3">
-      <h2 className="uppercase flex items-center gap-2 font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-muted-foreground">
+      <h2 className="uppercase flex items-center gap-2 font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-[var(--accent)] font-semibold">
         <Hammer size={13} className="text-amber-500" />
         Currently Building
       </h2>

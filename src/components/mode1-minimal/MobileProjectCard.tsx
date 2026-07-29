@@ -12,6 +12,8 @@ interface MobileProjectCardProps {
 }
 
 export function MobileProjectCard({ project, idx }: MobileProjectCardProps) {
+  const cardImage = project.image || project.screenshots?.[0];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -19,9 +21,18 @@ export function MobileProjectCard({ project, idx }: MobileProjectCardProps) {
       whileHover={{ y: -2 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ delay: idx * 0.06, duration: 0.35 }}
-      className="flex flex-col rounded-lg transition-colors duration-150 bg-(--bg-surface) border hover:border-(--accent-border)"
+      className="flex flex-col rounded-lg transition-colors duration-150 bg-(--bg-surface) border hover:border-(--accent-border) overflow-hidden"
     >
-      <div className="p-4 flex flex-col gap-2">
+      {cardImage && (
+        <div className="w-full aspect-video overflow-hidden border-b border-[var(--border-default)] relative bg-zinc-950/20">
+          <img
+            src={cardImage}
+            alt={project.title}
+            className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-300"
+          />
+        </div>
+      )}
+      <div className="p-4 flex flex-col gap-2 flex-1">
         {/* Title row */}
         <div className="flex items-start justify-between gap-2">
           <motion.div
@@ -49,7 +60,7 @@ export function MobileProjectCard({ project, idx }: MobileProjectCardProps) {
                   duration: 0.25,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="absolute left-0 -bottom-1 h-[1px] w-full origin-left bg-blue-500"
+                className="absolute left-0 -bottom-1 h-[1px] w-full origin-left bg-[var(--accent)]"
               />
             </Link>
           </motion.div>

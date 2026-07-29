@@ -20,7 +20,7 @@ export function Contact() {
 
   return (
     <div id="contact" className="flex flex-col items-start w-full my-6 gap-4">
-      <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-muted-foreground">
+      <h2 className="uppercase font-mono [font-size:var(--text-xs)] tracking-[0.1em] text-foreground/60 font-semibold">
         Contact
       </h2>
 
