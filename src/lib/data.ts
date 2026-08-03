@@ -62,6 +62,87 @@ export const EXPERIENCE: Experience[] = [
 // ─── Projects ────────────────────────────────────────────────────
 export const PROJECTS: Project[] = [
   {
+    id: 'leadforge-os',
+    title: 'LeadForge OS',
+    description: 'Local-first B2B lead generation and outreach automation desktop client',
+    longDescription:
+      'LeadForge OS is an open-source, local-first lead generation and cold outreach platform built as an Electron desktop application. By running web crawlers, map scrapers, and AI enrichment loops locally on user hardware, it avoids recurring cloud subscription costs and ensures prospect data privacy. Includes a centralized Hono/MongoDB sync engine and automated sequence tracking.',
+    tags: [
+      'Electron',
+      'Next.js',
+      'TypeScript',
+      'Hono',
+      'MongoDB',
+      'SQLite',
+      'Playwright',
+      'Cheerio',
+      'Zod',
+      'Mermaid'
+    ],
+    url: 'https://leadforge.kapiljangid.pro',
+    github: 'https://github.com/kjxcodez/leadforge-os',
+    type: 'tool',
+    featured: true,
+    year: 2026,
+    status: 'Live',
+    screenshots: [
+      '/leadforge-home.png',
+      '/leadforge-crawler-1.png',
+      '/leadforge-crawler-2.png',
+      '/leadforge-companies.png',
+      '/leadforge-ops.png'
+    ],
+    timeline: '2026',
+    highlights: [
+      'Local-first architecture executing crawlers, Playwright maps scrapers, and email tasks on user hardware',
+      'Centralized Hono and MongoDB cloud synchronization engine with conflict-free mutation tracking',
+      'Local AI prospect qualification using Ollama offline models or cloud model providers via OpenRouter',
+      'Asynchronous worker sandboxing exposing crawling jobs as standard LLM-callable tools',
+      'Full outreach sequence tracking with automated Nodemailer sends and ImapFlow reply tracking'
+    ],
+    keyFeatures: [
+      'Local Playwright Google Maps search panel crawling',
+      'Depth-controlled Cheerio website BFS scraping and email/phone extraction',
+      'LinkedIn Voyager executive profile finder and DuckDuckGo enrichment fallback',
+      'Custom workflow engine managing outreach sequences, rate limits, and IMAP replies',
+      'Mongoose-backed Cloud sync schema with IP-based rate limiting and Zod input validators'
+    ],
+    architecture: [
+      'Electron main/renderer boundaries with secure preload IPC pipelines',
+      'SQLite database pool with Write-Ahead Logging (WAL) configuration',
+      'Hono REST API server mounting public endpoints and protected business routes',
+      'Zod-validated Next.js client-side application with dynamic local-development port resolving'
+    ],
+    technicalChallenges: [
+      {
+        problem: 'Saturating UI main thread and memory when executing heavy crawling or scraping operations',
+        solution: 'Implemented a Scheduler Gateway in Electron main, spawning heavy Playwright/Cheerio scraping tasks in separate sandboxed background worker processes.'
+      },
+      {
+        problem: 'Protecting email authentication credentials and API keys stored in local configurations',
+        solution: 'Integrated the OS-native Keychain encryption layer using Electron safeStorage module, ensuring all active SMTP/IMAP credentials remain encrypted at rest.'
+      },
+      {
+        problem: 'Maintaining contact status consistency across multiple offline devices without data loss',
+        solution: 'Designed a conflict-resolution sync engine tracking local SQLite mutations, dispatching sync queues over HTTPS to MongoDB Atlas during active connection states.'
+      }
+    ],
+    learnings: [
+      'Local-first applications require robust process sandboxing to protect user interface responsiveness.',
+      'Database WAL mode prevents locking conflicts under high concurrent write loads from crawlers.',
+      'Next.js dynamic routing and environment fallback detection improves local development ergonomics.'
+    ],
+    futurePlans: [
+      'AST-aware automated scraper customizer',
+      'Semantic local vector database integration for semantic lead matching',
+      'Native installer build pipelines with macOS notarization support'
+    ],
+    impact: [
+      'Successfully compiled offline-first prospecting client generating verified leads and managing outbox queues locally.',
+      'Reduces B2B outbound campaign SaaS costs to raw model API tokens.'
+    ]
+  },
+  {
     id: 'coding-agent-nero',
     title: 'Coding Agent - NERO',
     description: 'Autonomous AI coding agent CLI for understanding, modifying, and verifying codebases',
