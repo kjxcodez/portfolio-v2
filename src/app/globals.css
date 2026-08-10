@@ -155,4 +155,18 @@
       opacity: 0.4;
     }
   }
+
+  @keyframes indeterminate-progress {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(250%);
+    }
+  }
+
+  .animate-indeterminate-progress {
+    animation: indeterminate-progress 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
 }
+
