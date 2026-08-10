@@ -11,7 +11,7 @@ export const metadata: Metadata = buildPageMetadata({
 
 // Add Google Drive video URL here when available
 // Example: "https://drive.google.com/file/d/1234567890/view"
-const GOOGLE_DRIVE_VIDEO_URL = "";
+const GOOGLE_DRIVE_VIDEO_URL = "https://drive.google.com/file/d/1lK3J5mSRZlcrVBP4Dt_F9twscnjnjWhL/view";
 
 function getGoogleDriveEmbedUrl(url: string): string {
   if (!url) return "";
