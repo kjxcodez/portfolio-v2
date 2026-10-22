@@ -62,6 +62,120 @@ export const EXPERIENCE: Experience[] = [
 // ─── Projects ────────────────────────────────────────────────────
 export const PROJECTS: Project[] = [
   {
+    id: 'hevymoto',
+    title: 'HevyMoto',
+    description:
+      'Full-stack motorcycle gear e-commerce platform with bike compatibility, product comparison, and integrated checkout',
+
+    longDescription:
+      'HevyMoto is a full-stack e-commerce platform built for motorcycle enthusiasts, bringing premium riding gear, helmets, touring luggage, protective equipment, and motorcycle accessories into a unified shopping experience. The platform combines structured product discovery, manufacturer and model-based bike compatibility, product comparison, shopping cart management, and checkout workflows. Built with Next.js and MongoDB, it integrates cloud-based product image storage, payment processing infrastructure, and server-side commerce logic to deliver a responsive, product-focused shopping experience.',
+
+    tags: [
+      'Next.js',
+      'TypeScript',
+      'React',
+      'Tailwind CSS',
+      'MongoDB',
+      'AWS S3',
+      'Razorpay',
+      'REST API',
+      'E-Commerce',
+      'Vercel'
+    ],
+
+    url: 'https://hevymoto.com',
+    github: '',
+    type: 'web',
+    featured: true,
+    year: 2026,
+    status: 'Live',
+
+    // Add your screenshots here
+    screenshots: [
+      "/hevymoto-home.png",
+      "/hevymoto-shop-by-bike-megamenu.png",
+      "/hevymoto-categories-megamenu.png",
+      "/hevymoto-all-gears.png",
+      "/hevymoto-quick-view.png"
+    ],
+
+    timeline: '2026',
+
+    highlights: [
+      'Full-stack e-commerce storefront specializing in motorcycle riding gear, protective equipment, and accessories',
+      'Bike compatibility discovery that helps riders find products suited to their motorcycle manufacturer and model',
+      'Product catalog with category-based browsing, pricing, discounts, availability, and detailed product information',
+      'Product comparison functionality for evaluating motorcycle accessories and specifications',
+      'Shopping cart and checkout workflows with server-side commerce validation',
+      'MongoDB-backed commerce data with cloud-hosted product images stored in Amazon S3',
+      'Payment processing foundation with Razorpay integration and support for cash-on-delivery workflows',
+      'Checkout idempotency enforcement to protect payment and order workflows from duplicate submissions'
+    ],
+
+    keyFeatures: [
+      'Product catalog with category, manufacturer, and brand-based discovery',
+      'Bike compatibility finder for manufacturer and model-specific product discovery',
+      'Product detail pages with pricing, discounts, availability, imagery, and specifications',
+      'Shopping cart management and checkout workflows',
+      'Product comparison for evaluating compatible accessories and equipment',
+      'Razorpay payment infrastructure and cash-on-delivery support',
+      'Responsive storefront designed for desktop and mobile shopping',
+      'Customer review and feedback collection workflow',
+      'Cloud-hosted product media and database-backed commerce operations'
+    ],
+
+    architecture: [
+      'Next.js App Router with React and TypeScript for the storefront and server-side application logic',
+      'Next.js API routes for commerce operations and communication between the client and backend',
+      'MongoDB as the primary persistence layer for commerce data',
+      'Amazon S3 for storing and delivering product images and media assets',
+      'Razorpay as the payment processor, with server-controlled checkout validation',
+      'Vercel deployment with a production custom domain',
+      'Server-authoritative commerce model in which the client expresses purchase intent, HevyMoto validates and records the transaction, and the payment gateway processes payments'
+    ],
+
+    technicalChallenges: [
+      {
+        problem:
+          'Maintaining checkout integrity and preventing duplicate processing when clients retry requests or submit checkout operations more than once',
+
+        solution:
+          'Enforced a header-only idempotency contract on the checkout route using Idempotency-Key or x-idempotency-key. Requests without the required header are rejected with HTTP 400, and dedicated checkout tests verify the contract.'
+      },
+      {
+        problem:
+          'Keeping product discovery relevant across a catalog containing equipment and accessories for different motorcycle manufacturers and models',
+
+        solution:
+          'Introduced a compatibility-first shopping experience that allows riders to discover products through motorcycle manufacturer and model selection, alongside conventional category and catalog browsing.'
+      },
+      {
+        problem:
+          'Maintaining a clear trust boundary between browser interactions, commerce data, and payment processing',
+
+        solution:
+          'Established the architectural principle that the client communicates purchase intent, the server remains authoritative over commerce operations, HevyMoto acts as the system of record, and Razorpay acts as the payment processor.'
+      }
+    ],
+
+    learnings: [
+      'E-commerce systems require explicit trust boundaries between client-side state, server-side business rules, persisted order data, and payment gateway state.',
+      'Idempotency contracts must be enforced consistently at the API boundary to make checkout retries safer and more predictable.',
+      'Motorcycle compatibility is an important product-discovery dimension and should complement, rather than replace, conventional category-based browsing.',
+      'Product image delivery, caching, and loading behavior are important contributors to the perceived performance of image-heavy storefronts.',
+      'A commerce platform benefits from treating catalog, cart, checkout, and payment processing as distinct responsibilities with clearly defined boundaries.'
+    ],
+
+    futurePlans: [],
+
+    impact: [
+      'Live e-commerce storefront available at hevymoto.com',
+      'Combines motorcycle gear discovery, bike compatibility, product comparison, and purchasing workflows in one platform',
+      'Provides a commerce foundation for catalog management, order processing, and payment integration',
+      'Establishes server-authoritative checkout and explicit idempotency enforcement as key reliability safeguards'
+    ]
+  },
+  {
     id: 'leadforge-os',
     title: 'LeadForge OS',
     description: 'Local-first B2B lead generation and outreach automation desktop client',
